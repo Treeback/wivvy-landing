@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #0D1117;
+    --foreground: #FFFFFF;
+    --grid: #1B2330;
+    --accent-blue: #4D8CFF;
+    --accent-blue-light: #7AA9FF;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-wivvy-bg text-white antialiased;
+    background-image: 
+      linear-gradient(rgba(27, 35, 48, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(27, 35, 48, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
+
+@layer utilities {
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(77, 140, 255, 0.5),
+                0 0 40px rgba(77, 140, 255, 0.3),
+                0 0 60px rgba(77, 140, 255, 0.1);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(77, 140, 255, 0.5);
+  }
+
+  .gradient-blue {
+    @apply bg-gradient-to-r from-wivvy-blue to-wivvy-blue-light;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-wivvy-blue to-wivvy-blue-light bg-clip-text text-transparent;
+  }
+}
