@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, X, Youtube, Brain, Sparkles, Link2, TrendingUp, Zap, Clock, Users, Target, FileText, Lightbulb, Star, Network, Layers, GitBranch, ArrowUpRight, BookOpen, Coffee, Heart, DollarSign, Smile, AlertCircle, Shield, Compass, BarChart, MessageCircle, Activity, Moon, Sun, User, UserPlus, ChevronRight, Briefcase, GraduationCap, Flame } from 'lucide-react'
+import { Plus, X, Youtube, Brain, Sparkles, Link2, TrendingUp, Zap, Clock, Users, Target, FileText, Lightbulb, Star, Network, Layers, GitBranch, ArrowUpRight, BookOpen, Coffee, Heart, DollarSign, Smile, AlertCircle, Shield, Compass, BarChart, MessageCircle, Activity, Moon, Sun, User, UserPlus, ChevronRight, Briefcase, GraduationCap, Flame, ChevronUp } from 'lucide-react'
 import React, { useEffect, useState, useMemo } from 'react'
 
 interface ProcessingMessage {
@@ -16,6 +16,8 @@ interface KnowledgeNode {
   type: string
   x: number
   y: number
+  xMobile?: number
+  yMobile?: number
   color: string
   icon: any
   category?: string
@@ -55,6 +57,17 @@ export default function AppScreenshot() {
   const [showInsights, setShowInsights] = useState(false)
   const [showGlow, setShowGlow] = useState(false)
   const [selectedTab, setSelectedTab] = useState<'insights' | 'emotions' | 'people'>('insights')
+  const [showMobileSidebar, setShowMobileSidebar] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const processingMessages: ProcessingMessage[] = [
     { text: "Analyzing content and emotional context...", icon: Brain, color: "text-purple-600" },
@@ -74,46 +87,21 @@ export default function AppScreenshot() {
     { id: 'p5', name: 'Jamie Liu', role: 'Best Friend', avatar: '👫', connectionStrength: 95 },
   ]
 
-  // Miro-style sticky notes spread across the entire canvas
+  // Miro-style sticky notes with mobile positions
   const knowledgeNodes: KnowledgeNode[] = [
-    // Top-left area
-    { id: 'k1', title: 'API Architecture', type: 'technical', x: 15, y: 15, color: 'bg-yellow-300', icon: Briefcase, category: 'career', relatedTo: ['k4', 'k7', 'new'], affinity: 0.9 },
-    
-    // Top-center
-    { id: 'k2', title: 'System Design', type: 'learning', x: 50, y: 12, color: 'bg-green-300', icon: GraduationCap, category: 'growth', relatedTo: ['k1', 'k5', 'new'], affinity: 0.95 },
-    
-    // Top-right
-    { id: 'k3', title: 'AI/ML Basics', type: 'learning', x: 85, y: 18, color: 'bg-blue-300', icon: Brain, category: 'growth', relatedTo: ['k2', 'k6', 'k11'], affinity: 0.6 },
-    
-    // Left side
-    { id: 'k4', title: 'Team Dynamics', type: 'social', x: 12, y: 45, color: 'bg-purple-300', icon: Users, category: 'career', relatedTo: ['k1', 'k7', 'k8'], affinity: 0.8 },
-    
-    // Right side
-    { id: 'k5', title: 'Leadership Skills', type: 'growth', x: 88, y: 42, color: 'bg-pink-300', icon: Target, category: 'career', relatedTo: ['k2', 'k3', 'new'], affinity: 0.7 },
-    
-    // Center-left
-    { id: 'k6', title: 'Public Speaking', type: 'skill', x: 28, y: 32, color: 'bg-orange-300', icon: MessageCircle, category: 'growth', relatedTo: ['k3', 'k9', 'new'], affinity: 0.5 },
-    
-    // Center-right
-    { id: 'k7', title: 'Work-Life Balance', type: 'wellness', x: 72, y: 28, color: 'bg-red-300', icon: Heart, category: 'wellness', relatedTo: ['k1', 'k4', 'k10'], affinity: 0.7 },
-    
-    // Center (new content)
-    { id: 'new', title: 'Scalable APIs Masterclass', type: 'video', x: 50, y: 50, color: 'bg-teal-300', icon: Youtube, category: 'new', relatedTo: ['k1', 'k2', 'k5', 'k11'], affinity: 1.0 },
-    
-    // Center-left bottom
-    { id: 'k8', title: 'Stress Management', type: 'health', x: 25, y: 68, color: 'bg-indigo-300', icon: Shield, category: 'wellness', relatedTo: ['k4', 'k9', 'new'], affinity: 0.85 },
-    
-    // Center-right bottom
-    { id: 'k9', title: 'Mindfulness Practice', type: 'mental', x: 75, y: 72, color: 'bg-cyan-300', icon: Activity, category: 'wellness', relatedTo: ['k6', 'k8', 'k10'], affinity: 0.6 },
-    
-    // Bottom-left
-    { id: 'k10', title: 'Creative Projects', type: 'personal', x: 18, y: 85, color: 'bg-lime-300', icon: Lightbulb, category: 'personal', relatedTo: ['k7', 'k9', 'k11'], affinity: 0.4 },
-    
-    // Bottom-center
-    { id: 'k11', title: 'Side Business', type: 'entrepreneurship', x: 50, y: 88, color: 'bg-amber-300', icon: DollarSign, category: 'personal', relatedTo: ['k10', 'new', 'k12'], affinity: 0.75 },
-    
-    // Bottom-right
-    { id: 'k12', title: 'Family Time', type: 'relationships', x: 82, y: 82, color: 'bg-violet-300', icon: Users, category: 'personal', relatedTo: ['k11', 'k5', 'k3'], affinity: 0.3 },
+    { id: 'k1', title: 'API Architecture', type: 'technical', x: 15, y: 15, xMobile: 20, yMobile: 10, color: 'bg-yellow-300', icon: Briefcase, category: 'career', relatedTo: ['k4', 'k7', 'new'], affinity: 0.9 },
+    { id: 'k2', title: 'System Design', type: 'learning', x: 50, y: 12, xMobile: 70, yMobile: 10, color: 'bg-green-300', icon: GraduationCap, category: 'growth', relatedTo: ['k1', 'k5', 'new'], affinity: 0.95 },
+    { id: 'k3', title: 'AI/ML Basics', type: 'learning', x: 85, y: 18, xMobile: 20, yMobile: 25, color: 'bg-blue-300', icon: Brain, category: 'growth', relatedTo: ['k2', 'k6', 'k11'], affinity: 0.6 },
+    { id: 'k4', title: 'Team Dynamics', type: 'social', x: 12, y: 45, xMobile: 70, yMobile: 25, color: 'bg-purple-300', icon: Users, category: 'career', relatedTo: ['k1', 'k7', 'k8'], affinity: 0.8 },
+    { id: 'k5', title: 'Leadership Skills', type: 'growth', x: 88, y: 42, xMobile: 20, yMobile: 40, color: 'bg-pink-300', icon: Target, category: 'career', relatedTo: ['k2', 'k3', 'new'], affinity: 0.7 },
+    { id: 'k6', title: 'Public Speaking', type: 'skill', x: 28, y: 32, xMobile: 70, yMobile: 40, color: 'bg-orange-300', icon: MessageCircle, category: 'growth', relatedTo: ['k3', 'k9', 'new'], affinity: 0.5 },
+    { id: 'k7', title: 'Work-Life Balance', type: 'wellness', x: 72, y: 28, xMobile: 20, yMobile: 55, color: 'bg-red-300', icon: Heart, category: 'wellness', relatedTo: ['k1', 'k4', 'k10'], affinity: 0.7 },
+    { id: 'new', title: 'Scalable APIs', type: 'video', x: 50, y: 50, xMobile: 45, yMobile: 47, color: 'bg-teal-300', icon: Youtube, category: 'new', relatedTo: ['k1', 'k2', 'k5', 'k11'], affinity: 1.0 },
+    { id: 'k8', title: 'Stress Management', type: 'health', x: 25, y: 68, xMobile: 70, yMobile: 55, color: 'bg-indigo-300', icon: Shield, category: 'wellness', relatedTo: ['k4', 'k9', 'new'], affinity: 0.85 },
+    { id: 'k9', title: 'Mindfulness Practice', type: 'mental', x: 75, y: 72, xMobile: 20, yMobile: 70, color: 'bg-cyan-300', icon: Activity, category: 'wellness', relatedTo: ['k6', 'k8', 'k10'], affinity: 0.6 },
+    { id: 'k10', title: 'Creative Projects', type: 'personal', x: 18, y: 85, xMobile: 70, yMobile: 70, color: 'bg-lime-300', icon: Lightbulb, category: 'personal', relatedTo: ['k7', 'k9', 'k11'], affinity: 0.4 },
+    { id: 'k11', title: 'Side Business', type: 'entrepreneurship', x: 50, y: 88, xMobile: 20, yMobile: 85, color: 'bg-amber-300', icon: DollarSign, category: 'personal', relatedTo: ['k10', 'new', 'k12'], affinity: 0.75 },
+    { id: 'k12', title: 'Family Time', type: 'relationships', x: 82, y: 82, xMobile: 70, yMobile: 85, color: 'bg-violet-300', icon: Users, category: 'personal', relatedTo: ['k11', 'k5', 'k3'], affinity: 0.3 },
   ]
 
   // Emotional patterns
@@ -196,6 +184,7 @@ export default function AppScreenshot() {
     setShowGlow(false)
     setSelectedNode(null)
     setActiveInsight(0)
+    setShowMobileSidebar(false)
 
     // Wait and show modal
     await new Promise(resolve => setTimeout(resolve, 2000))
@@ -236,6 +225,12 @@ export default function AppScreenshot() {
     // Show insights
     setShowInsights(true)
     
+    // On mobile, show sidebar after insights
+    if (isMobile) {
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      setShowMobileSidebar(true)
+    }
+    
     // Cycle through tabs
     await new Promise(resolve => setTimeout(resolve, 4000))
     setSelectedTab('emotions')
@@ -252,13 +247,13 @@ export default function AppScreenshot() {
     runIngestionDemo()
     const interval = setInterval(runIngestionDemo, 35000)
     return () => clearInterval(interval)
-  }, [])
+  }, [isMobile])
 
   const visibleNodes = showTransformation ? knowledgeNodes : knowledgeNodes.filter(n => n.id !== 'new')
 
   return React.createElement(
     'section',
-    { className: "container mx-auto px-6 py-20" },
+    { className: "container mx-auto px-4 md:px-6 py-10 md:py-20" },
     React.createElement(
       motion.div,
       {
@@ -273,7 +268,7 @@ export default function AppScreenshot() {
         { className: "glass-card rounded-xl overflow-hidden backdrop-blur-sm relative" },
         React.createElement(
           'div',
-          { className: "flex items-center justify-between p-4 border-b border-polygon-border" },
+          { className: "flex items-center justify-between p-3 md:p-4 border-b border-polygon-border" },
           React.createElement(
             'div',
             { className: "flex items-center space-x-2" },
@@ -283,17 +278,17 @@ export default function AppScreenshot() {
           ),
           React.createElement(
             'span',
-            { className: "text-sm text-polygon-text-secondary" },
+            { className: "text-xs md:text-sm text-polygon-text-secondary" },
             'Wivvy - Your Second Brain'
           )
         ),
         React.createElement(
           'div',
-          { className: "flex h-[700px]" },
+          { className: `${isMobile ? 'block' : 'flex'} h-[600px] md:h-[700px] relative` },
           // Main graph area
           React.createElement(
             'div',
-            { className: "flex-1 relative overflow-hidden bg-gray-50" },
+            { className: "flex-1 relative overflow-hidden bg-gray-50 h-full" },
             
             // Miro-style grid background
             React.createElement(
@@ -305,7 +300,7 @@ export default function AppScreenshot() {
                     linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
                     linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)
                   `,
-                  backgroundSize: '25px 25px'
+                  backgroundSize: isMobile ? '20px 20px' : '25px 25px'
                 }
               }
             ),
@@ -317,7 +312,7 @@ export default function AppScreenshot() {
                 whileHover: { scale: 1.05 },
                 whileTap: { scale: 0.95 },
                 onClick: () => setShowModal(true),
-                className: "absolute top-6 right-6 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 z-10 shadow-lg",
+                className: `absolute ${isMobile ? 'top-4 right-4' : 'top-6 right-6'} bg-blue-500 hover:bg-blue-600 text-white ${isMobile ? 'px-3 py-1.5 text-sm' : 'px-4 py-2'} rounded-lg flex items-center gap-2 z-10 shadow-lg`,
                 animate: !showModal && !showConnections ? {
                   scale: [1, 1.05, 1],
                 } : {},
@@ -327,8 +322,8 @@ export default function AppScreenshot() {
                   repeatDelay: 1
                 }
               },
-              React.createElement(Plus, { size: 20 }),
-              'Add Content'
+              React.createElement(Plus, { size: isMobile ? 16 : 20 }),
+              isMobile ? 'Add' : 'Add Content'
             ),
 
             // Knowledge graph SVG for connections
@@ -350,14 +345,19 @@ export default function AppScreenshot() {
                     const isAffected = showGlow && (node.affinity > 0.7 || toNode.affinity > 0.7)
                     const glowIntensity = showGlow ? Math.max(node.affinity || 0, toNode.affinity || 0) : 0
 
+                    const x1 = isMobile && node.xMobile ? node.xMobile : node.x
+                    const y1 = isMobile && node.yMobile ? node.yMobile : node.y
+                    const x2 = isMobile && toNode.xMobile ? toNode.xMobile : toNode.x
+                    const y2 = isMobile && toNode.yMobile ? toNode.yMobile : toNode.y
+
                     return React.createElement(motion.line, {
                       key: `${node.id}-${relatedId}`,
-                      x1: `${node.x}%`,
-                      y1: `${node.y}%`,
-                      x2: `${toNode.x}%`,
-                      y2: `${toNode.y}%`,
+                      x1: `${x1}%`,
+                      y1: `${y1}%`,
+                      x2: `${x2}%`,
+                      y2: `${y2}%`,
                       stroke: isAffected ? `rgba(251, 146, 60, ${0.3 + glowIntensity * 0.5})` : "rgba(0,0,0,0.2)",
-                      strokeWidth: isAffected ? 2 + glowIntensity : 1,
+                      strokeWidth: isAffected ? (isMobile ? 1.5 : 2) + glowIntensity : 1,
                       initial: { pathLength: 0, opacity: 0 },
                       animate: { 
                         pathLength: 1, 
@@ -380,14 +380,17 @@ export default function AppScreenshot() {
                 const isAffected = showGlow && node.affinity > 0.5
                 const glowScale = showGlow ? 1 + (node.affinity * 0.2) : 1
                 
+                const xPos = isMobile && node.xMobile ? node.xMobile : node.x
+                const yPos = isMobile && node.yMobile ? node.yMobile : node.y
+                
                 return React.createElement(
                   motion.div,
                   {
                     key: node.id,
                     className: "absolute",
                     style: {
-                      left: `${node.x}%`,
-                      top: `${node.y}%`,
+                      left: `${xPos}%`,
+                      top: `${yPos}%`,
                       transform: 'translate(-50%, -50%)'
                     },
                     initial: { 
@@ -404,8 +407,8 @@ export default function AppScreenshot() {
                       damping: 15,
                       duration: 1
                     },
-                    onHoverStart: () => setHoveredNode(node.id),
-                    onHoverEnd: () => setHoveredNode(null),
+                    onHoverStart: () => !isMobile && setHoveredNode(node.id),
+                    onHoverEnd: () => !isMobile && setHoveredNode(null),
                     onClick: () => setSelectedNode(node.id)
                   },
                   React.createElement(
@@ -430,43 +433,51 @@ export default function AppScreenshot() {
                     React.createElement(
                       'div',
                       {
-                        className: `${node.color} p-4 rounded-lg shadow-md relative`,
+                        className: `${node.color} ${isMobile ? 'p-2' : 'p-4'} rounded-lg shadow-md relative`,
                         style: { 
-                          width: '140px',
+                          width: isMobile ? '100px' : '140px',
                           filter: isAffected ? 'brightness(1.1)' : 'none',
                           boxShadow: isAffected ? `0 0 20px rgba(251, 146, 60, ${node.affinity})` : undefined
                         }
                       },
                       React.createElement(
                         'div',
-                        { className: "space-y-2" },
-                        React.createElement(node.icon, { size: 24, className: "text-gray-800" }),
+                        { className: isMobile ? "space-y-1" : "space-y-2" },
+                        React.createElement(node.icon, { size: isMobile ? 18 : 24, className: "text-gray-800" }),
                         React.createElement(
                           'div',
-                          { className: "text-sm font-semibold text-gray-900 leading-tight" },
+                          { className: `${isMobile ? 'text-xs' : 'text-sm'} font-semibold text-gray-900 leading-tight` },
                           node.title
                         )
                       ),
                       // Affinity indicator
                       isAffected && React.createElement(
                         'div',
-                        { className: "absolute -top-2 -right-2 bg-orange-500 rounded-full w-8 h-8 flex items-center justify-center text-xs font-bold text-white shadow-md" },
+                        { className: `absolute -top-2 -right-2 bg-orange-500 rounded-full ${isMobile ? 'w-6 h-6 text-xs' : 'w-8 h-8 text-xs'} flex items-center justify-center font-bold text-white shadow-md` },
                         Math.round(node.affinity * 100) + '%'
-                      ),
-                      // Connection dot
-                      React.createElement(
-                        'div',
-                        { className: "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-gray-600 rounded-full opacity-50" }
                       )
                     )
                   )
                 )
               })
+            ),
+
+            // Mobile bottom sheet trigger
+            isMobile && showInsights && React.createElement(
+              motion.button,
+              {
+                initial: { y: 100 },
+                animate: { y: 0 },
+                onClick: () => setShowMobileSidebar(true),
+                className: "absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-full px-6 py-3 flex items-center gap-2 z-10"
+              },
+              React.createElement(Sparkles, { size: 20, className: "text-blue-600" }),
+              React.createElement('span', { className: "text-sm font-medium text-gray-800" }, 'View Insights')
             )
           ),
 
-          // Sidebar
-          React.createElement(
+          // Desktop Sidebar / Mobile Bottom Sheet
+          !isMobile ? React.createElement(
             'div',
             { className: "w-96 border-l border-gray-200 bg-white flex flex-col" },
             // Tabs
@@ -670,6 +681,150 @@ export default function AppScreenshot() {
                 )
               )
             )
+          ) : null,
+
+          // Mobile Bottom Sheet
+          isMobile && React.createElement(
+            AnimatePresence,
+            null,
+            showMobileSidebar && React.createElement(
+              motion.div,
+              {
+                initial: { y: '100%' },
+                animate: { y: 0 },
+                exit: { y: '100%' },
+                transition: { type: 'spring', damping: 30 },
+                className: "fixed inset-x-0 bottom-0 bg-white rounded-t-2xl shadow-2xl z-50 max-h-[70vh]"
+              },
+              // Handle
+              React.createElement(
+                'div',
+                { 
+                  className: "p-4 border-b border-gray-200",
+                  onClick: () => setShowMobileSidebar(false)
+                },
+                React.createElement('div', { className: "w-12 h-1 bg-gray-300 rounded-full mx-auto mb-3" }),
+                React.createElement(
+                  'div',
+                  { className: "flex items-center justify-between" },
+                  React.createElement('h3', { className: "text-lg font-semibold text-gray-900" }, 'Insights'),
+                  React.createElement(ChevronUp, { size: 20, className: "text-gray-500" })
+                )
+              ),
+              // Tabs
+              React.createElement(
+                'div',
+                { className: "flex border-b border-gray-200" },
+                ['insights', 'emotions', 'people'].map(tab => 
+                  React.createElement(
+                    'button',
+                    {
+                      key: tab,
+                      onClick: () => setSelectedTab(tab as any),
+                      className: `flex-1 px-4 py-3 text-sm font-medium capitalize transition-colors ${
+                        selectedTab === tab 
+                          ? 'text-blue-600 border-b-2 border-blue-600' 
+                          : 'text-gray-600'
+                      }`
+                    },
+                    tab
+                  )
+                )
+              ),
+              // Content
+              React.createElement(
+                'div',
+                { className: "overflow-y-auto p-4 space-y-4 max-h-[50vh]" },
+                selectedTab === 'insights' && insights.map((insight, index) => 
+                  React.createElement(
+                    'div',
+                    {
+                      key: insight.id,
+                      className: "bg-gray-50 rounded-lg p-4 space-y-3 border border-gray-100"
+                    },
+                    React.createElement(
+                      'div',
+                      { className: "flex items-start gap-3" },
+                      React.createElement(
+                        'div',
+                        { className: `p-2 rounded-lg bg-gradient-to-r ${insight.color}` },
+                        React.createElement(insight.icon, { size: 18, className: "text-white" })
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: "flex-1" },
+                        React.createElement('h4', { className: "font-semibold text-sm text-gray-900" }, insight.title),
+                        React.createElement('p', { className: "text-xs text-gray-600 mt-1" }, insight.description)
+                      )
+                    ),
+                    React.createElement(
+                      'div',
+                      { className: "space-y-2" },
+                      React.createElement(
+                        'div',
+                        { className: "flex justify-between text-xs" },
+                        React.createElement('span', { className: "text-gray-500" }, 'Impact'),
+                        React.createElement('span', { className: "text-blue-600 font-medium" }, insight.impact)
+                      )
+                    )
+                  )
+                ),
+                selectedTab === 'emotions' && emotionalPatterns.map((pattern) => 
+                  React.createElement(
+                    'div',
+                    {
+                      key: pattern.id,
+                      className: "bg-gray-50 rounded-lg p-4 space-y-3 border border-gray-100"
+                    },
+                    React.createElement(
+                      'div',
+                      { className: "flex items-center gap-3" },
+                      React.createElement(
+                        'div',
+                        { className: `p-2 rounded-lg bg-gradient-to-r ${pattern.color}` },
+                        React.createElement(pattern.icon, { size: 18, className: "text-white" })
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: "flex-1" },
+                        React.createElement('h4', { className: "font-semibold text-sm text-gray-900" }, pattern.title),
+                        React.createElement('p', { className: "text-xs text-gray-600 mt-1" }, pattern.description)
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: "text-xl font-bold text-blue-600" },
+                        pattern.percentage + '%'
+                      )
+                    )
+                  )
+                ),
+                selectedTab === 'people' && people.map((person) => 
+                  React.createElement(
+                    'div',
+                    {
+                      key: person.id,
+                      className: "bg-gray-50 rounded-lg p-3 flex items-center gap-3 border border-gray-100"
+                    },
+                    React.createElement(
+                      'div',
+                      { className: "text-2xl" },
+                      person.avatar
+                    ),
+                    React.createElement(
+                      'div',
+                      { className: "flex-1" },
+                      React.createElement('h4', { className: "font-semibold text-sm text-gray-900" }, person.name),
+                      React.createElement('p', { className: "text-xs text-gray-600" }, person.role)
+                    ),
+                    React.createElement(
+                      'span',
+                      { className: "text-xs font-medium text-gray-700" },
+                      person.connectionStrength + '%'
+                    )
+                  )
+                )
+              )
+            )
           ),
 
           // Modal
@@ -682,7 +837,7 @@ export default function AppScreenshot() {
                 initial: { opacity: 0 },
                 animate: { opacity: 1 },
                 exit: { opacity: 0 },
-                className: "absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-20",
+                className: "absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-20 p-4",
                 onClick: () => !isProcessing && setShowModal(false)
               },
               React.createElement(
@@ -691,7 +846,7 @@ export default function AppScreenshot() {
                   initial: { scale: 0.9, opacity: 0 },
                   animate: { scale: 1, opacity: 1 },
                   exit: { scale: 0.9, opacity: 0 },
-                  className: "bg-white rounded-xl p-6 w-full max-w-md m-6 shadow-xl",
+                  className: `bg-white rounded-xl p-6 w-full ${isMobile ? 'max-w-sm' : 'max-w-md'} shadow-xl`,
                   onClick: (e: React.MouseEvent) => e.stopPropagation()
                 },
                 !isProcessing ? React.createElement(
@@ -733,7 +888,7 @@ export default function AppScreenshot() {
                     
                     React.createElement(
                       'div',
-                      { className: "flex gap-3" },
+                      { className: `flex ${isMobile ? 'flex-col' : 'flex-row'} gap-3` },
                       React.createElement(
                         'button',
                         { className: "flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors" },
@@ -771,7 +926,7 @@ export default function AppScreenshot() {
                     processingMessages[currentMessageIndex].icon && React.createElement(
                       processingMessages[currentMessageIndex].icon,
                       {
-                        size: 48,
+                        size: isMobile ? 36 : 48,
                         className: processingMessages[currentMessageIndex].color
                       }
                     )
@@ -784,7 +939,7 @@ export default function AppScreenshot() {
                       initial: { opacity: 0, y: 10 },
                       animate: { opacity: 1, y: 0 },
                       exit: { opacity: 0, y: -10 },
-                      className: "text-lg font-medium text-gray-800 mb-2"
+                      className: `${isMobile ? 'text-base' : 'text-lg'} font-medium text-gray-800 mb-2`
                     },
                     processingMessages[currentMessageIndex].text
                   ),
