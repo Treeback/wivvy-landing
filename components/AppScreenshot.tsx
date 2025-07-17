@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, X, Youtube, Brain, Sparkles, Link2, TrendingUp, Zap, Clock, Users, Target, FileText, Lightbulb, Star } from 'lucide-react'
+import { Plus, X, Youtube, Brain, Sparkles, Link2, TrendingUp, Zap, Clock, Users, Target, FileText, Lightbulb, Star, Network, Layers, GitBranch, ArrowUpRight, BookOpen, Coffee, Heart, DollarSign, Smile, AlertCircle, Shield, Compass, BarChart, MessageCircle, Activity, Moon, Sun, User, UserPlus, ChevronRight, Briefcase, GraduationCap, Flame } from 'lucide-react'
 import React, { useEffect, useState, useMemo } from 'react'
 
 interface ProcessingMessage {
@@ -18,7 +18,28 @@ interface KnowledgeNode {
   y: number
   color: string
   icon: any
+  category?: string
   relatedTo?: string[]
+  affinity?: number
+}
+
+interface Person {
+  id: string
+  name: string
+  role: string
+  avatar: string
+  connectionStrength: number
+}
+
+interface Insight {
+  id: string
+  title: string
+  description: string
+  impact: string
+  icon: any
+  color: string
+  type: 'career' | 'emotional' | 'psychological' | 'relationship' | 'wellness'
+  percentage?: number
 }
 
 export default function AppScreenshot() {
@@ -29,36 +50,138 @@ export default function AppScreenshot() {
   const [showConnections, setShowConnections] = useState(false)
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
   const [selectedNode, setSelectedNode] = useState<string | null>(null)
-
-  // Generate random particles data
-  const particles = useMemo(() => {
-    return Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      scale: Math.random() * 0.5 + 0.5,
-      duration: Math.random() * 10 + 10,
-      delay: Math.random() * 5
-    }))
-  }, [])
+  const [activeInsight, setActiveInsight] = useState<number>(0)
+  const [showTransformation, setShowTransformation] = useState(false)
+  const [showInsights, setShowInsights] = useState(false)
+  const [showGlow, setShowGlow] = useState(false)
+  const [selectedTab, setSelectedTab] = useState<'insights' | 'emotions' | 'people'>('insights')
 
   const processingMessages: ProcessingMessage[] = [
-    { text: "Reading your mind... just kidding, reading the video!", icon: Brain, color: "text-polygon-purple" },
-    { text: "Extracting golden nuggets of wisdom ✨", icon: Star, color: "text-polygon-yellow" },
-    { text: "Connecting the dots in your knowledge universe", icon: Link2, color: "text-polygon-blue" },
-    { text: "Finding patterns you didn't know existed", icon: TrendingUp, color: "text-polygon-green" },
-    { text: "Organizing thoughts at the speed of light", icon: Zap, color: "text-polygon-pink" },
-    { text: "Creating your personalized insight map", icon: Sparkles, color: "text-polygon-purple" },
+    { text: "Analyzing content and emotional context...", icon: Brain, color: "text-purple-600" },
+    { text: "Mapping psychological patterns ✨", icon: Activity, color: "text-yellow-600" },
+    { text: "Connecting to your knowledge network", icon: Link2, color: "text-blue-600" },
+    { text: "Identifying affected relationships", icon: Users, color: "text-pink-600" },
+    { text: "Calculating ripple effects", icon: Network, color: "text-green-600" },
+    { text: "Generating personalized insights", icon: Sparkles, color: "text-purple-600" },
   ]
 
-  // Your existing knowledge nodes
+  // People in your network
+  const people: Person[] = [
+    { id: 'p1', name: 'Sarah Chen', role: 'Team Lead', avatar: '👩‍💼', connectionStrength: 85 },
+    { id: 'p2', name: 'Michael Park', role: 'Mentor', avatar: '👨‍🏫', connectionStrength: 92 },
+    { id: 'p3', name: 'Alex Rivera', role: 'Colleague', avatar: '👤', connectionStrength: 67 },
+    { id: 'p4', name: 'Dr. Thompson', role: 'Therapist', avatar: '👨‍⚕️', connectionStrength: 78 },
+    { id: 'p5', name: 'Jamie Liu', role: 'Best Friend', avatar: '👫', connectionStrength: 95 },
+  ]
+
+  // Miro-style sticky notes spread across the entire canvas
   const knowledgeNodes: KnowledgeNode[] = [
-    { id: 'k1', title: 'API Performance Meeting', type: 'meeting', x: 20, y: 30, color: 'from-blue-500 to-blue-600', icon: Users },
-    { id: 'k2', title: 'System Design Goals', type: 'personal', x: 70, y: 20, color: 'from-green-500 to-green-600', icon: Target },
-    { id: 'k3', title: 'Microservices Research', type: 'research', x: 40, y: 60, color: 'from-purple-500 to-purple-600', icon: FileText },
-    { id: 'k4', title: 'Team Scaling Plans', type: 'planning', x: 80, y: 50, color: 'from-pink-500 to-pink-600', icon: TrendingUp },
-    { id: 'k5', title: 'Q4 Technical Roadmap', type: 'document', x: 30, y: 80, color: 'from-yellow-500 to-yellow-600', icon: Clock },
-    { id: 'new', title: 'Building Scalable APIs', type: 'video', x: 50, y: 45, color: 'from-red-500 to-red-600', icon: Youtube, relatedTo: ['k1', 'k2', 'k3', 'k4'] },
+    // Top-left area
+    { id: 'k1', title: 'API Architecture', type: 'technical', x: 15, y: 15, color: 'bg-yellow-300', icon: Briefcase, category: 'career', relatedTo: ['k4', 'k7', 'new'], affinity: 0.9 },
+    
+    // Top-center
+    { id: 'k2', title: 'System Design', type: 'learning', x: 50, y: 12, color: 'bg-green-300', icon: GraduationCap, category: 'growth', relatedTo: ['k1', 'k5', 'new'], affinity: 0.95 },
+    
+    // Top-right
+    { id: 'k3', title: 'AI/ML Basics', type: 'learning', x: 85, y: 18, color: 'bg-blue-300', icon: Brain, category: 'growth', relatedTo: ['k2', 'k6', 'k11'], affinity: 0.6 },
+    
+    // Left side
+    { id: 'k4', title: 'Team Dynamics', type: 'social', x: 12, y: 45, color: 'bg-purple-300', icon: Users, category: 'career', relatedTo: ['k1', 'k7', 'k8'], affinity: 0.8 },
+    
+    // Right side
+    { id: 'k5', title: 'Leadership Skills', type: 'growth', x: 88, y: 42, color: 'bg-pink-300', icon: Target, category: 'career', relatedTo: ['k2', 'k3', 'new'], affinity: 0.7 },
+    
+    // Center-left
+    { id: 'k6', title: 'Public Speaking', type: 'skill', x: 28, y: 32, color: 'bg-orange-300', icon: MessageCircle, category: 'growth', relatedTo: ['k3', 'k9', 'new'], affinity: 0.5 },
+    
+    // Center-right
+    { id: 'k7', title: 'Work-Life Balance', type: 'wellness', x: 72, y: 28, color: 'bg-red-300', icon: Heart, category: 'wellness', relatedTo: ['k1', 'k4', 'k10'], affinity: 0.7 },
+    
+    // Center (new content)
+    { id: 'new', title: 'Scalable APIs Masterclass', type: 'video', x: 50, y: 50, color: 'bg-teal-300', icon: Youtube, category: 'new', relatedTo: ['k1', 'k2', 'k5', 'k11'], affinity: 1.0 },
+    
+    // Center-left bottom
+    { id: 'k8', title: 'Stress Management', type: 'health', x: 25, y: 68, color: 'bg-indigo-300', icon: Shield, category: 'wellness', relatedTo: ['k4', 'k9', 'new'], affinity: 0.85 },
+    
+    // Center-right bottom
+    { id: 'k9', title: 'Mindfulness Practice', type: 'mental', x: 75, y: 72, color: 'bg-cyan-300', icon: Activity, category: 'wellness', relatedTo: ['k6', 'k8', 'k10'], affinity: 0.6 },
+    
+    // Bottom-left
+    { id: 'k10', title: 'Creative Projects', type: 'personal', x: 18, y: 85, color: 'bg-lime-300', icon: Lightbulb, category: 'personal', relatedTo: ['k7', 'k9', 'k11'], affinity: 0.4 },
+    
+    // Bottom-center
+    { id: 'k11', title: 'Side Business', type: 'entrepreneurship', x: 50, y: 88, color: 'bg-amber-300', icon: DollarSign, category: 'personal', relatedTo: ['k10', 'new', 'k12'], affinity: 0.75 },
+    
+    // Bottom-right
+    { id: 'k12', title: 'Family Time', type: 'relationships', x: 82, y: 82, color: 'bg-violet-300', icon: Users, category: 'personal', relatedTo: ['k11', 'k5', 'k3'], affinity: 0.3 },
+  ]
+
+  // Emotional patterns
+  const emotionalPatterns: Insight[] = [
+    {
+      id: 'e1',
+      title: 'Confidence Surge',
+      description: 'Technical learning directly boosts your leadership confidence',
+      impact: '+45% self-assurance',
+      icon: Flame,
+      color: 'from-orange-500 to-red-500',
+      type: 'emotional',
+      percentage: 78
+    },
+    {
+      id: 'e2',
+      title: 'Anxiety Triggers',
+      description: 'New challenges spike stress but fuel growth',
+      impact: 'Manageable with mindfulness',
+      icon: AlertCircle,
+      color: 'from-yellow-500 to-orange-500',
+      type: 'emotional',
+      percentage: 62
+    },
+    {
+      id: 'e3',
+      title: 'Joy Patterns',
+      description: 'Learning + creating = peak happiness state',
+      impact: 'Optimal flow achieved',
+      icon: Smile,
+      color: 'from-green-500 to-emerald-500',
+      type: 'emotional',
+      percentage: 88
+    },
+  ]
+
+  // Enhanced insights
+  const insights: Insight[] = [
+    {
+      id: 'i1',
+      title: 'Career Acceleration Path',
+      description: 'This API knowledge + your leadership skills = Senior Architect role ready',
+      impact: '$65K salary increase potential',
+      icon: TrendingUp,
+      color: 'from-blue-500 to-cyan-500',
+      type: 'career',
+      percentage: 92
+    },
+    {
+      id: 'i2',
+      title: 'Stress-Performance Balance',
+      description: 'Your stress peaks before breakthroughs. New content shows how to maintain peak without burnout.',
+      impact: '2x productivity, 50% less stress',
+      icon: Activity,
+      color: 'from-purple-500 to-pink-500',
+      type: 'psychological',
+      percentage: 75
+    },
+    {
+      id: 'i3',
+      title: 'Network Effect Opportunity',
+      description: 'Sarah and Michael are working on similar problems - collaboration opportunity detected',
+      impact: 'Potential partnership worth $30K',
+      icon: Users,
+      color: 'from-green-500 to-teal-500',
+      type: 'relationship',
+      percentage: 83
+    },
   ]
 
   const runIngestionDemo = async () => {
@@ -68,7 +191,11 @@ export default function AppScreenshot() {
     setIsProcessing(false)
     setCurrentMessageIndex(0)
     setShowConnections(false)
+    setShowTransformation(false)
+    setShowInsights(false)
+    setShowGlow(false)
     setSelectedNode(null)
+    setActiveInsight(0)
 
     // Wait and show modal
     await new Promise(resolve => setTimeout(resolve, 2000))
@@ -76,10 +203,10 @@ export default function AppScreenshot() {
     
     // Type the video link
     await new Promise(resolve => setTimeout(resolve, 1000))
-    const link = 'https://youtube.com/watch?v=scalable-apis-2024'
+    const link = 'https://youtube.com/watch?v=scalable-apis-masterclass'
     for (let i = 0; i <= link.length; i++) {
       setVideoLink(link.slice(0, i))
-      await new Promise(resolve => setTimeout(resolve, 50))
+      await new Promise(resolve => setTimeout(resolve, 40))
     }
 
     // Start processing
@@ -89,346 +216,597 @@ export default function AppScreenshot() {
     // Show processing messages
     for (let i = 0; i < processingMessages.length; i++) {
       setCurrentMessageIndex(i)
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      await new Promise(resolve => setTimeout(resolve, 1800))
     }
 
-    // Close modal and show connections
+    // Close modal and show transformation
     setShowModal(false)
     setIsProcessing(false)
     await new Promise(resolve => setTimeout(resolve, 500))
-    setShowConnections(true)
     
-    // Auto-select the new video node
+    // Show connections first
+    setShowConnections(true)
     await new Promise(resolve => setTimeout(resolve, 1000))
-    setSelectedNode('new')
+    
+    // Add new node and glow affected connections
+    setShowTransformation(true)
+    setShowGlow(true)
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    // Show insights
+    setShowInsights(true)
+    
+    // Cycle through tabs
+    await new Promise(resolve => setTimeout(resolve, 4000))
+    setSelectedTab('emotions')
+    await new Promise(resolve => setTimeout(resolve, 4000))
+    setSelectedTab('people')
+    await new Promise(resolve => setTimeout(resolve, 4000))
+    setSelectedTab('insights')
 
     // Hold final state
-    await new Promise(resolve => setTimeout(resolve, 8000))
+    await new Promise(resolve => setTimeout(resolve, 3000))
   }
 
   useEffect(() => {
     runIngestionDemo()
-    const interval = setInterval(runIngestionDemo, 25000)
+    const interval = setInterval(runIngestionDemo, 35000)
     return () => clearInterval(interval)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return (
-    <section className="container mx-auto px-6 py-20">
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative max-w-6xl mx-auto"
-      >
-        <div className="glass-card rounded-xl overflow-hidden backdrop-blur-sm relative">
-          <div className="flex items-center justify-between p-4 border-b border-polygon-border">
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 rounded-full bg-red-500" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500" />
-              <div className="w-3 h-3 rounded-full bg-green-500" />
-            </div>
-            <span className="text-sm text-polygon-text-secondary">Wivvy - Your Digital Mind</span>
-          </div>
+  const visibleNodes = showTransformation ? knowledgeNodes : knowledgeNodes.filter(n => n.id !== 'new')
 
-          <div className="h-[600px] relative overflow-hidden">
-            {/* Background gradient effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-polygon-purple/5 via-transparent to-polygon-blue/5" />
+  return React.createElement(
+    'section',
+    { className: "container mx-auto px-6 py-20" },
+    React.createElement(
+      motion.div,
+      {
+        initial: { opacity: 0, y: 40 },
+        whileInView: { opacity: 1, y: 0 },
+        transition: { duration: 0.8 },
+        viewport: { once: true },
+        className: "relative max-w-7xl mx-auto"
+      },
+      React.createElement(
+        'div',
+        { className: "glass-card rounded-xl overflow-hidden backdrop-blur-sm relative" },
+        React.createElement(
+          'div',
+          { className: "flex items-center justify-between p-4 border-b border-polygon-border" },
+          React.createElement(
+            'div',
+            { className: "flex items-center space-x-2" },
+            React.createElement('div', { className: "w-3 h-3 rounded-full bg-red-500" }),
+            React.createElement('div', { className: "w-3 h-3 rounded-full bg-yellow-500" }),
+            React.createElement('div', { className: "w-3 h-3 rounded-full bg-green-500" })
+          ),
+          React.createElement(
+            'span',
+            { className: "text-sm text-polygon-text-secondary" },
+            'Wivvy - Your Second Brain'
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: "flex h-[700px]" },
+          // Main graph area
+          React.createElement(
+            'div',
+            { className: "flex-1 relative overflow-hidden bg-gray-50" },
             
-            {/* Floating particles effect */}
-            <div className="absolute inset-0">
-              {particles.map((particle) => (
-                <motion.div
-                  key={particle.id}
-                  className="absolute w-1 h-1 bg-polygon-purple/20 rounded-full"
-                  initial={{ 
-                    x: `${particle.x}%`, 
-                    y: `${particle.y}%`,
-                    scale: particle.scale
-                  }}
-                  animate={{
-                    y: [`${particle.y}%`, '-10%'],
-                    opacity: [0, 1, 0]
-                  }}
-                  transition={{
-                    duration: particle.duration,
-                    repeat: Infinity,
-                    delay: particle.delay
-                  }}
-                />
-              ))}
-            </div>
+            // Miro-style grid background
+            React.createElement(
+              'div',
+              { 
+                className: "absolute inset-0",
+                style: {
+                  backgroundImage: `
+                    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)
+                  `,
+                  backgroundSize: '25px 25px'
+                }
+              }
+            ),
 
-            {/* Main content area - Knowledge Graph */}
-            <div className="relative h-full p-8">
-              {/* Add button */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setShowModal(true)}
-                className="absolute top-8 right-8 btn-primary flex items-center gap-2 z-10"
-                animate={!showModal && !showConnections ? {
+            // Add button
+            React.createElement(
+              motion.button,
+              {
+                whileHover: { scale: 1.05 },
+                whileTap: { scale: 0.95 },
+                onClick: () => setShowModal(true),
+                className: "absolute top-6 right-6 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 z-10 shadow-lg",
+                animate: !showModal && !showConnections ? {
                   scale: [1, 1.05, 1],
-                } : {}}
-                transition={{
+                } : {},
+                transition: {
                   duration: 2,
                   repeat: !showModal && !showConnections ? Infinity : 0,
                   repeatDelay: 1
-                }}
-              >
-                <Plus size={20} />
-                Add to Mind
-              </motion.button>
+                }
+              },
+              React.createElement(Plus, { size: 20 }),
+              'Add Content'
+            ),
 
-              {/* Knowledge nodes */}
-              <svg className="absolute inset-0 w-full h-full">
-                {/* Connection lines */}
-                <AnimatePresence>
-                  {showConnections && knowledgeNodes.find(n => n.id === 'new')?.relatedTo?.map((relatedId, i) => {
-                    const fromNode = knowledgeNodes.find(n => n.id === 'new')
-                    const toNode = knowledgeNodes.find(n => n.id === relatedId)
-                    if (!fromNode || !toNode) return null
+            // Knowledge graph SVG for connections
+            React.createElement(
+              'svg',
+              { 
+                className: "absolute inset-0 w-full h-full pointer-events-none",
+                style: { zIndex: 1 }
+              },
+              // Connection lines
+              React.createElement(
+                AnimatePresence,
+                null,
+                showConnections && visibleNodes.map(node => 
+                  node.relatedTo?.map((relatedId) => {
+                    const toNode = visibleNodes.find(n => n.id === relatedId)
+                    if (!toNode) return null
 
-                    return (
-                      <motion.line
-                        key={`${fromNode.id}-${toNode.id}`}
-                        x1={`${fromNode.x}%`}
-                        y1={`${fromNode.y}%`}
-                        x2={`${toNode.x}%`}
-                        y2={`${toNode.y}%`}
-                        stroke="url(#gradient)"
-                        strokeWidth={selectedNode === 'new' || hoveredNode === relatedId ? 3 : 1.5}
-                        strokeDasharray={selectedNode === 'new' ? '0' : '5,5'}
-                        initial={{ pathLength: 0, opacity: 0 }}
-                        animate={{ 
-                          pathLength: 1, 
-                          opacity: selectedNode === 'new' || hoveredNode === relatedId ? 0.8 : 0.3 
-                        }}
-                        transition={{ duration: 1, delay: i * 0.2 }}
-                      />
+                    const isAffected = showGlow && (node.affinity > 0.7 || toNode.affinity > 0.7)
+                    const glowIntensity = showGlow ? Math.max(node.affinity || 0, toNode.affinity || 0) : 0
+
+                    return React.createElement(motion.line, {
+                      key: `${node.id}-${relatedId}`,
+                      x1: `${node.x}%`,
+                      y1: `${node.y}%`,
+                      x2: `${toNode.x}%`,
+                      y2: `${toNode.y}%`,
+                      stroke: isAffected ? `rgba(251, 146, 60, ${0.3 + glowIntensity * 0.5})` : "rgba(0,0,0,0.2)",
+                      strokeWidth: isAffected ? 2 + glowIntensity : 1,
+                      initial: { pathLength: 0, opacity: 0 },
+                      animate: { 
+                        pathLength: 1, 
+                        opacity: 1,
+                      },
+                      transition: { 
+                        duration: 1,
+                      }
+                    })
+                  })
+                )
+              )
+            ),
+
+            // Knowledge nodes (Miro-style sticky notes)
+            React.createElement(
+              'div',
+              { className: "absolute inset-0", style: { zIndex: 2 } },
+              visibleNodes.map((node) => {
+                const isAffected = showGlow && node.affinity > 0.5
+                const glowScale = showGlow ? 1 + (node.affinity * 0.2) : 1
+                
+                return React.createElement(
+                  motion.div,
+                  {
+                    key: node.id,
+                    className: "absolute",
+                    style: {
+                      left: `${node.x}%`,
+                      top: `${node.y}%`,
+                      transform: 'translate(-50%, -50%)'
+                    },
+                    initial: { 
+                      scale: node.id === 'new' ? 0 : 1,
+                      opacity: node.id === 'new' ? 0 : 1
+                    },
+                    animate: {
+                      scale: node.id === 'new' && showTransformation ? glowScale : isAffected ? glowScale : 1,
+                      opacity: 1
+                    },
+                    transition: { 
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 15,
+                      duration: 1
+                    },
+                    onHoverStart: () => setHoveredNode(node.id),
+                    onHoverEnd: () => setHoveredNode(null),
+                    onClick: () => setSelectedNode(node.id)
+                  },
+                  React.createElement(
+                    motion.div,
+                    {
+                      animate: {
+                        scale: hoveredNode === node.id ? 1.05 : 1,
+                        rotate: hoveredNode === node.id ? -2 : 0,
+                      },
+                      className: "relative cursor-pointer"
+                    },
+                    // Shadow for depth
+                    React.createElement(
+                      'div',
+                      { 
+                        className: `absolute inset-0 bg-black/10 rounded-lg transform translate-x-1 translate-y-1`,
+                        style: { zIndex: -1 }
+                      }
+                    ),
+                    
+                    // Sticky note
+                    React.createElement(
+                      'div',
+                      {
+                        className: `${node.color} p-4 rounded-lg shadow-md relative`,
+                        style: { 
+                          width: '140px',
+                          filter: isAffected ? 'brightness(1.1)' : 'none',
+                          boxShadow: isAffected ? `0 0 20px rgba(251, 146, 60, ${node.affinity})` : undefined
+                        }
+                      },
+                      React.createElement(
+                        'div',
+                        { className: "space-y-2" },
+                        React.createElement(node.icon, { size: 24, className: "text-gray-800" }),
+                        React.createElement(
+                          'div',
+                          { className: "text-sm font-semibold text-gray-900 leading-tight" },
+                          node.title
+                        )
+                      ),
+                      // Affinity indicator
+                      isAffected && React.createElement(
+                        'div',
+                        { className: "absolute -top-2 -right-2 bg-orange-500 rounded-full w-8 h-8 flex items-center justify-center text-xs font-bold text-white shadow-md" },
+                        Math.round(node.affinity * 100) + '%'
+                      ),
+                      // Connection dot
+                      React.createElement(
+                        'div',
+                        { className: "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-gray-600 rounded-full opacity-50" }
+                      )
                     )
-                  })}
-                </AnimatePresence>
-                <defs>
-                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#8B5CF6" />
-                    <stop offset="100%" stopColor="#3B82F6" />
-                  </linearGradient>
-                </defs>
-              </svg>
+                  )
+                )
+              })
+            )
+          ),
 
-              {/* Knowledge nodes */}
-              {knowledgeNodes.map((node) => (
-                <motion.div
-                  key={node.id}
-                  className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
-                  style={{ left: `${node.x}%`, top: `${node.y}%` }}
-                  initial={node.id === 'new' ? { scale: 0, opacity: 0 } : { scale: 1, opacity: 1 }}
-                  animate={
-                    node.id === 'new' && showConnections 
-                      ? { scale: 1, opacity: 1 } 
-                      : node.id !== 'new' 
-                        ? { scale: 1, opacity: 1 }
-                        : { scale: 0, opacity: 0 }
-                  }
-                  transition={{ duration: 0.5, delay: node.id === 'new' ? 0.5 : 0 }}
-                  onHoverStart={() => setHoveredNode(node.id)}
-                  onHoverEnd={() => setHoveredNode(null)}
-                  onClick={() => setSelectedNode(node.id)}
-                >
-                  <motion.div
-                    animate={{
-                      scale: hoveredNode === node.id || selectedNode === node.id ? 1.1 : 1,
-                    }}
-                    className="relative"
-                  >
-                    {/* Glow effect */}
-                    {(selectedNode === node.id || (node.id === 'new' && showConnections)) && (
-                      <motion.div
-                        className={`absolute inset-0 bg-gradient-to-r ${node.color} rounded-full blur-xl`}
-                        animate={{
-                          scale: [1, 1.2, 1],
-                          opacity: [0.5, 0.8, 0.5]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity
-                        }}
-                      />
-                    )}
-                    
-                    {/* Node content */}
-                    <div className={`relative bg-gradient-to-r ${node.color} p-4 rounded-full shadow-lg`}>
-                      <node.icon size={24} className="text-white" />
-                    </div>
-                    
-                    {/* Label */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ 
-                        opacity: hoveredNode === node.id || selectedNode === node.id || node.id === 'new' ? 1 : 0,
-                        y: hoveredNode === node.id || selectedNode === node.id || node.id === 'new' ? 0 : 10
-                      }}
-                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 whitespace-nowrap"
-                    >
-                      <div className="bg-polygon-card px-3 py-1 rounded-lg text-xs font-medium">
-                        {node.title}
-                      </div>
-                    </motion.div>
-                  </motion.div>
-                </motion.div>
-              ))}
+          // Sidebar
+          React.createElement(
+            'div',
+            { className: "w-96 border-l border-gray-200 bg-white flex flex-col" },
+            // Tabs
+            React.createElement(
+              'div',
+              { className: "flex border-b border-gray-200" },
+              ['insights', 'emotions', 'people'].map(tab => 
+                React.createElement(
+                  'button',
+                  {
+                    key: tab,
+                    onClick: () => setSelectedTab(tab as any),
+                    className: `flex-1 px-4 py-3 text-sm font-medium capitalize transition-colors ${
+                      selectedTab === tab 
+                        ? 'text-blue-600 border-b-2 border-blue-600' 
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`
+                  },
+                  tab
+                )
+              )
+            ),
 
-              {/* Insight panel */}
-              <AnimatePresence>
-                {selectedNode === 'new' && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    className="absolute bottom-8 right-8 w-80 glass-card rounded-lg p-4"
-                  >
-                    <h3 className="font-medium mb-3 flex items-center gap-2">
-                      <Lightbulb size={18} className="text-polygon-yellow" />
-                      AI Insights
-                    </h3>
-                    <div className="space-y-2 text-sm text-polygon-text-secondary">
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                      >
-                        This video perfectly complements your API performance discussions from last week&apos;s meeting.
-                      </motion.p>
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                      >
-                        The scalability patterns align with your microservices research and Q4 roadmap goals.
-                      </motion.p>
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6 }}
-                      >
-                        Consider applying these concepts to your team scaling plans.
-                      </motion.p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            // Tab content
+            React.createElement(
+              'div',
+              { className: "flex-1 overflow-y-auto p-4 space-y-4" },
+              // Insights tab
+              selectedTab === 'insights' && insights.map((insight, index) => 
+                React.createElement(
+                  motion.div,
+                  {
+                    key: insight.id,
+                    initial: { opacity: 0, x: 20 },
+                    animate: { opacity: showInsights ? 1 : 0, x: showInsights ? 0 : 20 },
+                    transition: { delay: index * 0.1 },
+                    className: "bg-gray-50 rounded-lg p-4 space-y-3 border border-gray-100"
+                  },
+                  React.createElement(
+                    'div',
+                    { className: "flex items-start gap-3" },
+                    React.createElement(
+                      'div',
+                      { className: `p-2 rounded-lg bg-gradient-to-r ${insight.color}` },
+                      React.createElement(insight.icon, { size: 20, className: "text-white" })
+                    ),
+                    React.createElement(
+                      'div',
+                      { className: "flex-1" },
+                      React.createElement('h4', { className: "font-semibold text-sm text-gray-900" }, insight.title),
+                      React.createElement('p', { className: "text-xs text-gray-600 mt-1" }, insight.description)
+                    )
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: "space-y-2" },
+                    React.createElement(
+                      'div',
+                      { className: "flex justify-between text-xs" },
+                      React.createElement('span', { className: "text-gray-500" }, 'Impact'),
+                      React.createElement('span', { className: "text-blue-600 font-medium" }, insight.impact)
+                    ),
+                    insight.percentage && React.createElement(
+                      'div',
+                      { className: "w-full bg-gray-200 rounded-full h-2" },
+                      React.createElement(
+                        motion.div,
+                        {
+                          className: `bg-gradient-to-r ${insight.color} h-2 rounded-full`,
+                          initial: { width: '0%' },
+                          animate: { width: showInsights ? `${insight.percentage}%` : '0%' },
+                          transition: { delay: index * 0.1 + 0.3, duration: 0.8 }
+                        }
+                      )
+                    )
+                  )
+                )
+              ),
 
-            {/* Modal */}
-            <AnimatePresence>
-              {showModal && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-20"
-                  onClick={() => !isProcessing && setShowModal(false)}
-                >
-                  <motion.div
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.9, opacity: 0 }}
-                    className="glass-card rounded-xl p-6 w-full max-w-md m-6"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {!isProcessing ? (
-                      <React.Fragment>
-                        <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-lg font-semibold">Add to Your Mind</h3>
-                          <button
-                            onClick={() => setShowModal(false)}
-                            className="text-polygon-text-tertiary hover:text-white transition-colors"
-                          >
-                            <X size={20} />
-                          </button>
-                        </div>
-                        
-                        <div className="space-y-4">
-                          <div>
-                            <label className="text-sm text-polygon-text-secondary mb-2 block">
-                              Paste a link, type a thought, or upload a file
-                            </label>
-                            <input
-                              type="text"
-                              value={videoLink}
-                              onChange={(e) => setVideoLink(e.target.value)}
-                              placeholder="https://..."
-                              className="w-full px-4 py-3 bg-polygon-card border border-polygon-border rounded-lg focus:border-polygon-purple focus:outline-none transition-colors"
-                            />
-                          </div>
-                          
-                          <div className="flex gap-3">
-                            <button className="flex-1 btn-secondary flex items-center justify-center gap-2">
-                              <Brain size={18} />
-                              Quick Thought
-                            </button>
-                            <button className="flex-1 btn-secondary flex items-center justify-center gap-2">
-                              <FileText size={18} />
-                              Upload File
-                            </button>
-                          </div>
-                          
-                          <button 
-                            onClick={() => setIsProcessing(true)}
-                            className="w-full btn-primary flex items-center justify-center gap-2"
-                          >
-                            <Sparkles size={18} />
-                            Add to Mind
-                          </button>
-                        </div>
-                      </React.Fragment>
-                    ) : (
-                      <div className="text-center py-8">
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                          className="inline-block mb-6"
-                        >
-                          {processingMessages[currentMessageIndex].icon && React.createElement(
-                            processingMessages[currentMessageIndex].icon,
+              // Emotions tab
+              selectedTab === 'emotions' && React.createElement(
+                React.Fragment,
+                null,
+                React.createElement(
+                  'div',
+                  { className: "text-sm text-gray-600 mb-4" },
+                  'Emotional patterns detected from your content'
+                ),
+                emotionalPatterns.map((pattern, index) => 
+                  React.createElement(
+                    motion.div,
+                    {
+                      key: pattern.id,
+                      initial: { opacity: 0, x: 20 },
+                      animate: { opacity: showInsights ? 1 : 0, x: showInsights ? 0 : 20 },
+                      transition: { delay: index * 0.1 },
+                      className: "bg-gray-50 rounded-lg p-4 space-y-3 border border-gray-100"
+                    },
+                    React.createElement(
+                      'div',
+                      { className: "flex items-center gap-3" },
+                      React.createElement(
+                        'div',
+                        { className: `p-2 rounded-lg bg-gradient-to-r ${pattern.color}` },
+                        React.createElement(pattern.icon, { size: 20, className: "text-white" })
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: "flex-1" },
+                        React.createElement('h4', { className: "font-semibold text-sm text-gray-900" }, pattern.title),
+                        React.createElement('p', { className: "text-xs text-gray-600 mt-1" }, pattern.description)
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: "text-2xl font-bold text-blue-600" },
+                        pattern.percentage + '%'
+                      )
+                    ),
+                    React.createElement(
+                      'div',
+                      { className: "flex items-center gap-2 text-xs" },
+                      React.createElement(ArrowUpRight, { size: 12, className: "text-green-600" }),
+                      React.createElement('span', { className: "text-gray-600" }, pattern.impact)
+                    )
+                  )
+                )
+              ),
+
+              // People tab
+              selectedTab === 'people' && React.createElement(
+                React.Fragment,
+                null,
+                React.createElement(
+                  'div',
+                  { className: "text-sm text-gray-600 mb-4" },
+                  'People connected to this content'
+                ),
+                people.map((person, index) => 
+                  React.createElement(
+                    motion.div,
+                    {
+                      key: person.id,
+                      initial: { opacity: 0, x: 20 },
+                      animate: { opacity: showInsights ? 1 : 0, x: showInsights ? 0 : 20 },
+                      transition: { delay: index * 0.1 },
+                      className: "bg-gray-50 rounded-lg p-4 flex items-center gap-3 hover:bg-gray-100 transition-colors cursor-pointer border border-gray-100"
+                    },
+                    React.createElement(
+                      'div',
+                      { className: "text-3xl" },
+                      person.avatar
+                    ),
+                    React.createElement(
+                      'div',
+                      { className: "flex-1" },
+                      React.createElement('h4', { className: "font-semibold text-sm text-gray-900" }, person.name),
+                      React.createElement('p', { className: "text-xs text-gray-600" }, person.role)
+                    ),
+                    React.createElement(
+                      'div',
+                      { className: "text-right" },
+                      React.createElement(
+                        'div',
+                        { className: "text-xs text-gray-500 mb-1" },
+                        'Connection'
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: "flex items-center gap-2" },
+                        React.createElement(
+                          'div',
+                          { className: "w-16 bg-gray-200 rounded-full h-2" },
+                          React.createElement(
+                            motion.div,
                             {
-                              size: 48,
-                              className: processingMessages[currentMessageIndex].color
+                              className: `bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full`,
+                              initial: { width: '0%' },
+                              animate: { width: showInsights ? `${person.connectionStrength}%` : '0%' },
+                              transition: { delay: index * 0.1 + 0.3, duration: 0.8 }
                             }
-                          )}
-                        </motion.div>
-                        
-                        <motion.p
-                          key={currentMessageIndex}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          className="text-lg font-medium mb-2"
-                        >
-                          {processingMessages[currentMessageIndex].text}
-                        </motion.p>
-                        
-                        <div className="flex justify-center gap-1 mt-4">
-                          {processingMessages.map((_, i) => (
-                            <motion.div
-                              key={i}
-                              className={`h-1 rounded-full transition-all ${
-                                i <= currentMessageIndex ? 'w-8 bg-polygon-purple' : 'w-1 bg-polygon-border'
-                              }`}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-      </motion.div>
-    </section>
+                          )
+                        ),
+                        React.createElement(
+                          'span',
+                          { className: "text-xs font-medium text-gray-700" },
+                          person.connectionStrength + '%'
+                        )
+                      )
+                    )
+                  )
+                ),
+                React.createElement(
+                  motion.button,
+                  {
+                    whileHover: { scale: 1.02 },
+                    whileTap: { scale: 0.98 },
+                    className: "w-full mt-4 p-3 border border-gray-300 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors"
+                  },
+                  React.createElement(UserPlus, { size: 16 }),
+                  'Add Connection'
+                )
+              )
+            )
+          ),
+
+          // Modal
+          React.createElement(
+            AnimatePresence,
+            null,
+            showModal && React.createElement(
+              motion.div,
+              {
+                initial: { opacity: 0 },
+                animate: { opacity: 1 },
+                exit: { opacity: 0 },
+                className: "absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-20",
+                onClick: () => !isProcessing && setShowModal(false)
+              },
+              React.createElement(
+                motion.div,
+                {
+                  initial: { scale: 0.9, opacity: 0 },
+                  animate: { scale: 1, opacity: 1 },
+                  exit: { scale: 0.9, opacity: 0 },
+                  className: "bg-white rounded-xl p-6 w-full max-w-md m-6 shadow-xl",
+                  onClick: (e: React.MouseEvent) => e.stopPropagation()
+                },
+                !isProcessing ? React.createElement(
+                  React.Fragment,
+                  null,
+                  React.createElement(
+                    'div',
+                    { className: "flex items-center justify-between mb-4" },
+                    React.createElement('h3', { className: "text-lg font-semibold text-gray-900" }, 'Add to Your Mind'),
+                    React.createElement(
+                      'button',
+                      {
+                        onClick: () => setShowModal(false),
+                        className: "text-gray-400 hover:text-gray-600 transition-colors"
+                      },
+                      React.createElement(X, { size: 20 })
+                    )
+                  ),
+                  
+                  React.createElement(
+                    'div',
+                    { className: "space-y-4" },
+                    React.createElement(
+                      'div',
+                      null,
+                      React.createElement(
+                        'label',
+                        { className: "text-sm text-gray-600 mb-2 block" },
+                        'Paste a link, type a thought, or upload a file'
+                      ),
+                      React.createElement('input', {
+                        type: "text",
+                        value: videoLink,
+                        onChange: (e: React.ChangeEvent<HTMLInputElement>) => setVideoLink(e.target.value),
+                        placeholder: "https://...",
+                        className: "w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors text-gray-900 placeholder-gray-400"
+                      })
+                    ),
+                    
+                    React.createElement(
+                      'div',
+                      { className: "flex gap-3" },
+                      React.createElement(
+                        'button',
+                        { className: "flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors" },
+                        React.createElement(Brain, { size: 18, className: "text-gray-600" }),
+                        'Quick Thought'
+                      ),
+                      React.createElement(
+                        'button',
+                        { className: "flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors" },
+                        React.createElement(FileText, { size: 18, className: "text-gray-600" }),
+                        'Upload File'
+                      )
+                    ),
+                    
+                    React.createElement(
+                      'button',
+                      { 
+                        onClick: () => setIsProcessing(true),
+                        className: "w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                      },
+                      React.createElement(Sparkles, { size: 18 }),
+                      'Add to Mind'
+                    )
+                  )
+                ) : React.createElement(
+                  'div',
+                  { className: "text-center py-8" },
+                  React.createElement(
+                    motion.div,
+                    {
+                      animate: { rotate: 360 },
+                      transition: { duration: 3, repeat: Infinity, ease: "linear" },
+                      className: "inline-block mb-6"
+                    },
+                    processingMessages[currentMessageIndex].icon && React.createElement(
+                      processingMessages[currentMessageIndex].icon,
+                      {
+                        size: 48,
+                        className: processingMessages[currentMessageIndex].color
+                      }
+                    )
+                  ),
+                  
+                  React.createElement(
+                    motion.p,
+                    {
+                      key: currentMessageIndex,
+                      initial: { opacity: 0, y: 10 },
+                      animate: { opacity: 1, y: 0 },
+                      exit: { opacity: 0, y: -10 },
+                      className: "text-lg font-medium text-gray-800 mb-2"
+                    },
+                    processingMessages[currentMessageIndex].text
+                  ),
+                  
+                  React.createElement(
+                    'div',
+                    { className: "flex justify-center gap-1 mt-4" },
+                    processingMessages.map((_, i) => 
+                      React.createElement(motion.div, {
+                        key: i,
+                        className: `h-1 rounded-full transition-all ${
+                          i <= currentMessageIndex ? 'w-8 bg-blue-500' : 'w-1 bg-gray-300'
+                        }`
+                      })
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
   )
 }
