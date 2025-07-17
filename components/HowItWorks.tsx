@@ -56,12 +56,12 @@ const HowItWorks = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="bg-wivvy-bg border border-wivvy-grid rounded-xl p-8 hover:border-wivvy-blue/50 transition-all duration-300 group">
+              <div className="glass-card glass-card-hover rounded-xl p-8 border border-polygon-border hover:border-polygon-purple/50 transition-all duration-300 group">
                 <div className="flex items-start justify-between mb-6">
-                  <span className="text-5xl font-bold gradient-text opacity-50">
+                  <span className="text-5xl font-bold text-gradient opacity-50">
                     {step.number}
                   </span>
-                  <step.icon className={`w-8 h-8 text-wivvy-blue transition-transform ${step.animation}`} />
+                  <step.icon className={`w-8 h-8 text-polygon-purple transition-transform ${step.animation}`} />
                 </div>
                 
                 <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
@@ -69,7 +69,7 @@ const HowItWorks = () => {
 
                 {index < steps.length - 1 && (
                   <motion.div
-                    className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-wivvy-blue to-transparent"
+                    className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-polygon-purple to-transparent"
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
                     transition={{ duration: 0.5, delay: 0.5 + index * 0.2 }}

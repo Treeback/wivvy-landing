@@ -57,10 +57,10 @@ const UseCases = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-wivvy-bg/50 border border-wivvy-grid rounded-xl p-6 hover:border-wivvy-blue/50 transition-all duration-300 group"
+              className="glass-card glass-card-hover border border-polygon-border rounded-xl p-6 hover:border-polygon-purple/50 transition-all duration-300 group"
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-wivvy-blue/10 mb-4 group-hover:bg-wivvy-blue/20 transition-colors">
-                <useCase.icon className="w-6 h-6 text-wivvy-blue" />
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-polygon-purple/10 mb-4 group-hover:bg-polygon-purple/20 transition-all group-hover:scale-110">
+                <useCase.icon className="w-6 h-6 text-polygon-purple" />
               </div>
               
               <h3 className="text-lg font-semibold mb-3">{useCase.title}</h3>

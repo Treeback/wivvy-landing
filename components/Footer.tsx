@@ -3,13 +3,13 @@ import { Twitter, Github, Linkedin } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className="bg-wivvy-bg/50 border-t border-wivvy-grid mt-32">
+    <footer className="bg-polygon-bg/50 border-t border-polygon-border mt-32">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <span className="text-2xl font-bold">
-                <span className="gradient-text">W</span>
+                <span className="text-gradient">W</span>
                 <span className="text-white">ivvy</span>
               </span>
             </div>
@@ -61,7 +61,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-wivvy-grid text-center">
+        <div className="mt-12 pt-8 border-t border-polygon-border text-center">
           <p className="text-gray-400 text-sm">
             © 2024 Wivvy. All rights reserved.
           </p>

@@ -17,7 +17,7 @@ const CTABanner = () => {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-b from-wivvy-bg to-wivvy-bg/50">
+    <section className="py-20 bg-gradient-to-b from-polygon-bg to-polygon-bg/50">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -40,11 +40,11 @@ const CTABanner = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="flex-1 px-6 py-3 bg-wivvy-bg border border-wivvy-grid rounded-lg focus:border-wivvy-blue focus:outline-none transition-colors"
+              className="flex-1 px-6 py-3 glass-card border border-polygon-border rounded-lg focus:border-polygon-purple focus:outline-none transition-all hover:border-polygon-purple/50"
               required
             />
             
-            <Button type="submit" variant="primary">
+            <Button type="submit" variant="primary" className="btn-primary">
               {submitted ? 'Thanks!' : 'Request Access'}
             </Button>
           </form>

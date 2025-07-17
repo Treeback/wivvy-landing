@@ -19,7 +19,7 @@ const Hero = () => {
         >
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="block">Rebuild your mind's</span>
-            <span className="block gradient-text">infrastructure.</span>
+            <span className="block text-gradient">infrastructure.</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -28,7 +28,7 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="primary" size="lg" className="group">
+            <Button variant="primary" size="lg" className="btn-primary group">
               Request Early Access
               <span className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             </Button>
@@ -41,7 +41,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-wivvy-bg to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-polygon-bg to-transparent" />
     </section>
   )
 }

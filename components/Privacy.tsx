@@ -32,8 +32,8 @@ const Privacy = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto text-center"
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-wivvy-blue/10 mb-6">
-            <Shield className="w-8 h-8 text-wivvy-blue" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-polygon-purple/10 mb-6 transition-all hover:scale-110 hover:bg-polygon-purple/20">
+            <Shield className="w-8 h-8 text-polygon-purple" />
           </div>
 
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -54,8 +54,8 @@ const Privacy = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-wivvy-bg border border-wivvy-grid mb-4">
-                  <feature.icon className="w-6 h-6 text-wivvy-blue" />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg glass-card border border-polygon-border mb-4 transition-all hover:scale-110">
+                  <feature.icon className="w-6 h-6 text-polygon-purple" />
                 </div>
                 <h3 className="text-lg font-medium mb-2">{feature.title}</h3>
                 <p className="text-gray-400 text-sm">{feature.description}</p>

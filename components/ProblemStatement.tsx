@@ -23,7 +23,7 @@ const ProblemStatement = () => {
   ]
 
   return (
-    <section className="py-20 bg-wivvy-bg/50">
+    <section className="py-20 bg-polygon-bg/50">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -47,8 +47,8 @@ const ProblemStatement = () => {
               viewport={{ once: true }}
               className="text-center"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-wivvy-blue/10 mb-4">
-                <problem.icon className="w-8 h-8 text-wivvy-blue" />
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-polygon-purple/10 mb-4 transition-all hover:scale-110 hover:bg-polygon-purple/20">
+                <problem.icon className="w-8 h-8 text-polygon-purple" />
               </div>
               <h3 className="text-lg font-medium mb-2">{problem.title}</h3>
               <p className="text-gray-400 text-sm">{problem.description}</p>

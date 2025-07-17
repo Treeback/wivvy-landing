@@ -4,11 +4,15 @@
 
 @layer base {
   :root {
-    --background: #0D1117;
+    --background: #000000;
     --foreground: #FFFFFF;
-    --grid: #1B2330;
-    --accent-blue: #4D8CFF;
-    --accent-blue-light: #7AA9FF;
+    --card: #111111;
+    --card-hover: #1a1a1a;
+    --border: #222222;
+    --primary: #8B5CF6;
+    --primary-light: #A78BFA;
+    --secondary: #3B82F6;
+    --secondary-light: #60A5FA;
   }
 
   html {
@@ -16,30 +20,99 @@
   }
 
   body {
-    @apply bg-wivvy-bg text-white antialiased;
+    @apply bg-polygon-bg text-white antialiased;
     background-image: 
-      linear-gradient(rgba(27, 35, 48, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(27, 35, 48, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
+      radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+  }
+
+  * {
+    @apply border-polygon-border;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-polygon-card/80 backdrop-blur-xl border border-polygon-border;
+  }
+
+  .glass-card-hover {
+    @apply hover:bg-polygon-card-hover/80 hover:border-polygon-border-light transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-polygon-purple to-polygon-purple-light hover:from-polygon-purple-light hover:to-polygon-purple text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-polygon-purple/25 hover:scale-[1.02];
+  }
+
+  .btn-secondary {
+    @apply bg-polygon-card border border-polygon-border hover:bg-polygon-card-hover hover:border-polygon-border-light text-white font-medium px-6 py-3 rounded-lg transition-all duration-200;
+  }
+
+  .gradient-border {
+    @apply relative;
+    background: linear-gradient(var(--card), var(--card)) padding-box,
+              linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #EC4899 100%) border-box;
+    border: 1px solid transparent;
   }
 }
 
 @layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-polygon-purple via-polygon-blue to-polygon-pink bg-clip-text text-transparent;
+  }
+
+  .text-gradient-purple {
+    @apply bg-gradient-to-r from-polygon-purple to-polygon-purple-light bg-clip-text text-transparent;
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5),
+                0 0 40px rgba(139, 92, 246, 0.3),
+                0 0 60px rgba(139, 92, 246, 0.1);
+  }
+
   .glow-blue {
-    box-shadow: 0 0 20px rgba(77, 140, 255, 0.5),
-                0 0 40px rgba(77, 140, 255, 0.3),
-                0 0 60px rgba(77, 140, 255, 0.1);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5),
+                0 0 40px rgba(59, 130, 246, 0.3),
+                0 0 60px rgba(59, 130, 246, 0.1);
   }
 
-  .text-glow {
-    text-shadow: 0 0 20px rgba(77, 140, 255, 0.5);
+  .shimmer {
+    @apply relative overflow-hidden;
   }
 
-  .gradient-blue {
-    @apply bg-gradient-to-r from-wivvy-blue to-wivvy-blue-light;
+  .shimmer::before {
+    @apply absolute inset-0 -translate-x-full;
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+    content: "";
   }
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-wivvy-blue to-wivvy-blue-light bg-clip-text text-transparent;
+  .gradient-mesh {
+    background-image: 
+      radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 0.15) 0px, transparent 50%);
+    filter: blur(100px);
+  }
+
+  .noise {
+    position: relative;
+  }
+
+  .noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
   }
 }
