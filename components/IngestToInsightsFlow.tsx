@@ -118,13 +118,13 @@ const IngestToInsightsFlow = () => {
                       >
                         {index === 1 ? (
                           <div className="space-y-1">
-                            <p className="text-sm text-gray-300">{item.label}</p>
+                            <p className="text-sm text-gray-300">{(item as any).label}</p>
                             <div className="w-full bg-polygon-card rounded-full h-1.5">
                               <motion.div
                                 className="bg-gradient-to-r from-polygon-purple to-polygon-purple-light h-1.5 rounded-full"
                                 initial={{ width: '0%' }}
                                 animate={{ 
-                                  width: currentStep === index ? `${item.progress}%` : '0%' 
+                                  width: currentStep === index ? `${(item as any).progress}%` : '0%' 
                                 }}
                                 transition={{ 
                                   duration: 1, 
@@ -135,14 +135,14 @@ const IngestToInsightsFlow = () => {
                           </div>
                         ) : (
                           <div className={`flex items-center gap-2 p-3 rounded-lg ${
-                            item.insight 
+                            (item as any).insight 
                               ? 'bg-polygon-purple/10 border border-polygon-purple/30' 
                               : 'bg-polygon-card/50'
                           }`}>
-                            {item.icon && (
-                              <item.icon size={18} className={item.color || 'text-polygon-purple'} />
+                            {(item as any).icon && (
+                              <(item as any).icon size={18} className={(item as any).color || 'text-polygon-purple'} />
                             )}
-                            <span className="text-sm">{item.label}</span>
+                            <span className="text-sm">{(item as any).label}</span>
                           </div>
                         )}
                       </motion.div>
