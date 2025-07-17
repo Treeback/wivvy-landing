@@ -377,8 +377,8 @@ export default function AppScreenshot() {
               'div',
               { className: "absolute inset-0", style: { zIndex: 2 } },
               visibleNodes.map((node) => {
-                const isAffected = showGlow && node.affinity > 0.5
-                const glowScale = showGlow ? 1 + (node.affinity * 0.2) : 1
+                const isAffected = showGlow && (node.affinity || 0) > 0.5
+                const glowScale = showGlow ? 1 + ((node.affinity || 0) * 0.2) : 1
                 
                 const xPos = isMobile && node.xMobile ? node.xMobile : node.x
                 const yPos = isMobile && node.yMobile ? node.yMobile : node.y
@@ -437,7 +437,7 @@ export default function AppScreenshot() {
                         style: { 
                           width: isMobile ? '100px' : '140px',
                           filter: isAffected ? 'brightness(1.1)' : 'none',
-                          boxShadow: isAffected ? `0 0 20px rgba(251, 146, 60, ${node.affinity})` : undefined
+                          boxShadow: isAffected ? `0 0 20px rgba(251, 146, 60, ${node.affinity || 0})` : undefined
                         }
                       },
                       React.createElement(
@@ -454,7 +454,7 @@ export default function AppScreenshot() {
                       isAffected && React.createElement(
                         'div',
                         { className: `absolute -top-2 -right-2 bg-orange-500 rounded-full ${isMobile ? 'w-6 h-6 text-xs' : 'w-8 h-8 text-xs'} flex items-center justify-center font-bold text-white shadow-md` },
-                        Math.round(node.affinity * 100) + '%'
+                        Math.round((node.affinity || 0) * 100) + '%'
                       )
                     )
                   )
