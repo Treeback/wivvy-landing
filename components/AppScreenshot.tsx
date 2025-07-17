@@ -342,7 +342,7 @@ export default function AppScreenshot() {
                     const toNode = visibleNodes.find(n => n.id === relatedId)
                     if (!toNode) return null
 
-                    const isAffected = showGlow && (node.affinity > 0.7 || toNode.affinity > 0.7)
+                    const isAffected = showGlow && ((node.affinity || 0) > 0.7 || (toNode.affinity || 0) > 0.7)
                     const glowIntensity = showGlow ? Math.max(node.affinity || 0, toNode.affinity || 0) : 0
 
                     const x1 = isMobile && node.xMobile ? node.xMobile : node.x
