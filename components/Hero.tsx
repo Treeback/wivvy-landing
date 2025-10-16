@@ -54,16 +54,30 @@ const Hero = () => {
                 <span className="relative z-10 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent animate-gradient">
                   emotional insights
                 </span>
-                <motion.svg
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 1, delay: 0.8 }}
+                <svg
                   className="absolute -bottom-2 left-0 w-full"
                   viewBox="0 0 300 12"
                   fill="none"
                 >
-                  <path
-                    d="M2 9C2 9 75 3 150 7C225 11 298 5 298 5"
+                  <motion.path
+                    initial={{ pathLength: 0 }}
+                    animate={{ 
+                      pathLength: 1,
+                      d: [
+                        "M2 9C2 9 75 3 150 7C225 11 298 5 298 5",
+                        "M2 5C2 5 75 11 150 7C225 3 298 9 298 9",
+                        "M2 9C2 9 75 3 150 7C225 11 298 5 298 5"
+                      ]
+                    }}
+                    transition={{ 
+                      pathLength: { duration: 1, delay: 0.8 },
+                      d: {
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 1.8
+                      }
+                    }}
                     stroke="url(#gradient)"
                     strokeWidth="3"
                     strokeLinecap="round"
@@ -75,28 +89,32 @@ const Hero = () => {
                       <stop offset="100%" stopColor="#6366f1" />
                     </linearGradient>
                   </defs>
-                </motion.svg>
-                {/* Beating heart animation */}
-                <motion.div
-                  className="absolute -right-10 top-1/2 -translate-y-1/2"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 1.2, duration: 0.5 }}
-                >
-                  <motion.div
-                    animate={{ 
-                      scale: [1, 1.08, 1, 1.08, 1],
-                    }}
-                    transition={{ 
-                      duration: 2.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      times: [0, 0.2, 0.4, 0.6, 1]
-                    }}
-                  >
-                    <Heart className="w-6 h-6 text-pink-500 fill-pink-500" />
-                  </motion.div>
-                </motion.div>
+                </svg>
+                {/* Multiple floating emotion emojis */}
+                <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-24 h-20">
+                  {['😊', '😔', '😍', '😤', '🤔', '😰', '😎', '😞', '🤩', '😫', '😌', '🙄', '🥰', '😠', '😄', '😕'].map((emoji, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute left-1/2 top-1/2 text-lg"
+                      initial={{ scale: 0, opacity: 0, x: -9, y: -9 }}
+                      animate={{ 
+                        scale: [0, 1.2, 1.2, 0],
+                        opacity: [0, 1, 1, 0],
+                        x: [-9, -9 + (i % 3 - 1) * 25, -9 + (i % 3 - 1) * 35, -9],
+                        y: [-9, -9 - 20, -9 - 40, -9]
+                      }}
+                      transition={{ 
+                        duration: 3,
+                        repeat: Infinity,
+                        delay: i * 0.3,
+                        ease: "easeOut",
+                        times: [0, 0.3, 0.7, 1]
+                      }}
+                    >
+                      {emoji}
+                    </motion.div>
+                  ))}
+                </div>
               </span>
             </motion.h1>
             
