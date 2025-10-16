@@ -275,155 +275,62 @@ const ProblemStatement = () => {
       realityCheck: "The most important user signals are the ones you're not tracking",
       visual: (
         <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-          {/* Main dashboard */}
-          <motion.div 
-            className="relative"
-            animate={{ 
-              rotateX: [0, 5, -5, 0],
-              rotateY: [0, -5, 5, 0]
-            }}
-            transition={{ 
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
-          >
-            {/* Dashboard frame */}
-            <div className="w-56 h-40 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl shadow-2xl overflow-hidden relative">
-              {/* Header */}
-              <div className="bg-gray-800 text-white text-xs px-3 py-1.5">Analytics Dashboard</div>
+          {/* Dashboard with blind spot visualization */}
+          <div className="relative">
+            <div className="bg-white rounded-xl shadow-xl p-5 w-52 border border-gray-200">
+              <div className="text-xs font-medium text-gray-500 mb-4">What you track</div>
               
-              {/* Visible metrics grid */}
-              <div className="p-3 grid grid-cols-2 gap-2">
-                {/* Metric cards */}
-                {[
-                  { label: 'Views', value: '12.5k', color: 'bg-blue-400' },
-                  { label: 'Clicks', value: '892', color: 'bg-green-400' },
-                  { label: 'Time', value: '2:34', color: 'bg-purple-400' },
-                  { label: 'Conv.', value: '3.2%', color: 'bg-indigo-400' }
-                ].map((metric, i) => (
-                  <motion.div 
-                    key={i} 
-                    className="bg-white rounded p-2 shadow-sm"
-                    animate={{ 
-                      scale: [1, 1.02, 1],
-                      boxShadow: [
-                        '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                        '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                        '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
-                      ]
-                    }}
-                    transition={{ 
-                      duration: 2,
-                      delay: i * 0.2,
-                      repeat: Infinity
-                    }}
-                  >
-                    <div className="text-xs text-gray-500">{metric.label}</div>
-                    <div className="text-sm font-bold text-gray-800">{metric.value}</div>
-                    <motion.div 
-                      className={`h-0.5 ${metric.color} rounded-full mt-1`}
-                      animate={{ scaleX: [0.6, 1, 0.6] }}
-                      transition={{ duration: 3, delay: i * 0.3, repeat: Infinity }}
-                    />
-                  </motion.div>
-                ))}
+              {/* Visible metrics */}
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-gray-600">Clicks</span>
+                  <span className="text-sm font-medium">892</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-gray-600">Time on page</span>
+                  <span className="text-sm font-medium">2:34</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-gray-600">Bounce rate</span>
+                  <span className="text-sm font-medium">47%</span>
+                </div>
               </div>
-
-              {/* Missing data overlay - scan lines */}
-              <motion.div 
-                className="absolute inset-0 pointer-events-none"
-                animate={{ opacity: [0.1, 0.3, 0.1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-red-500/10 via-transparent to-red-500/10" />
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Eye scanning animation */}
-          <motion.div 
-            className="absolute w-full h-full pointer-events-none"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-          >
-            <motion.div
-              className="absolute top-1/2 left-1/2"
-              style={{ transform: 'translate(-50%, -50%)' }}
-            >
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  opacity: [0.8, 1, 0.8]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Eye className="w-12 h-12 text-gray-600" />
-              </motion.div>
               
-              {/* Scan beam */}
-              <motion.div
-                className="absolute top-1/2 left-1/2 w-32 h-0.5 bg-gradient-to-r from-transparent via-red-400 to-transparent"
-                style={{ transformOrigin: '0 50%' }}
+              {/* Divider */}
+              <div className="my-3 border-t border-gray-200" />
+              
+              {/* What's missing */}
+              <div className="text-xs font-medium text-gray-500 mb-2">What you miss</div>
+              <motion.div 
+                className="text-center py-2"
                 animate={{ 
-                  rotate: [0, 360],
-                  opacity: [0.5, 0.8, 0.5]
+                  opacity: [0.3, 1, 0.3]
                 }}
                 transition={{ 
                   duration: 3,
-                  repeat: Infinity
+                  repeat: Infinity,
+                  ease: "easeInOut"
                 }}
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Floating missing insights */}
-          {[
-            { emoji: '😤', label: 'Frustration spike', x: 20, y: 20 },
-            { emoji: '🤔', label: 'Decision moment', x: 75, y: 30 },
-            { emoji: '😔', label: 'Abandonment', x: 30, y: 70 },
-            { emoji: '❓', label: 'Confusion point', x: 80, y: 80 },
-            { emoji: '😰', label: 'Anxiety peak', x: 15, y: 85 }
-          ].map((insight, i) => (
-            <motion.div
-              key={i}
-              className="absolute"
-              style={{ left: `${insight.x}%`, top: `${insight.y}%` }}
-              initial={{ scale: 0, opacity: 0 }}
+              >
+                <div className="text-lg mb-1">😤 😔 🤔</div>
+                <div className="text-xs text-red-600">User emotions</div>
+              </motion.div>
+            </div>
+            
+            {/* Eye with limited vision */}
+            <motion.div 
+              className="absolute -top-3 right-4"
               animate={{ 
-                scale: [0, 1, 1, 0],
-                opacity: [0, 1, 1, 0],
-                y: [0, -10, -10, -20]
+                opacity: [0.5, 1, 0.5]
               }}
               transition={{ 
-                duration: 4,
-                delay: i * 0.8,
+                duration: 2,
                 repeat: Infinity
               }}
             >
-              <div className="bg-white rounded-lg shadow-xl p-2 border-2 border-red-200">
-                <div className="text-2xl mb-1">{insight.emoji}</div>
-                <div className="text-xs text-red-600 font-medium whitespace-nowrap">{insight.label}</div>
-                <motion.div 
-                  className="absolute -bottom-1 left-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"
-                  style={{ transform: 'translateX(-50%)' }}
-                  animate={{ opacity: [0, 1, 0] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                />
-              </div>
+              <Eye className="w-6 h-6 text-gray-400" />
             </motion.div>
-          ))}
-
-          {/* Glitch effect */}
-          <motion.div
-            className="absolute inset-0 pointer-events-none"
-            animate={{ opacity: [0, 0, 0, 0.1, 0] }}
-            transition={{ duration: 5, repeat: Infinity }}
-          >
-            <div className="absolute inset-0 bg-red-500 mix-blend-multiply" style={{ clipPath: 'inset(20% 0 70% 0)' }} />
-            <div className="absolute inset-0 bg-blue-500 mix-blend-multiply" style={{ clipPath: 'inset(60% 0 10% 0)' }} />
-          </motion.div>
+          </div>
         </div>
       )
     }
