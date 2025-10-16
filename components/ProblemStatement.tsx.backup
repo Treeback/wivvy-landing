@@ -23,17 +23,6 @@ const ProblemStatement = () => {
       icon: BarChart3,
       title: "Surface-level metrics",
       subtitle: "Missing the human story",
-      stats: [
-        { label: "Lost insights", value: "73%" },
-        { label: "User frustration", value: "High" },
-        { label: "Action clarity", value: "12%" }
-      ],
-      insights: [
-        "You see clicks, but not the hesitation before them",
-        "You track conversions, but miss the emotional journey",
-        "You measure time on page, but not engagement quality"
-      ],
-      realityCheck: "Your dashboards show growth, but customer satisfaction is plummeting",
       visual: (
         <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
           {/* Animated user icons leaving */}
@@ -185,17 +174,6 @@ const ProblemStatement = () => {
       icon: Users,
       title: "Static personas",
       subtitle: "Real users are dynamic",
-      stats: [
-        { label: "Persona accuracy", value: "34%" },
-        { label: "Behavior shifts", value: "Daily" },
-        { label: "Context missed", value: "91%" }
-      ],
-      insights: [
-        "Your 'power user' is actually 5 different emotional states",
-        "Morning browsers become evening buyers - you don't see why",
-        "Same person, different mood, completely different behavior"
-      ],
-      realityCheck: "Static segments can't capture the fluidity of human emotion",
       visual: (
         <div className="relative w-full h-full flex items-center justify-center">
           <div className="grid grid-cols-2 gap-2">
@@ -240,17 +218,6 @@ const ProblemStatement = () => {
       icon: Eye,
       title: "Blind spots",
       subtitle: "Missing emotional context",
-      stats: [
-        { label: "Hidden friction", value: "67%" },
-        { label: "Emotional data", value: "0%" },
-        { label: "True intent", value: "Guessing" }
-      ],
-      insights: [
-        "Critical decision moments happen between the clicks",
-        "Frustration builds silently until users suddenly leave",
-        "You're blind to the emotional journey that drives decisions"
-      ],
-      realityCheck: "The most important user signals are the ones you're not tracking",
       visual: (
         <div className="relative w-full h-full flex items-center justify-center">
           {/* Dashboard with missing pieces */}
@@ -490,290 +457,99 @@ const ProblemStatement = () => {
     }
   ]
 
-
   return (
-    <section className="py-24 relative overflow-hidden" id="problem-solution">
-      <div className="container mx-auto px-6 relative">
-        {/* Enhanced header with dramatic reveal */}
-        <motion.div 
-          className="text-center mb-20"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <motion.div 
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-full mb-8 shadow-lg"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            <AlertTriangle className="w-4 h-4 text-red-500" />
-            <span className="text-sm font-medium text-gray-700">The Hidden Problem</span>
-          </motion.div>
-          
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-            Your analytics are
-            <br />
-            <motion.span 
-              className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-            >
-              lying to you
-            </motion.span>
-          </h2>
-        </motion.div>
-
-        {/* Enhanced cards with 3D perspective and interactive hover */}
-        <div className="relative mb-32">
-          {/* Background gradient orbs */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
+    <section className="relative overflow-hidden" id="problem-solution">
+      {/* Fixed title section */}
+      <div className="sticky top-0 z-50 bg-white border-b border-gray-100">
+        <div className="container mx-auto px-6 py-8">
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-red-200 rounded-full mb-4 shadow-lg">
+              <AlertTriangle className="w-4 h-4 text-red-500" />
+              <span className="text-sm font-medium text-gray-700">The Hidden Problem</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
+              Your analytics are
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500 ml-3">
+                lying to you
+              </span>
+            </h2>
           </div>
+        </div>
+      </div>
 
-          {/* Cards container with perspective */}
-          <div className="relative max-w-7xl mx-auto perspective-1000">
-            {problems.map((problem, index) => (
-              <motion.div
-                key={index}
-                className="relative mb-32 last:mb-0"
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                {/* Card number indicator */}
-                <motion.div
-                  className="absolute -left-20 top-1/2 -translate-y-1/2 hidden lg:block"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <div className="text-8xl font-bold text-gray-100">
-                    0{index + 1}
-                  </div>
-                </motion.div>
-
-                {/* Main card with tilt effect */}
-                <motion.div
-                  className="relative group"
-                  whileHover={{ 
-                    scale: 1.02,
-                    rotateY: index % 2 === 0 ? -5 : 5,
-                    z: 50
-                  }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-3xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
-                  
-                  <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 group-hover:border-red-200 transition-all duration-500">
-                    <div className="grid lg:grid-cols-2 gap-0">
-                      {/* Visual Side with overlay effect */}
-                      <div className={`relative bg-gradient-to-br from-gray-50 to-white overflow-hidden ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                        {/* Animated background pattern */}
-                        <div className="absolute inset-0 opacity-10">
-                          <div className="absolute inset-0" style={{
-                            backgroundImage: `radial-gradient(circle at 1px 1px, rgb(0 0 0 / 0.1) 1px, transparent 1px)`,
-                            backgroundSize: '20px 20px'
-                          }} />
-                        </div>
-                        
-                        {/* Visual content with parallax */}
-                        <motion.div 
-                          className="relative h-full flex items-center justify-center p-12 min-h-[400px]"
-                          style={{ transformStyle: "preserve-3d" }}
-                          whileHover={{ z: 20 }}
-                        >
-                          <div className="relative z-10 w-full h-full">
-                            {problem.visual}
-                          </div>
-                          
-                          {/* Hover effect overlay */}
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-orange-500/10"
-                            initial={{ opacity: 0 }}
-                            whileHover={{ opacity: 1 }}
-                            transition={{ duration: 0.3 }}
-                          />
-                        </motion.div>
-                      </div>
-
-                      {/* Content Side with enhanced typography */}
-                      <div className={`relative p-12 lg:p-16 flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                        {/* Decorative element */}
-                        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-red-100 to-orange-100 rounded-full blur-3xl opacity-30" />
-                        
-                        <motion.div
-                          className="relative z-10"
-                          initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.3, duration: 0.6 }}
-                        >
-                          {/* Icon with gradient background */}
-                          <div className="inline-flex items-center justify-center w-16 h-16 mb-6 bg-gradient-to-br from-red-100 to-orange-100 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                            <problem.icon className="w-8 h-8 text-red-500" />
-                          </div>
-                          
-                          {/* Enhanced typography */}
-                          <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                            {problem.title}
-                          </h3>
-                          <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                            {problem.subtitle}
-                          </p>
-                          
-                          {/* Stats Grid */}
-                          <div className="grid grid-cols-3 gap-4 mb-8">
-                            {problem.stats.map((stat, idx) => (
-                              <motion.div
-                                key={idx}
-                                className="text-center p-4 bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-100"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.4 + idx * 0.1 }}
-                              >
-                                <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-                                <div className="text-xs text-gray-500 uppercase tracking-wide">{stat.label}</div>
-                              </motion.div>
-                            ))}
-                          </div>
-
-                          {/* Insights List */}
-                          <div className="space-y-3 mb-8">
-                            {problem.insights.map((insight, idx) => (
-                              <motion.div
-                                key={idx}
-                                className="flex items-start gap-3"
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.5 + idx * 0.1 }}
-                              >
-                                <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0" />
-                                <p className="text-gray-700 leading-relaxed">{insight}</p>
-                              </motion.div>
-                            ))}
-                          </div>
-
-                          {/* Reality Check Box */}
-                          <motion.div
-                            className="p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-xl border border-red-200 mb-6"
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.6 }}
-                          >
-                            <p className="text-sm text-gray-800">
-                              <span className="font-semibold text-red-600">Reality check:</span> {problem.realityCheck}
-                            </p>
-                          </motion.div>
-                          
-                          {/* Interactive CTA */}
-                          <motion.div 
-                            className="inline-flex items-center gap-3 text-red-600 font-semibold group/cta cursor-pointer"
-                            whileHover={{ x: 10 }}
-                            transition={{ type: "spring", stiffness: 300 }}
-                          >
-                            <span className="text-lg">See the full picture</span>
-                            <div className="relative">
-                              <ArrowRight className="w-5 h-5 transition-transform group-hover/cta:translate-x-1" />
-                              <motion.div
-                                className="absolute inset-0 bg-red-500 rounded-full blur-md opacity-0 group-hover/cta:opacity-30"
-                                transition={{ duration: 0.3 }}
-                              />
-                            </div>
-                          </motion.div>
-                        </motion.div>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Bottom insight banner with statistics */}
+      {/* Scroll-triggered cards container */}
+      <div className="relative">
+        {problems.map((problem, index) => (
           <motion.div
-            className="max-w-5xl mx-auto mt-20"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            key={index}
+            className="min-h-screen flex items-center justify-center py-20"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: false, amount: 0.5 }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="relative bg-gradient-to-r from-red-500 to-orange-500 rounded-3xl text-white overflow-hidden">
-              {/* Animated background elements */}
-              <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-black/10" />
-                {[...Array(3)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-64 h-64 bg-white/10 rounded-full"
-                    style={{
-                      left: `${i * 30}%`,
-                      top: '50%',
-                    }}
-                    animate={{
-                      y: [-20, 20, -20],
-                      x: [-10, 10, -10],
-                    }}
-                    transition={{
-                      duration: 5 + i,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                ))}
-              </div>
-              
-              <div className="relative z-10 p-8 lg:p-12">
-                <div className="grid lg:grid-cols-2 gap-8 items-center">
-                  <div className="text-center lg:text-left">
-                    <h3 className="text-3xl font-bold mb-4">
-                      The cost of not understanding your users
-                    </h3>
-                    <p className="text-xl opacity-90 mb-6">
-                      While you rely on surface metrics, your competitors are making data-driven emotional connections
-                    </p>
-                    <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                      <div className="bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2">
-                        <span className="font-semibold">42%</span> higher conversion
-                      </div>
-                      <div className="bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2">
-                        <span className="font-semibold">3.5x</span> better retention
-                      </div>
-                      <div className="bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2">
-                        <span className="font-semibold">67%</span> less churn
+            <motion.div
+              initial={{ y: 100, opacity: 0, scale: 0.9 }}
+              whileInView={{ 
+                y: 0, 
+                opacity: 1,
+                scale: 1
+              }}
+              viewport={{ once: false, amount: 0.5 }}
+              transition={{ 
+                duration: 0.8,
+                ease: "easeOut"
+              }}
+              className="container mx-auto px-6"
+            >
+              <div className="max-w-5xl mx-auto">
+                <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+                  <div className="flex flex-col lg:flex-row">
+                    {/* Visual Side */}
+                    <div className="flex-1 bg-gradient-to-br from-gray-50 to-white">
+                      <div className="p-8 lg:p-12 h-[400px] flex items-center justify-center">
+                        {problem.visual}
                       </div>
                     </div>
-                  </div>
-                  
-                  <div className="text-center lg:text-right">
-                    <div className="inline-flex flex-col items-center lg:items-end">
-                      <div className="text-5xl font-bold mb-2">$2.6M</div>
-                      <div className="text-lg opacity-90">Average annual revenue lost</div>
-                      <div className="text-sm opacity-75 mt-1">to emotional blind spots</div>
+
+                    {/* Content Side */}
+                    <div className="flex-1 p-8 lg:p-12 flex flex-col justify-center">
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: false }}
+                        transition={{ delay: 0.3, duration: 0.6 }}
+                      >
+                        <problem.icon className="w-14 h-14 text-red-500 mb-6" />
+                        <h3 className="text-3xl font-bold text-gray-900 mb-4">{problem.title}</h3>
+                        <p className="text-xl text-gray-600 mb-6">{problem.subtitle}</p>
+                        
+                        <motion.div 
+                          className="inline-flex items-center gap-3 text-red-600 font-semibold"
+                          whileHover={{ x: 5 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          <span>The truth hurts</span>
+                          <ArrowRight className="w-5 h-5" />
+                        </motion.div>
+                      </motion.div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
-        </div>
+        ))}
+      </div>
 
-        {/* Enter Wivvy Section with Story Visualization */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="py-24 bg-gradient-to-b from-white via-gray-50/50 to-white"
-        >
+      {/* Enter Wivvy Section with Story Visualization */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="py-24 bg-gradient-to-b from-white via-gray-50/50 to-white"
+      >
           <div className="max-w-7xl mx-auto px-6">
             {/* Header with Animated Logo */}
             <div className="text-center mb-20">
@@ -1326,28 +1102,7 @@ const ProblemStatement = () => {
             </motion.div>
           </div>
         </motion.div>
-      </div>
-
-      <style jsx>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
+      </motion.div>
     </section>
   )
 }
