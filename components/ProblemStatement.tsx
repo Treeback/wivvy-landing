@@ -553,33 +553,41 @@ const ProblemStatement = () => {
                             />
                           ))}
                           
-                          {/* Data points flowing in */}
+                          {/* Hearts flowing in */}
                           {[...Array(6)].map((_, i) => {
                             const angle = (i * 60) * Math.PI / 180
                             const startX = 100 * Math.cos(angle)
                             const startY = 100 * Math.sin(angle)
+                            const colors = ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#a855f7', '#ec4899']
                             return (
                               <motion.div
                                 key={i}
-                                className="absolute w-3 h-3 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full"
+                                className="absolute flex items-center justify-center"
                                 style={{
                                   left: '50%',
                                   top: '50%',
                                   transform: 'translate(-50%, -50%)'
                                 }}
-                                initial={{ x: startX, y: startY, opacity: 0 }}
+                                initial={{ x: startX, y: startY, opacity: 0, scale: 0 }}
                                 animate={{ 
                                   x: 0,
                                   y: 0,
-                                  opacity: [0, 1, 0]
+                                  opacity: [0, 1, 0],
+                                  scale: [0, 1, 0]
                                 }}
                                 transition={{
-                                  delay: 1 + i * 0.1,
-                                  duration: 1,
+                                  delay: 1 + i * 0.2,
+                                  duration: 1.5,
                                   repeat: Infinity,
-                                  repeatDelay: 2
+                                  repeatDelay: 1.5
                                 }}
-                              />
+                              >
+                                <Heart 
+                                  className="w-4 h-4" 
+                                  fill={colors[i]} 
+                                  color={colors[i]}
+                                />
+                              </motion.div>
                             )
                           })}
                         </motion.div>
