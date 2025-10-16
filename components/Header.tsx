@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Brain, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import Button from './ui/Button'
+import Logo from './ui/Logo'
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false)
@@ -35,7 +36,7 @@ const Header = () => {
       <nav className="container mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center">
-            <Brain className="w-6 h-6 text-white" />
+            <Logo size="md" className="text-white" />
           </div>
           <span className="text-2xl font-bold text-gray-900">Wivvy</span>
         </Link>

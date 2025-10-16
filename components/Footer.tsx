@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Twitter, Github, Linkedin, Brain } from 'lucide-react'
+import { Twitter, Github, Linkedin } from 'lucide-react'
+import Logo from './ui/Logo'
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center">
-                <Brain className="w-6 h-6 text-white" />
+                <Logo size="md" className="text-white" />
               </div>
               <span className="text-xl font-bold text-gray-900">Wivvy</span>
             </div>
