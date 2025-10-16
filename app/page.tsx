@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import ProblemStatement from '@/components/ProblemStatement'
+import TransformationExamples from '@/components/TransformationExamples'
 import Benefits from '@/components/Benefits'
 import CTABanner from '@/components/CTABanner'
 import Footer from '@/components/Footer'
@@ -19,6 +20,7 @@ export default function Home() {
       <Header />
       <Hero />
       <ProblemStatement />
+      <TransformationExamples />
       <Benefits />
       <CTABanner />
       <Footer />

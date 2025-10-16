@@ -285,10 +285,6 @@ const ProblemStatement = () => {
 
   return (
     <section className="py-24 relative overflow-hidden" id="problem-solution">
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 via-orange-50/30 to-yellow-50/50" />
-      </div>
-
       <div className="container mx-auto px-6 relative">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-red-200 rounded-full mb-8 shadow-lg">
