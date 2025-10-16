@@ -423,7 +423,7 @@ const ProblemStatement = () => {
                   transition={{ delay: 0.2 }}
                   className="relative"
                 >
-                  <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 relative z-10">
+                  <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 relative z-10 min-h-[500px] flex flex-col">
                     {/* Step indicator */}
                     <div className="absolute -top-4 left-8 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-medium">
                       The Reality
@@ -477,7 +477,7 @@ const ProblemStatement = () => {
                     </p>
                     
                     {/* Key metrics */}
-                    <div className="grid grid-cols-3 gap-2 text-center">
+                    <div className="grid grid-cols-3 gap-2 text-center mt-auto">
                       <div className="bg-gray-50 rounded-lg p-2">
                         <div className="text-lg font-bold text-gray-400">73%</div>
                         <div className="text-xs text-gray-500">Exit rate</div>
@@ -502,7 +502,7 @@ const ProblemStatement = () => {
                   transition={{ delay: 0.4 }}
                   className="relative"
                 >
-                  <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 relative z-10">
+                  <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 relative z-10 min-h-[500px] flex flex-col">
                     {/* Step indicator */}
                     <div className="absolute -top-4 left-8 bg-yellow-500 text-white px-4 py-1 rounded-full text-sm font-medium">
                       The Magic
@@ -585,7 +585,7 @@ const ProblemStatement = () => {
                     </p>
                     
                     {/* Processing layers */}
-                    <div className="space-y-2">
+                    <div className="space-y-2 mt-auto">
                       <div className="flex items-center gap-3">
                         <div className="w-2 h-2 bg-blue-500 rounded-full" />
                         <span className="text-xs text-gray-600">Behavioral patterns analyzed</span>
@@ -610,7 +610,7 @@ const ProblemStatement = () => {
                   transition={{ delay: 0.6 }}
                   className="relative"
                 >
-                  <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 relative z-10">
+                  <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 relative z-10 min-h-[500px] flex flex-col">
                     {/* Step indicator */}
                     <div className="absolute -top-4 left-8 bg-green-500 text-white px-4 py-1 rounded-full text-sm font-medium">
                       The Result
@@ -688,7 +688,7 @@ const ProblemStatement = () => {
                     </p>
                     
                     {/* Success metrics */}
-                    <div className="grid grid-cols-3 gap-2 text-center">
+                    <div className="grid grid-cols-3 gap-2 text-center mt-auto">
                       <div className="bg-green-50 rounded-lg p-2">
                         <div className="text-lg font-bold text-green-600">+47%</div>
                         <div className="text-xs text-gray-600">Conversion</div>

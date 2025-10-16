@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Play, CheckCircle2, Sparkles } from 'lucide-react'
+import { ArrowRight, Play, CheckCircle2, Sparkles, Heart } from 'lucide-react'
 import Button from './ui/Button'
 import { useState } from 'react'
 
@@ -86,6 +86,27 @@ const Hero = () => {
                     </linearGradient>
                   </defs>
                 </motion.svg>
+                {/* Beating heart animation */}
+                <motion.div
+                  className="absolute -right-10 top-1/2 -translate-y-1/2"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 1.2, duration: 0.5 }}
+                >
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.08, 1, 1.08, 1],
+                    }}
+                    transition={{ 
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      times: [0, 0.2, 0.4, 0.6, 1]
+                    }}
+                  >
+                    <Heart className="w-6 h-6 text-pink-500 fill-pink-500" />
+                  </motion.div>
+                </motion.div>
               </span>
             </motion.h1>
             
