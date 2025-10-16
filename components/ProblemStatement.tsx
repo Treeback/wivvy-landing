@@ -3,6 +3,7 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AlertTriangle, BarChart3, Users, Brain, Eye, Sparkles, ArrowRight, Heart, Zap, Layers, MousePointer, TrendingUp, Shield, Lightbulb, Activity, Database, Cpu, Network, ChevronRight, Zap as Lightning, LineChart, Target, Gauge, BrainCircuit, Workflow } from 'lucide-react'
+import Logo from './ui/Logo'
 
 const ProblemStatement = () => {
   const [hoveredCard, setHoveredCard] = React.useState<number | null>(null)
@@ -466,31 +467,224 @@ const ProblemStatement = () => {
           className="py-24 bg-gradient-to-b from-white via-gray-50/50 to-white"
         >
           <div className="max-w-7xl mx-auto px-6">
-            {/* Header */}
+            {/* Header with Animated Logo */}
             <div className="text-center mb-20">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 className="mb-8"
               >
-                <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2 relative inline-block">
-                  Enter Wivvy
+                {/* Logo and Text Container */}
+                <div className="flex items-center justify-center gap-3 mb-6">
+                  {/* Animated Logo - Small and Clean */}
                   <motion.div
-                    className="absolute -bottom-4 left-0 right-0"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
+                    className="relative"
+                    initial={{ x: -50, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
+                    transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
                   >
-                    <div className="h-3 bg-gradient-to-r from-red-200 via-yellow-200 to-green-200 opacity-60 rounded-full" />
+                    {/* Logo with morphing data bars */}
+                    <div className="relative">
+                      <svg
+                        width="32"
+                        height="32"
+                        viewBox="0 0 40 40"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g>
+                          {/* Animated data bars */}
+                          <motion.rect 
+                            x="8" 
+                            y="22" 
+                            width="3" 
+                            height="8" 
+                            fill="#6366f1"
+                            animate={{ 
+                              height: [8, 12, 8],
+                              y: [22, 18, 22],
+                              opacity: [0.4, 0.8, 0.4]
+                            }}
+                            transition={{ 
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut"
+                            }}
+                          />
+                          <motion.rect 
+                            x="13" 
+                            y="18" 
+                            width="3" 
+                            height="12" 
+                            fill="#6366f1"
+                            animate={{ 
+                              height: [12, 16, 12],
+                              y: [18, 14, 18],
+                              opacity: [0.6, 1, 0.6]
+                            }}
+                            transition={{ 
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: 0.2
+                            }}
+                          />
+                          <motion.rect 
+                            x="18" 
+                            y="14" 
+                            width="3" 
+                            height="16" 
+                            fill="#6366f1"
+                            animate={{ 
+                              height: [16, 20, 16],
+                              y: [14, 10, 14],
+                              opacity: [0.8, 1, 0.8]
+                            }}
+                            transition={{ 
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: 0.4
+                            }}
+                          />
+                          
+                          {/* Heart that pulses with data */}
+                          <g transform="translate(24, 14)">
+                            <motion.path
+                              d="M 6 2
+                                 C 6 0.5, 4.5 0, 3 0
+                                 C 1.5 0, 0 0.5, 0 2
+                                 C 0 3.5, 3 7, 6 10
+                                 C 9 7, 12 3.5, 12 2
+                                 C 12 0.5, 10.5 0, 9 0
+                                 C 7.5 0, 6 0.5, 6 2 Z"
+                              fill="#ec4899"
+                              animate={{ 
+                                scale: [1, 1.2, 1],
+                                opacity: [0.7, 1, 0.7]
+                              }}
+                              transition={{ 
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                delay: 0.6
+                              }}
+                              style={{ transformOrigin: 'center' }}
+                            />
+                          </g>
+                          
+                          {/* Connecting gradient that pulses */}
+                          <defs>
+                            <linearGradient id="fadeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <motion.stop 
+                                offset="0%" 
+                                stopColor="#6366f1"
+                                animate={{ 
+                                  stopOpacity: [0.8, 1, 0.8]
+                                }}
+                                transition={{ 
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  ease: "easeInOut"
+                                }}
+                              />
+                              <motion.stop 
+                                offset="100%" 
+                                stopColor="#ec4899"
+                                animate={{ 
+                                  stopOpacity: [0, 0.6, 0]
+                                }}
+                                transition={{ 
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  ease: "easeInOut"
+                                }}
+                              />
+                            </linearGradient>
+                          </defs>
+                          
+                          <motion.rect 
+                            x="21" 
+                            y="20" 
+                            width="3" 
+                            height="2" 
+                            fill="url(#fadeGradient)"
+                            animate={{ 
+                              width: [3, 5, 3],
+                              x: [21, 20, 21]
+                            }}
+                            transition={{ 
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut"
+                            }}
+                          />
+                        </g>
+                      </svg>
+                    </div>
+                    
+                    {/* Transformation particles */}
+                    <motion.div className="absolute inset-0 pointer-events-none">
+                      {[...Array(3)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute w-0.5 h-0.5 bg-gradient-to-r from-indigo-600 to-pink-600 rounded-full"
+                          style={{
+                            left: '50%',
+                            top: '50%',
+                          }}
+                          animate={{ 
+                            x: [-15, 15],
+                            y: [0, 0],
+                            opacity: [0, 1, 0],
+                            scale: [0, 1.5, 0]
+                          }}
+                          transition={{ 
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: i * 0.6,
+                            ease: "linear"
+                          }}
+                        />
+                      ))}
+                    </motion.div>
                   </motion.div>
-                </h3>
+                  
+                  {/* Wivvy text with gradient */}
+                  <motion.h3 
+                    className="text-4xl lg:text-5xl font-bold"
+                    initial={{ x: 50, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
+                  >
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+                      Wivvy
+                    </span>
+                  </motion.h3>
+                </div>
+                
+                {/* Animated underline */}
+                <motion.div
+                  className="h-1 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 mx-auto rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: 200 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+                />
               </motion.div>
               
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <motion.p 
+                className="text-xl text-gray-600 max-w-3xl mx-auto"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 }}
+              >
                 The first analytics platform that understands emotions, not just events
-              </p>
+              </motion.p>
             </div>
 
             {/* Story Flow Visualization */}
