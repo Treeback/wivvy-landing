@@ -391,18 +391,25 @@ const ProblemStatement = () => {
             {/* Header */}
             <div className="text-center mb-20">
               <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 200 }}
-                className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full mb-6 shadow-2xl"
+                className="mb-8"
               >
-                <Sparkles className="w-10 h-10 text-white" />
+                <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2 relative inline-block">
+                  Enter Wivvy
+                  <motion.div
+                    className="absolute -bottom-4 left-0 right-0"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "100%" }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                  >
+                    <div className="h-3 bg-gradient-to-r from-red-200 via-yellow-200 to-green-200 opacity-60 rounded-full" />
+                  </motion.div>
+                </h3>
               </motion.div>
               
-              <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                Enter Wivvy
-              </h3>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 The first analytics platform that understands emotions, not just events
               </p>
