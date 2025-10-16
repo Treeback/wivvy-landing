@@ -13,8 +13,8 @@ const Pricing = () => {
       name: 'Starter',
       icon: Sparkles,
       description: 'Perfect for individual creators and small teams',
-      monthlyPrice: 29,
-      yearlyPrice: 24, // ~20% discount
+      monthlyPrice: 29 as number,
+      yearlyPrice: 24 as number, // ~20% discount
       color: 'from-blue-500 to-cyan-500',
       features: [
         'Up to 10,000 monthly events',
@@ -33,8 +33,8 @@ const Pricing = () => {
       name: 'Professional',
       icon: Zap,
       description: 'Advanced analytics for growing businesses',
-      monthlyPrice: 149,
-      yearlyPrice: 119, // ~20% discount
+      monthlyPrice: 149 as number,
+      yearlyPrice: 119 as number, // ~20% discount
       color: 'from-indigo-600 to-purple-600',
       features: [
         'Up to 100,000 monthly events',
@@ -57,8 +57,8 @@ const Pricing = () => {
       name: 'Enterprise',
       icon: Building2,
       description: 'Custom solutions for large organizations',
-      monthlyPrice: 'Custom',
-      yearlyPrice: 'Custom',
+      monthlyPrice: 'Custom' as 'Custom',
+      yearlyPrice: 'Custom' as 'Custom',
       color: 'from-purple-600 to-pink-600',
       features: [
         'Unlimited events',
@@ -183,7 +183,7 @@ const Pricing = () => {
                       <p className="text-sm text-gray-600 mt-1">Contact us for pricing</p>
                     </div>
                   )}
-                  {billingCycle === 'yearly' && typeof tier.monthlyPrice === 'number' && (
+                  {billingCycle === 'yearly' && typeof tier.monthlyPrice === 'number' && typeof tier.yearlyPrice === 'number' && (
                     <p className="text-sm text-gray-500 mt-1">
                       Billed annually (${tier.yearlyPrice * 12})
                     </p>
