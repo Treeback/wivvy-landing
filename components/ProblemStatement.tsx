@@ -61,17 +61,27 @@ const ProblemStatement = () => {
               {/* Animated counter */}
               <div className="relative">
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
                   className="text-6xl font-bold"
                 >
-                  <span className="text-gray-900">
+                  <motion.span 
+                    className="text-gray-900"
+                    animate={{ 
+                      opacity: [0.8, 1, 0.8]
+                    }}
+                    transition={{ 
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
                     73%
-                  </span>
+                  </motion.span>
                 </motion.div>
                 
-                {/* Pulsing ring around percentage */}
+                {/* Subtle glow effect */}
                 <motion.div
                   className="absolute inset-0 flex items-center justify-center pointer-events-none"
                   initial={{ opacity: 0 }}
@@ -79,14 +89,15 @@ const ProblemStatement = () => {
                   transition={{ delay: 0.5 }}
                 >
                   <motion.div
-                    className="w-32 h-32 border-2 border-red-400 rounded-full"
+                    className="w-32 h-32 bg-red-400 rounded-full blur-3xl"
                     animate={{ 
-                      scale: [1, 1.3, 1],
-                      opacity: [0.5, 0, 0.5]
+                      scale: [0.8, 1, 0.8],
+                      opacity: [0.05, 0.1, 0.05]
                     }}
                     transition={{ 
-                      duration: 2,
-                      repeat: Infinity
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
                     }}
                   />
                 </motion.div>
@@ -95,51 +106,59 @@ const ProblemStatement = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
                 className="text-sm text-gray-600 font-medium"
               >
                 users left your site
               </motion.div>
 
-              {/* Animated question */}
+              {/* Subtle question animation */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, y: 5 }}
                 animate={{ 
                   opacity: 1, 
-                  scale: 1,
-                  rotate: [-2, 2, -2]
+                  y: 0
                 }}
                 transition={{ 
                   delay: 0.8,
-                  rotate: {
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }
+                  duration: 0.8
                 }}
                 className="text-3xl font-bold text-red-600 mt-6"
               >
-                But why?
-              </motion.div>
-
-              {/* Question marks floating around */}
-              {[...Array(3)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute text-2xl text-red-400"
-                  style={{
-                    left: `${[20, 50, 80][i]}%`,
-                    top: `${[20, 80, 50][i]}%`
-                  }}
+                <motion.span
                   animate={{ 
-                    y: [0, -10, 0],
-                    opacity: [0.3, 1, 0.3],
-                    rotate: [0, 360]
+                    y: [0, -2, 0]
                   }}
                   transition={{ 
                     duration: 3,
-                    delay: i * 0.5,
-                    repeat: Infinity
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  style={{ display: 'inline-block' }}
+                >
+                  But why?
+                </motion.span>
+              </motion.div>
+
+              {/* Subtle floating question marks */}
+              {[...Array(3)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute text-xl text-red-300"
+                  style={{
+                    left: `${[25, 50, 75][i]}%`,
+                    top: `${[30, 70, 45][i]}%`
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ 
+                    y: [0, -5, 0],
+                    opacity: [0, 0.4, 0]
+                  }}
+                  transition={{ 
+                    duration: 4,
+                    delay: i * 1.2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
                   }}
                 >
                   ?
