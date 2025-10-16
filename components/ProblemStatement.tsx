@@ -517,9 +517,9 @@ const ProblemStatement = () => {
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           transition={{ delay: 0.6, type: "spring" }}
-                          className="relative"
+                          className="relative flex items-center justify-center"
                         >
-                          <div className="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center z-30">
+                          <div className="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center z-30 relative">
                             <Users className="w-10 h-10 text-gray-700" />
                           </div>
                           
@@ -527,13 +527,10 @@ const ProblemStatement = () => {
                           {[1, 2, 3].map((ring) => (
                             <motion.div
                               key={ring}
-                              className="absolute inset-0 rounded-full border-2"
+                              className="absolute rounded-full border-2"
                               style={{
-                                width: `${20 + ring * 40}px`,
-                                height: `${20 + ring * 40}px`,
-                                top: '50%',
-                                left: '50%',
-                                transform: 'translate(-50%, -50%)',
+                                width: `${80 + ring * 40}px`,
+                                height: `${80 + ring * 40}px`,
                                 borderColor: ring === 1 ? '#3b82f6' : ring === 2 ? '#a855f7' : '#10b981'
                               }}
                               initial={{ scale: 0, opacity: 0 }}
@@ -557,7 +554,12 @@ const ProblemStatement = () => {
                             return (
                               <motion.div
                                 key={i}
-                                className="absolute w-2 h-2 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full"
+                                className="absolute w-3 h-3 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full"
+                                style={{
+                                  left: '50%',
+                                  top: '50%',
+                                  transform: 'translate(-50%, -50%)'
+                                }}
                                 initial={{ x: startX, y: startY, opacity: 0 }}
                                 animate={{ 
                                   x: 0,
