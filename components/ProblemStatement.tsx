@@ -305,51 +305,48 @@ const ProblemStatement = () => {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 mb-20">
-          {problems.map((problem, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              onHoverStart={() => setHoveredCard(index)}
-              onHoverEnd={() => setHoveredCard(null)}
-              className="relative"
-            >
+        {/* Problems displayed in a unique staggered layout */}
+        <div className="max-w-6xl mx-auto mb-20">
+          <div className="relative">
+            {problems.map((problem, index) => (
               <motion.div
-                animate={{
-                  scale: hoveredCard === index ? 1.02 : 1,
-                }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="relative bg-white rounded-2xl shadow-xl overflow-hidden h-96 border border-gray-100 hover:border-red-200"
+                key={index}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className={`flex flex-col lg:flex-row items-center gap-8 mb-12 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
               >
-                <div className="p-8 h-full flex flex-col">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <problem.icon className="w-8 h-8 text-red-500 mb-2" />
-                      <h3 className="text-xl font-bold text-gray-900">{problem.title}</h3>
-                      <p className="text-sm text-gray-500">{problem.subtitle}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex-1 relative">
+                {/* Visual Side */}
+                <motion.div 
+                  className="flex-1 relative"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div className="bg-white rounded-2xl shadow-xl p-8 h-64 overflow-hidden border border-gray-100 hover:border-red-200 transition-colors">
                     {problem.visual}
                   </div>
+                </motion.div>
 
+                {/* Content Side */}
+                <div className={`flex-1 text-center lg:${index % 2 === 0 ? 'text-left' : 'text-right'}`}>
                   <motion.div
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: hoveredCard === index ? 1 : 0 }}
-                    className="absolute inset-0 bg-gradient-to-br from-red-500/90 to-orange-500/90 flex items-center justify-center p-8"
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: index * 0.2 + 0.3 }}
                   >
-                    <p className="text-white text-center font-medium">
-                      Traditional analytics miss the emotional drivers behind every user action
-                    </p>
+                    <problem.icon className={`w-12 h-12 text-red-500 mb-4 mx-auto lg:mx-0 ${index % 2 === 1 ? 'lg:ml-auto' : ''}`} />
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{problem.title}</h3>
+                    <p className="text-lg text-gray-600 mb-4">{problem.subtitle}</p>
+                    <div className={`inline-flex items-center gap-2 text-red-600 font-medium ${index % 2 === 1 ? 'flex-row-reverse' : ''}`}>
+                      <span className="text-sm">The truth hurts</span>
+                      <ArrowRight className={`w-4 h-4 ${index % 2 === 1 ? 'rotate-180' : ''}`} />
+                    </div>
                   </motion.div>
                 </div>
               </motion.div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Enter Wivvy Section with Story Visualization */}
