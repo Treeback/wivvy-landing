@@ -128,7 +128,7 @@ const TransformationExamples = () => {
   const currentExample = examples[activeExample]
 
   return (
-    <section className="py-12 relative bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden">
+    <section className="py-12 relative bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden" id="use-cases">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />

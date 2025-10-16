@@ -18,7 +18,7 @@ export default function PersonaIntelligence() {
   }, [isAnimating])
 
   return (
-    <section className="py-24 relative bg-white overflow-hidden">
+    <section className="py-24 relative bg-white overflow-hidden" id="persona-intelligence">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div

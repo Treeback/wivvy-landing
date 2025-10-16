@@ -4,6 +4,7 @@ import ProblemStatement from '@/components/ProblemStatement'
 import TransformationExamples from '@/components/TransformationExamples'
 import PersonaIntelligence from '@/components/PersonaIntelligence'
 import Benefits from '@/components/Benefits'
+import Pricing from '@/components/Pricing'
 import CTABanner from '@/components/CTABanner'
 import Footer from '@/components/Footer'
 
@@ -24,6 +25,7 @@ export default function Home() {
       <PersonaIntelligence />
       <TransformationExamples />
       <Benefits />
+      <Pricing />
       <CTABanner />
       <Footer />
     </main>

@@ -19,9 +19,10 @@ const Header = () => {
   }, [])
 
   const navItems = [
-    { name: 'How it Works', href: '#how-it-works' },
-    { name: 'Benefits', href: '#benefits' },
+    { name: 'Problem', href: '#problem-solution' },
+    { name: 'How It Works', href: '#persona-intelligence' },
     { name: 'Use Cases', href: '#use-cases' },
+    { name: 'Benefits', href: '#benefits' },
     { name: 'Pricing', href: '#pricing' }
   ]
 
