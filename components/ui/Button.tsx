@@ -17,23 +17,20 @@ const Button: FC<ButtonProps> = ({
   return (
     <button
       className={twMerge(clsx(
-        'font-medium rounded-lg transition-all duration-200 relative overflow-hidden',
+        'font-medium rounded-md transition-colors duration-150',
         {
-          'bg-gradient-to-r from-wivvy-blue to-wivvy-blue-light text-white hover:shadow-lg hover:scale-105 glow-blue': variant === 'primary',
-          'bg-transparent text-white border border-wivvy-blue hover:bg-wivvy-blue/10': variant === 'secondary',
+          'bg-[#8B5CF6] hover:bg-[#9F6FFA] text-white': variant === 'primary',
+          'bg-[#1A1A1A] border border-[#2A2A2A] hover:bg-[#2A2A2A] hover:border-[#3A3A3A] text-white': variant === 'secondary',
           'bg-transparent text-gray-400 hover:text-white': variant === 'ghost',
-          'px-4 py-2 text-sm': size === 'sm',
-          'px-6 py-3 text-base': size === 'md',
-          'px-8 py-4 text-lg': size === 'lg',
+          'px-3 py-1.5 text-sm': size === 'sm',
+          'px-4 py-2 text-sm': size === 'md',
+          'px-6 py-2.5 text-base': size === 'lg',
         },
         className
       ))}
       {...props}
     >
-      {variant === 'primary' && (
-        <span className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-      )}
-      <span className="relative z-10">{children}</span>
+      {children}
     </button>
   )
 }

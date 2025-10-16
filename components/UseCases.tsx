@@ -1,84 +1,149 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Rocket, Palette, Heart, Search } from 'lucide-react'
+import { ShoppingBag, Youtube, Smartphone, Megaphone, Quote } from 'lucide-react'
 
 const UseCases = () => {
-  const cases = [
+  const useCases = [
     {
-      icon: Rocket,
-      title: 'Founder',
-      pain: 'Ideas scattered across Notion, Slack, screenshots',
-      outcome: 'All thoughts connected, patterns emerge'
+      icon: ShoppingBag,
+      company: 'Bloom Beauty',
+      type: 'DTC Brand',
+      challenge: 'High cart abandonment despite premium products',
+      insight: 'Discovered trust anxiety in first-time buyers',
+      action: 'Added security badges and testimonials at checkout',
+      result: '37% increase in conversion rate',
+      color: 'from-pink-500 to-rose-500'
     },
     {
-      icon: Palette,
-      title: 'Creative Thinker',
-      pain: 'Inspiration strikes, then vanishes in the noise',
-      outcome: 'Every spark captured, creativity compounds'
+      icon: Youtube,
+      company: 'TechExplained',
+      type: 'Content Creator',
+      challenge: 'Engagement plateau at 100K subscribers',
+      insight: 'Audience craved authenticity over polish',
+      action: 'Shifted to raw, behind-the-scenes content',
+      result: '2.5x engagement, 50K new subs in 2 months',
+      color: 'from-red-500 to-orange-500'
     },
     {
-      icon: Heart,
-      title: 'Inner Explorer',
-      pain: 'Journal entries isolated, no growth tracking',
-      outcome: 'See your evolution, understand patterns'
+      icon: Smartphone,
+      company: 'FitTrack',
+      type: 'Mobile App',
+      challenge: '60% users quit after onboarding',
+      insight: 'New users felt overwhelmed by features',
+      action: 'Simplified to 3-step progressive onboarding',
+      result: '85% completion rate achieved',
+      color: 'from-blue-500 to-cyan-500'
     },
     {
-      icon: Search,
-      title: 'Researcher',
-      pain: 'Sources everywhere, synthesis takes forever',
-      outcome: 'Knowledge web builds itself as you learn'
+      icon: Megaphone,
+      company: 'Nexus Agency',
+      type: 'Marketing Agency',
+      challenge: 'Generic campaigns underperforming',
+      insight: 'Each segment had distinct emotional triggers',
+      action: 'Created psychographic-based campaigns',
+      result: '4x improvement in CTR and conversions',
+      color: 'from-purple-500 to-indigo-500'
     }
   ]
 
   return (
-    <section className="py-20">
+    <section className="py-24 relative bg-white" id="use-cases">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Built for how you think
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Success stories across industries
           </h2>
-          <p className="text-xl text-gray-400">
-            Whatever your mind creates, Wivvy connects
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            See how teams transform emotional insights into tangible business results
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {cases.map((useCase, index) => (
+        <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+          {useCases.map((useCase, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="glass-card glass-card-hover border border-polygon-border rounded-xl p-6 hover:border-polygon-purple/50 transition-all duration-300 group"
+              transition={{ delay: index * 0.1 }}
+              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-polygon-purple/10 mb-4 group-hover:bg-polygon-purple/20 transition-all group-hover:scale-110">
-                <useCase.icon className="w-6 h-6 text-polygon-purple" />
-              </div>
+              <div className={`h-2 bg-gradient-to-r ${useCase.color}`} />
               
-              <h3 className="text-lg font-semibold mb-3">{useCase.title}</h3>
-              
-              <div className="space-y-3">
-                <div className="text-sm">
-                  <span className="text-red-400/70">Pain:</span>
-                  <p className="text-gray-400 mt-1">{useCase.pain}</p>
+              <div className="p-8">
+                <div className="flex items-start justify-between mb-6">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900">{useCase.company}</h3>
+                    <p className="text-sm text-gray-500">{useCase.type}</p>
+                  </div>
+                  <div className={`w-12 h-12 bg-gradient-to-br ${useCase.color} rounded-xl flex items-center justify-center opacity-10 group-hover:opacity-20 transition-opacity`}>
+                    <useCase.icon className="w-6 h-6 text-white" />
+                  </div>
                 </div>
                 
-                <div className="text-sm">
-                  <span className="text-green-400/70">Outcome:</span>
-                  <p className="text-gray-300 mt-1">{useCase.outcome}</p>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-1">Challenge</p>
+                    <p className="text-gray-700">{useCase.challenge}</p>
+                  </div>
+                  
+                  <div>
+                    <p className="text-sm font-medium text-indigo-600 uppercase tracking-wider mb-1">Key Insight</p>
+                    <p className="text-gray-700 italic">{useCase.insight}</p>
+                  </div>
+                  
+                  <div>
+                    <p className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-1">Action Taken</p>
+                    <p className="text-gray-700">{useCase.action}</p>
+                  </div>
+                  
+                  <div className="pt-4 mt-4 border-t border-gray-100">
+                    <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+                      {useCase.result}
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Testimonial */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="mt-20 max-w-4xl mx-auto"
+        >
+          <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-12 relative">
+            <Quote className="absolute top-6 left-6 w-8 h-8 text-indigo-200" />
+            <blockquote className="text-2xl font-light text-gray-800 italic text-center mb-6">
+              "Wivvy transformed how we think about our users. We stopped guessing and started knowing. 
+              The emotional insights we gained revolutionized our entire product strategy."
+            </blockquote>
+            <div className="text-center">
+              <div className="inline-flex items-center gap-4">
+                <img 
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=SarahChen" 
+                  alt="Sarah Chen"
+                  className="w-12 h-12 rounded-full"
+                />
+                <div className="text-left">
+                  <p className="font-semibold text-gray-900">Sarah Chen</p>
+                  <p className="text-sm text-gray-600">VP of Product, Mindful</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

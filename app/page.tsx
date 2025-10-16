@@ -1,25 +1,29 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
-import AppScreenshot from '@/components/AppScreenshot'
 import ProblemStatement from '@/components/ProblemStatement'
-import IngestToInsightsFlow from '@/components/IngestToInsightsFlow'
+import HowItWorks from '@/components/HowItWorks'
+import Benefits from '@/components/Benefits'
 import UseCases from '@/components/UseCases'
-import Privacy from '@/components/Privacy'
 import CTABanner from '@/components/CTABanner'
 import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-polygon-bg relative overflow-hidden">
-      <div className="absolute inset-0 gradient-mesh -z-10" />
-      <div className="absolute inset-0 noise opacity-20 -z-10" />
+    <main className="min-h-screen bg-white relative overflow-hidden">
+      {/* Subtle geometric patterns */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.02]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgb(0 0 0 / 0.05) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }} />
+      </div>
+      
       <Header />
       <Hero />
-      <AppScreenshot />
       <ProblemStatement />
-      <IngestToInsightsFlow />
+      <HowItWorks />
+      <Benefits />
       <UseCases />
-      <Privacy />
       <CTABanner />
       <Footer />
     </main>

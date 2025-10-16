@@ -9,12 +9,12 @@ module.exports = {
     extend: {
       colors: {
         'polygon': {
-          'bg': '#000000',
-          'bg-secondary': '#0a0a0a',
-          'card': '#111111',
-          'card-hover': '#1a1a1a',
-          'border': '#222222',
-          'border-light': '#333333',
+          'bg': '#0C0C0C',
+          'bg-secondary': '#0A0A0A',
+          'card': '#1A1A1A',
+          'card-hover': '#2A2A2A',
+          'border': '#1A1A1A',
+          'border-light': '#2A2A2A',
           'purple': '#8B5CF6',
           'purple-light': '#A78BFA',
           'purple-dark': '#7C3AED',
@@ -27,7 +27,7 @@ module.exports = {
           'yellow': '#F59E0B',
           'yellow-light': '#FCD34D',
           'text': {
-            'primary': '#FFFFFF',
+            'primary': '#FAFAFA',
             'secondary': '#A1A1AA',
             'tertiary': '#71717A',
           }

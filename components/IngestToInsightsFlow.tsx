@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { motion, useScroll, useTransform, useMotionValue, animate } from 'framer-motion'
-import { Brain, FileText, Link2, Mic, Sparkles, ChevronRight, Users, TrendingUp, Lightbulb } from 'lucide-react'
+import { Brain, Folder, Target, Activity, Sparkles, ChevronRight, AlertTriangle, TrendingUp, Lightbulb } from 'lucide-react'
 import { useRef, useEffect, useState } from 'react'
 
 export default function IngestToInsightsFlow() {
@@ -17,36 +17,36 @@ export default function IngestToInsightsFlow() {
   
   const steps = [
     {
-      title: 'Capture Everything',
-      description: 'Add thoughts, meetings, documents, links',
+      title: 'Capture & Organize',
+      description: 'Thoughts auto-assigned to projects',
       icon: Brain,
       items: [
-        { icon: Brain, label: 'Quick thought', color: 'text-blue-400' },
-        { icon: FileText, label: 'Meeting notes', color: 'text-green-400' },
-        { icon: Link2, label: 'Important link', color: 'text-purple-400' },
-        { icon: Mic, label: 'Voice memo', color: 'text-orange-400' },
+        { icon: Brain, label: 'Product idea → SaaS project', color: 'text-blue-400' },
+        { icon: Target, label: 'Set KPI: 1000 MRR by Q2', color: 'text-green-400' },
+        { icon: Folder, label: 'Meeting notes → AI project', color: 'text-purple-400' },
+        { icon: Activity, label: 'Track metrics across ventures', color: 'text-orange-400' },
       ]
     },
     {
-      title: 'AI Processing',
-      description: 'Wivvy analyzes and connects your content',
+      title: 'AI Analysis',
+      description: 'Pattern detection across all projects',
       icon: Sparkles,
       items: [
-        { label: 'Extracting key topics...', progress: 100 },
-        { label: 'Finding connections...', progress: 100 },
-        { label: 'Generating insights...', progress: 100 },
-        { label: 'Building knowledge graph...', progress: 100 },
+        { label: 'Analyzing project health...', progress: 100 },
+        { label: 'Detecting pivot signals...', progress: 100 },
+        { label: 'Finding cross-project patterns...', progress: 100 },
+        { label: 'Calculating momentum scores...', progress: 100 },
       ]
     },
     {
-      title: 'Discover Insights',
-      description: 'Uncover patterns and connections',
+      title: 'Actionable Insights',
+      description: 'AI tells you what needs attention',
       icon: Lightbulb,
       items: [
-        { icon: Users, label: '3 related meetings found', insight: true },
-        { icon: TrendingUp, label: 'Recurring theme detected', insight: true },
-        { icon: Brain, label: 'Connected to 5 past ideas', insight: true },
-        { icon: Sparkles, label: 'New opportunity identified', insight: true },
+        { icon: AlertTriangle, label: 'Project B losing momentum', insight: true },
+        { icon: TrendingUp, label: 'KPI alert: Revenue up 40%', insight: true },
+        { icon: Brain, label: 'Similar failure pattern detected', insight: true },
+        { icon: Sparkles, label: 'Time to pivot Project C', insight: true },
       ]
     }
   ]
@@ -154,10 +154,10 @@ export default function IngestToInsightsFlow() {
     return React.createElement(
       'div',
       {
-        className: `glass-card border rounded-xl p-6 h-full transition-all duration-500 ${
+        className: `bg-[#0A0A0A] border rounded-lg p-6 h-full transition-all duration-150 ${
           isActive && !isMobile
-            ? 'border-polygon-purple shadow-lg shadow-polygon-purple/20' 
-            : 'border-polygon-border'
+            ? 'border-purple-500/50' 
+            : 'border-[#1A1A1A]'
         } relative overflow-hidden`
       },
       // Animated border highlight (desktop only)
@@ -235,10 +235,10 @@ export default function IngestToInsightsFlow() {
                 : React.createElement(
                     'div',
                     {
-                      className: `flex items-center gap-2 p-3 rounded-lg ${
+                      className: `flex items-center gap-2 p-2.5 rounded-md ${
                         item.insight 
-                          ? 'bg-polygon-purple/10 border border-polygon-purple/30' 
-                          : 'bg-polygon-card/50'
+                          ? 'bg-purple-500/10 border border-purple-500/20' 
+                          : 'bg-[#1A1A1A]'
                       }`
                     },
                     item.icon && React.createElement(item.icon, {
@@ -292,10 +292,10 @@ export default function IngestToInsightsFlow() {
                 : React.createElement(
                     'div',
                     {
-                      className: `flex items-center gap-2 p-3 rounded-lg ${
+                      className: `flex items-center gap-2 p-2.5 rounded-md ${
                         item.insight 
-                          ? 'bg-polygon-purple/10 border border-polygon-purple/30' 
-                          : 'bg-polygon-card/50'
+                          ? 'bg-purple-500/10 border border-purple-500/20' 
+                          : 'bg-[#1A1A1A]'
                       }`
                     },
                     item.icon && React.createElement(item.icon, {
@@ -315,7 +315,7 @@ export default function IngestToInsightsFlow() {
     'section',
     { 
       ref: containerRef,
-      className: 'py-20 bg-polygon-bg/50 relative min-h-screen',
+      className: 'py-20 border-t border-[#1A1A1A] relative min-h-screen',
       id: 'how-it-works'
     },
     React.createElement(
@@ -330,11 +330,11 @@ export default function IngestToInsightsFlow() {
           viewport: { once: true },
           className: 'text-center mb-12'
         },
-        React.createElement('h2', { className: 'text-3xl md:text-4xl font-bold mb-4' }, 'From Information to Intelligence'),
+        React.createElement('h2', { className: 'text-3xl md:text-4xl font-semibold mb-4 text-white' }, 'From Chaos to Clarity'),
         React.createElement('p', { className: 'text-xl text-gray-400' }, 
           isLocked && !isMobile
             ? 'Use scroll to navigate through the steps' 
-            : 'Watch how Wivvy transforms your scattered thoughts into actionable insights'
+            : 'Track KPIs, spot patterns, and know when to pivot across all your projects'
         )
       ),
       React.createElement(
