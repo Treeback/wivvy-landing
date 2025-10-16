@@ -3,6 +3,7 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MousePointer, Clock, ShoppingCart, X, Heart, TrendingUp, AlertCircle, Sparkles, ChevronRight, BarChart, Brain, Lightbulb } from 'lucide-react'
+import Logo from './ui/Logo'
 
 const TransformationExamples = () => {
   const [activeExample, setActiveExample] = React.useState(0)
@@ -236,7 +237,7 @@ const TransformationExamples = () => {
                   <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                        <Brain className="w-5 h-5" />
+                        <Logo className="text-white" size="sm" />
                       </div>
                       <h3 className="text-lg font-semibold">Wivvy AI Processing</h3>
                     </div>
