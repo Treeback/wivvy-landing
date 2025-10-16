@@ -1,9 +1,7 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import ProblemStatement from '@/components/ProblemStatement'
-import HowItWorks from '@/components/HowItWorks'
 import Benefits from '@/components/Benefits'
-import UseCases from '@/components/UseCases'
 import CTABanner from '@/components/CTABanner'
 import Footer from '@/components/Footer'
 
@@ -21,9 +19,7 @@ export default function Home() {
       <Header />
       <Hero />
       <ProblemStatement />
-      <HowItWorks />
       <Benefits />
-      <UseCases />
       <CTABanner />
       <Footer />
     </main>
