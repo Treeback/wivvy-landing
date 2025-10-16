@@ -66,23 +66,9 @@ const ProblemStatement = () => {
                   transition={{ delay: 0.2 }}
                   className="text-6xl font-bold"
                 >
-                  <motion.span
-                    className="text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-red-600"
-                    animate={{ 
-                      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                    }}
-                    transition={{ 
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                    style={{ 
-                      backgroundSize: '200% 200%',
-                      display: 'inline-block'
-                    }}
-                  >
+                  <span className="text-gray-900">
                     73%
-                  </motion.span>
+                  </span>
                 </motion.div>
                 
                 {/* Pulsing ring around percentage */}
