@@ -23,34 +23,142 @@ const ProblemStatement = () => {
       title: "Surface-level metrics",
       subtitle: "Missing the human story",
       visual: (
-        <div className="relative w-full h-full flex items-center justify-center">
-          {/* Numbers without meaning */}
-          <div className="text-center">
-            <div className="space-y-3">
+        <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+          {/* Animated user icons leaving */}
+          <div className="absolute inset-0">
+            {[...Array(8)].map((_, i) => (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-5xl font-bold text-gray-700"
+                key={i}
+                className="absolute"
+                initial={{ 
+                  left: '50%',
+                  top: '50%',
+                  x: -12,
+                  y: -12,
+                  opacity: 0 
+                }}
+                animate={{ 
+                  left: `${[10, 90, 20, 80, 15, 85, 25, 75][i]}%`,
+                  top: `${[10, 20, 80, 90, 30, 70, 50, 40][i]}%`,
+                  opacity: [0, 1, 1, 0],
+                  rotate: [0, 180, 360]
+                }}
+                transition={{ 
+                  duration: 3,
+                  delay: i * 0.3,
+                  repeat: Infinity,
+                  ease: "easeOut"
+                }}
               >
-                73%
+                <Users className="w-6 h-6 text-gray-400" />
               </motion.div>
+            ))}
+          </div>
+
+          {/* Central content */}
+          <div className="relative z-10 text-center">
+            <div className="space-y-3">
+              {/* Animated counter */}
+              <div className="relative">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-6xl font-bold"
+                >
+                  <motion.span
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-red-600"
+                    animate={{ 
+                      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                    }}
+                    transition={{ 
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                    style={{ 
+                      backgroundSize: '200% 200%',
+                      display: 'inline-block'
+                    }}
+                  >
+                    73%
+                  </motion.span>
+                </motion.div>
+                
+                {/* Pulsing ring around percentage */}
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <motion.div
+                    className="w-32 h-32 border-2 border-red-400 rounded-full"
+                    animate={{ 
+                      scale: [1, 1.3, 1],
+                      opacity: [0.5, 0, 0.5]
+                    }}
+                    transition={{ 
+                      duration: 2,
+                      repeat: Infinity
+                    }}
+                  />
+                </motion.div>
+              </div>
+
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="text-sm text-gray-500"
+                className="text-sm text-gray-600 font-medium"
               >
                 users left your site
               </motion.div>
+
+              {/* Animated question */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.8 }}
-                className="text-3xl font-bold text-red-500 mt-6"
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1,
+                  rotate: [-2, 2, -2]
+                }}
+                transition={{ 
+                  delay: 0.8,
+                  rotate: {
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }
+                }}
+                className="text-3xl font-bold text-red-600 mt-6"
               >
                 But why?
               </motion.div>
+
+              {/* Question marks floating around */}
+              {[...Array(3)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute text-2xl text-red-400"
+                  style={{
+                    left: `${[20, 50, 80][i]}%`,
+                    top: `${[20, 80, 50][i]}%`
+                  }}
+                  animate={{ 
+                    y: [0, -10, 0],
+                    opacity: [0.3, 1, 0.3],
+                    rotate: [0, 360]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    delay: i * 0.5,
+                    repeat: Infinity
+                  }}
+                >
+                  ?
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
