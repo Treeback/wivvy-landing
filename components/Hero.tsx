@@ -1,143 +1,265 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, BarChart3 } from 'lucide-react'
+import { ArrowRight, Play, CheckCircle2, Sparkles } from 'lucide-react'
 import Button from './ui/Button'
+import { useState } from 'react'
 
 const Hero = () => {
+  const [email, setEmail] = useState('')
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle email submission
+    console.log('Email submitted:', email)
+  }
+
+  const features = [
+    "Real-time emotional analytics",
+    "Privacy-first approach", 
+    "No code required"
+  ]
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20">
-      {/* Subtle gradient accent */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-indigo-50 via-purple-50 to-transparent rounded-full blur-3xl opacity-60 -translate-y-1/2 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-blue-50 via-indigo-50 to-transparent rounded-full blur-3xl opacity-40 translate-y-1/2 -translate-x-1/3" />
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      {/* Professional gradient mesh background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-50/40 via-white to-white" />
+        <div className="absolute top-0 -left-4 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
+        <div className="absolute top-0 -right-4 w-96 h-96 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
+        <div className="absolute -bottom-8 left-20 w-96 h-96 bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
       </div>
       
-      <div className="container mx-auto px-6 py-20 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto"
-        >
-          {/* Premium badge */}
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex justify-center mb-8"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 rounded-full">
-              <div className="w-2 h-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-gray-700">Introducing the future of user analytics</span>
-            </div>
-          </motion.div>
-          
-          <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold text-center leading-tight tracking-tight"
+            transition={{ duration: 0.6 }}
+            className="text-center"
           >
-            <span className="text-gray-900">Understand the</span>
-            <br />
-            <span className="relative inline-block">
-              <span className="relative z-10 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                emotional why
-              </span>
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute bottom-2 left-0 h-4 bg-gradient-to-r from-indigo-100 to-purple-100 -z-10 rounded"
-              />
-            </span>
-            <br />
-            <span className="text-gray-900">behind every decision</span>
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto text-center leading-relaxed mt-8"
-          >
-            Wivvy transforms behavioral data into deep psychographic insights, 
-            revealing what your users feel—not just what they click.
-          </motion.p>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
-          >
-            <Button 
-              variant="primary" 
-              className="group px-8 py-4 text-base font-medium bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-200"
+            {/* Trust indicator */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 border border-indigo-200/50 rounded-full mb-8"
             >
-              Start Free Trial
-              <ArrowRight className="inline-block ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </Button>
+              <Sparkles className="w-4 h-4 text-indigo-600" />
+              <span className="text-sm font-medium text-indigo-700">Trusted by 500+ innovative teams</span>
+            </motion.div>
             
-            <Button 
-              variant="secondary" 
-              className="px-8 py-4 text-base font-medium border-2 border-gray-200 bg-white hover:bg-gray-50 text-gray-700"
+            {/* Main headline with better typography */}
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6"
             >
-              Watch Demo
-            </Button>
+              <span className="text-gray-900">Turn user behavior</span>
+              <br />
+              <span className="text-gray-900">into </span>
+              <span className="relative">
+                <span className="relative z-10 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent animate-gradient">
+                  emotional insights
+                </span>
+                <motion.svg
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 1, delay: 0.8 }}
+                  className="absolute -bottom-2 left-0 w-full"
+                  viewBox="0 0 300 12"
+                  fill="none"
+                >
+                  <path
+                    d="M2 9C2 9 75 3 150 7C225 11 298 5 298 5"
+                    stroke="url(#gradient)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#6366f1" />
+                      <stop offset="50%" stopColor="#a855f7" />
+                      <stop offset="100%" stopColor="#6366f1" />
+                    </linearGradient>
+                  </defs>
+                </motion.svg>
+              </span>
+            </motion.h1>
+            
+            {/* Subheading with better readability */}
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed"
+            >
+              Wivvy decodes the psychology behind every click, helping you build products 
+              and experiences that truly resonate with your users' emotions.
+            </motion.p>
+
+            {/* Feature pills */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap items-center justify-center gap-4 mb-10"
+            >
+              {features.map((feature, index) => (
+                <div key={index} className="flex items-center gap-2 text-sm text-gray-600">
+                  <CheckCircle2 className="w-4 h-4 text-green-500" />
+                  <span>{feature}</span>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* CTA Section - Email first approach */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-col items-center gap-4"
+            >
+              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3 w-full max-w-md">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your work email"
+                  className="flex-1 px-5 py-3.5 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all text-base"
+                  required
+                />
+                <Button 
+                  type="submit"
+                  className="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 transition-all duration-200 whitespace-nowrap group"
+                >
+                  Start Free Trial
+                  <ArrowRight className="ml-2 w-4 h-4 inline-block transition-transform group-hover:translate-x-1" />
+                </Button>
+              </form>
+              
+              <button
+                onClick={() => setIsVideoModalOpen(true)}
+                className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group"
+              >
+                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+                  <Play className="w-4 h-4 ml-0.5" />
+                </div>
+                <span className="font-medium">Watch 2-min demo</span>
+              </button>
+            </motion.div>
+
+            {/* Social proof */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="mt-16"
+            >
+              <p className="text-sm text-gray-500 mb-6">Trusted by data-driven teams at</p>
+              <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+                {['Stripe', 'Shopify', 'Notion', 'Linear', 'Vercel'].map((company, index) => (
+                  <motion.div
+                    key={company}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 + index * 0.1 }}
+                    className="text-2xl font-semibold text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    {company}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Floating UI elements for depth */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="absolute -right-20 top-20 hidden xl:block"
+          >
+            <div className="bg-white rounded-2xl shadow-2xl p-6 transform rotate-6 hover:rotate-3 transition-transform">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                <span className="text-sm font-medium text-gray-700">Live emotional data</span>
+              </div>
+              <div className="space-y-2">
+                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="h-full w-3/4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" />
+                </div>
+                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="h-full w-1/2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
+                </div>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-wrap items-center justify-center gap-8 text-sm"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="absolute -left-20 bottom-20 hidden xl:block"
           >
-            <div className="flex items-center gap-3 bg-white rounded-lg px-4 py-3 shadow-sm border border-gray-100">
-              <BarChart3 className="w-5 h-5 text-indigo-600" />
-              <div>
-                <div className="font-semibold text-gray-900">47% higher engagement</div>
-                <div className="text-gray-500">average improvement</div>
+            <div className="bg-white rounded-2xl shadow-2xl p-6 transform -rotate-6 hover:-rotate-3 transition-transform">
+              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-1">
+                87%
               </div>
+              <div className="text-sm text-gray-600">Accuracy in emotion detection</div>
             </div>
-            <div className="flex items-center gap-3 bg-white rounded-lg px-4 py-3 shadow-sm border border-gray-100">
-              <div className="w-10 h-10 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center">
-                <span className="text-lg font-bold text-indigo-600">3.2x</span>
-              </div>
-              <div>
-                <div className="font-semibold text-gray-900">Better conversion</div>
-                <div className="text-gray-500">than traditional analytics</div>
-              </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Video Modal */}
+      {isVideoModalOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+          onClick={() => setIsVideoModalOpen(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            className="bg-white rounded-2xl p-2 shadow-2xl max-w-4xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="aspect-video bg-gray-900 rounded-lg flex items-center justify-center">
+              <Play className="w-16 h-16 text-white" />
             </div>
           </motion.div>
         </motion.div>
+      )}
 
-        {/* Abstract visual element */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-6xl"
-        >
-          <div className="relative h-32 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-white to-transparent" />
-            <svg className="absolute bottom-0 w-full" viewBox="0 0 1200 120" preserveAspectRatio="none">
-              <path 
-                d="M0,60 C150,20 350,80 600,60 C850,40 1050,100 1200,60 L1200,120 L0,120 Z" 
-                fill="url(#waveGradient)" 
-                opacity="0.1"
-              />
-              <defs>
-                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#6366f1" />
-                  <stop offset="100%" stopColor="#a855f7" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </motion.div>
-      </div>
+      <style jsx>{`
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+        @keyframes gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+      `}</style>
     </section>
   )
 }
