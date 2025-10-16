@@ -23,26 +23,36 @@ const ProblemStatement = () => {
       title: "Surface-level metrics",
       subtitle: "Missing the human story",
       visual: (
-        <div className="relative w-full h-full">
-          <div className="absolute inset-0 flex items-end justify-around p-4">
-            {[40, 65, 30, 80, 45].map((height, i) => (
+        <div className="relative w-full h-full flex items-center justify-center">
+          {/* Numbers without meaning */}
+          <div className="text-center">
+            <div className="space-y-3">
               <motion.div
-                key={i}
-                initial={{ height: 0 }}
-                animate={{ height: `${height}%` }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="w-8 bg-gradient-to-t from-gray-400 to-gray-300 rounded-t"
-              />
-            ))}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-5xl font-bold text-gray-700"
+              >
+                73%
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="text-sm text-gray-500"
+              >
+                users left your site
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.8 }}
+                className="text-3xl font-bold text-red-500 mt-6"
+              >
+                But why?
+              </motion.div>
+            </div>
           </div>
-          <motion.div
-            animate={{ opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute inset-0 flex items-center justify-center"
-          >
-            <Brain className="w-16 h-16 text-red-300 opacity-30" />
-            <div className="absolute inset-0 bg-red-500/10 blur-xl" />
-          </motion.div>
         </div>
       )
     },
@@ -345,12 +355,10 @@ const ProblemStatement = () => {
             >
               <motion.div
                 animate={{
-                  scale: hoveredCard === index ? 1.05 : 1,
-                  rotateY: hoveredCard === index ? 10 : 0
+                  scale: hoveredCard === index ? 1.02 : 1,
                 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="relative bg-white rounded-2xl shadow-xl overflow-hidden h-96"
-                style={{ transformStyle: 'preserve-3d' }}
+                className="relative bg-white rounded-2xl shadow-xl overflow-hidden h-96 border border-gray-100 hover:border-red-200"
               >
                 <div className="p-8 h-full flex flex-col">
                   <div className="flex items-start justify-between mb-4">
