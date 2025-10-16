@@ -39,16 +39,6 @@ const Hero = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            {/* Trust indicator */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 border border-indigo-200/50 rounded-full mb-8"
-            >
-              <Sparkles className="w-4 h-4 text-indigo-600" />
-              <span className="text-sm font-medium text-indigo-700">Trusted by 500+ innovative teams</span>
-            </motion.div>
             
             {/* Main headline with better typography */}
             <motion.h1 
@@ -172,28 +162,6 @@ const Hero = () => {
               </button>
             </motion.div>
 
-            {/* Social proof */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="mt-16"
-            >
-              <p className="text-sm text-gray-500 mb-6">Trusted by data-driven teams at</p>
-              <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-                {['Stripe', 'Shopify', 'Notion', 'Linear', 'Vercel'].map((company, index) => (
-                  <motion.div
-                    key={company}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7 + index * 0.1 }}
-                    className="text-2xl font-semibold text-gray-400 hover:text-gray-600 transition-colors"
-                  >
-                    {company}
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Floating UI elements for depth */}

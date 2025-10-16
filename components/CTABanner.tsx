@@ -90,17 +90,6 @@ const CTABanner = () => {
             </div>
           </div>
 
-          {/* Trust badges */}
-          <div className="mt-16 pt-16 border-t border-gray-200">
-            <p className="text-sm text-gray-500 mb-8">Trusted by innovative teams at</p>
-            <div className="flex flex-wrap items-center justify-center gap-12 opacity-60 grayscale">
-              <div className="text-2xl font-bold text-gray-400">Shopify</div>
-              <div className="text-2xl font-bold text-gray-400">Stripe</div>
-              <div className="text-2xl font-bold text-gray-400">Notion</div>
-              <div className="text-2xl font-bold text-gray-400">Linear</div>
-              <div className="text-2xl font-bold text-gray-400">Figma</div>
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>
