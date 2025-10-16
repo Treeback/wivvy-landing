@@ -220,31 +220,92 @@ const ProblemStatement = () => {
       subtitle: "Missing emotional context",
       visual: (
         <div className="relative w-full h-full flex items-center justify-center">
-          <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="relative"
-          >
-            <Eye className="w-24 h-24 text-gray-400" />
-            {[0, 72, 144, 216, 288].map((rotation, i) => (
-              <motion.div
-                key={i}
-                className="absolute inset-0 flex items-center justify-center"
-                style={{ transform: `rotate(${rotation}deg)` }}
-              >
-                <motion.div
-                  animate={{ opacity: [0, 0.8, 0] }}
-                  transition={{
-                    duration: 2,
-                    delay: i * 0.4,
-                    repeat: Infinity
-                  }}
-                  className="w-4 h-4 bg-red-400 rounded-full blur-sm"
-                  style={{ transform: 'translateX(40px)' }}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+          {/* Dashboard with missing pieces */}
+          <div className="relative w-48 h-32">
+            {/* Analytics dashboard outline */}
+            <div className="absolute inset-0 border-2 border-gray-300 rounded-lg bg-gray-50">
+              {/* Visible metrics */}
+              <div className="p-3 space-y-2">
+                {/* Clicks metric */}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-600">Clicks</span>
+                  <motion.div 
+                    className="w-12 h-1.5 bg-blue-400 rounded"
+                    animate={{ scaleX: [0.7, 1, 0.7] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                </div>
+                {/* Views metric */}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-600">Views</span>
+                  <motion.div 
+                    className="w-10 h-1.5 bg-green-400 rounded"
+                    animate={{ scaleX: [0.8, 1, 0.8] }}
+                    transition={{ duration: 2.5, repeat: Infinity }}
+                  />
+                </div>
+              </div>
+            </div>
+            
+            {/* Missing emotional data - represented as gaps */}
+            <motion.div 
+              className="absolute -right-8 top-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 1, 0] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              <div className="bg-white rounded-lg shadow-lg p-2 border-2 border-dashed border-red-300">
+                <div className="text-xs text-red-600 font-medium">Why did they leave?</div>
+                <div className="flex items-center gap-1 mt-1">
+                  {['😔', '😤', '🤔'].map((emoji, i) => (
+                    <motion.span 
+                      key={i} 
+                      className="text-sm"
+                      animate={{ 
+                        y: [0, -3, 0],
+                        opacity: [0.5, 1, 0.5]
+                      }}
+                      transition={{ 
+                        duration: 1.5, 
+                        delay: i * 0.2,
+                        repeat: Infinity 
+                      }}
+                    >
+                      {emoji}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* Another missing piece */}
+            <motion.div 
+              className="absolute -left-8 bottom-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 1, 0] }}
+              transition={{ duration: 3, delay: 1.5, repeat: Infinity }}
+            >
+              <div className="bg-white rounded-lg shadow-lg p-2 border-2 border-dashed border-orange-300">
+                <div className="text-xs text-orange-600 font-medium">User feeling?</div>
+                <motion.div 
+                  className="text-lg text-center mt-1"
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  ❓
+                </motion.div>
+              </div>
+            </motion.div>
+            
+            {/* Eye scanning but missing the important parts */}
+            <motion.div 
+              className="absolute inset-0 pointer-events-none"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            >
+              <Eye className="w-8 h-8 text-gray-600 absolute -top-4 left-1/2 -translate-x-1/2" />
+            </motion.div>
+          </div>
         </div>
       )
     }
