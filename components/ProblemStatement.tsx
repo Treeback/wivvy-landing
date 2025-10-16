@@ -36,148 +36,131 @@ const ProblemStatement = () => {
       realityCheck: "Your dashboards show growth, but customer satisfaction is plummeting",
       visual: (
         <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-          {/* Animated user icons leaving */}
-          <div className="absolute inset-0">
-            {[...Array(8)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute"
-                initial={{ 
-                  left: '50%',
-                  top: '50%',
-                  x: -12,
-                  y: -12,
-                  opacity: 0 
-                }}
-                animate={{ 
-                  left: `${[10, 90, 20, 80, 15, 85, 25, 75][i]}%`,
-                  top: `${[10, 20, 80, 90, 30, 70, 50, 40][i]}%`,
-                  opacity: [0, 1, 1, 0],
-                  rotate: [0, 180, 360]
-                }}
-                transition={{ 
-                  duration: 3,
-                  delay: i * 0.3,
-                  repeat: Infinity,
-                  ease: "easeOut"
-                }}
-              >
-                <Users className="w-6 h-6 text-gray-400" />
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Central content */}
-          <div className="relative z-10 text-center">
-            <div className="space-y-3">
-              {/* Animated counter */}
-              <div className="relative">
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-                  className="text-6xl font-bold"
-                >
-                  <motion.span 
-                    className="text-gray-900"
-                    animate={{ 
-                      opacity: [0.8, 1, 0.8]
-                    }}
-                    transition={{ 
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    73%
-                  </motion.span>
-                </motion.div>
-                
-                {/* Subtle glow effect */}
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <motion.div
-                    className="w-32 h-32 bg-red-400 rounded-full blur-3xl"
-                    animate={{ 
-                      scale: [0.8, 1, 0.8],
-                      opacity: [0.05, 0.1, 0.05]
-                    }}
-                    transition={{ 
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                </motion.div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="text-sm text-gray-600 font-medium"
-              >
-                users left your site
-              </motion.div>
-
-              {/* Subtle question animation */}
-              <motion.div
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ 
-                  opacity: 1, 
-                  y: 0
-                }}
-                transition={{ 
-                  delay: 0.8,
-                  duration: 0.8
-                }}
-                className="text-3xl font-bold text-red-600 mt-6"
-              >
-                <motion.span
+          {/* Central analytics dashboard */}
+          <div className="relative z-10">
+            <motion.div
+              className="bg-white rounded-2xl shadow-2xl p-6 border border-gray-200"
+              animate={{ 
+                scale: [1, 1.02, 1],
+                boxShadow: [
+                  "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+                  "0 30px 35px -5px rgba(239, 68, 68, 0.15)",
+                  "0 20px 25px -5px rgba(0, 0, 0, 0.1)"
+                ]
+              }}
+              transition={{ 
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              {/* Dashboard header */}
+              <div className="text-xs text-gray-500 mb-3">Real-time Analytics</div>
+              
+              {/* Main metric */}
+              <div className="text-center mb-4">
+                <motion.div 
+                  className="text-4xl font-bold text-gray-900"
                   animate={{ 
-                    y: [0, -2, 0]
+                    opacity: [0.8, 1, 0.8]
                   }}
                   transition={{ 
                     duration: 3,
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
-                  style={{ display: 'inline-block' }}
                 >
-                  But why?
-                </motion.span>
-              </motion.div>
-
-              {/* Subtle floating question marks */}
-              {[...Array(3)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute text-xl text-red-300"
-                  style={{
-                    left: `${[25, 50, 75][i]}%`,
-                    top: `${[30, 70, 45][i]}%`
-                  }}
-                  initial={{ opacity: 0 }}
-                  animate={{ 
-                    y: [0, -5, 0],
-                    opacity: [0, 0.4, 0]
-                  }}
-                  transition={{ 
-                    duration: 4,
-                    delay: i * 1.2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  ?
+                  73%
                 </motion.div>
-              ))}
-            </div>
+                <div className="text-sm text-gray-500">users left</div>
+              </div>
+
+              {/* But why question */}
+              <motion.div 
+                className="text-lg font-bold text-red-600 text-center"
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ 
+                  opacity: 1, 
+                  y: [0, -2, 0]
+                }}
+                transition={{ 
+                  opacity: { delay: 0.5, duration: 0.5 },
+                  y: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                }}
+              >
+                But why?
+              </motion.div>
+            </motion.div>
+
+            {/* Subtle glow effect behind dashboard */}
+            <motion.div
+              className="absolute inset-0 -z-10"
+              animate={{
+                opacity: [0.3, 0.5, 0.3]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <div className="absolute inset-0 bg-red-400 rounded-2xl blur-2xl opacity-20" />
+            </motion.div>
           </div>
+
+          {/* User icons leaving */}
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute"
+              initial={{ 
+                left: '50%',
+                top: '50%',
+                x: -12,
+                y: -12,
+                opacity: 0 
+              }}
+              animate={{ 
+                left: [`50%`, `${[10, 90, 20, 80, 15, 85, 25, 75][i]}%`],
+                top: [`50%`, `${[10, 20, 80, 90, 30, 70, 50, 40][i]}%`],
+                opacity: [0, 1, 1, 0],
+                scale: [0.5, 1, 0.8]
+              }}
+              transition={{ 
+                duration: 3,
+                delay: i * 0.4,
+                repeat: Infinity,
+                ease: "easeOut"
+              }}
+            >
+              <Users className="w-6 h-6 text-gray-500" />
+            </motion.div>
+          ))}
+
+          {/* Floating question marks */}
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={`q-${i}`}
+              className="absolute text-xl text-red-400"
+              style={{
+                left: `${[20, 50, 80][i]}%`,
+                top: `${[25, 75, 45][i]}%`
+              }}
+              animate={{ 
+                y: [0, -10, 0],
+                opacity: [0, 0.6, 0],
+                scale: [0.8, 1, 0.8]
+              }}
+              transition={{ 
+                duration: 3,
+                delay: i * 1,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              ?
+            </motion.div>
+          ))}
         </div>
       )
     },
@@ -197,42 +180,81 @@ const ProblemStatement = () => {
       ],
       realityCheck: "Static segments can't capture the fluidity of human emotion",
       visual: (
-        <div className="relative w-full h-full flex items-center justify-center">
-          <div className="grid grid-cols-2 gap-2">
-            {[1, 2, 3, 4].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: i * 0.1 }}
-                className="w-16 h-20 bg-gray-200 rounded-lg flex items-center justify-center"
-              >
-                <div className="w-10 h-10 bg-gray-300 rounded-full" />
-              </motion.div>
-            ))}
-          </div>
-          {['😊', '😔', '😤', '😍', '😰'].map((emoji, i) => (
+        <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+          {/* Main container */}
+          <div className="relative">
+            {/* Static persona card that transforms */}
             <motion.div
-              key={i}
-              className="absolute text-2xl"
+              className="bg-white rounded-xl shadow-xl p-6 w-44 border border-gray-200"
               animate={{
-                x: [0, 20, -20, 0],
-                y: [0, -20, 20, 0],
-                opacity: [0, 1, 1, 0]
+                boxShadow: [
+                  "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+                  "0 20px 25px -5px rgba(147, 51, 234, 0.15)",
+                  "0 20px 25px -5px rgba(0, 0, 0, 0.1)"
+                ]
               }}
               transition={{
                 duration: 4,
-                delay: i * 0.8,
-                repeat: Infinity
-              }}
-              style={{
-                left: `${20 + i * 15}%`,
-                top: `${20 + i * 10}%`
+                repeat: Infinity,
+                ease: "easeInOut"
               }}
             >
-              {emoji}
+              {/* Profile header */}
+              <div className="text-center mb-4">
+                <motion.div className="relative inline-block">
+                  <div className="w-16 h-16 bg-gradient-to-br from-gray-300 to-gray-400 rounded-full mx-auto" />
+                  
+                  {/* Changing emotions overlay */}
+                  {['😊', '😔', '😤', '🤔', '😴'].map((emoji, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute inset-0 flex items-center justify-center text-3xl"
+                      initial={{ opacity: 0 }}
+                      animate={{
+                        opacity: i === 0 ? [0, 1, 1, 0] : [0, 0, 1, 1, 0, 0]
+                      }}
+                      transition={{
+                        duration: 5,
+                        delay: i * 1,
+                        repeat: Infinity,
+                        times: i === 0 ? [0, 0.1, 0.9, 1] : [0, 0.2, 0.4, 0.6, 0.8, 1]
+                      }}
+                    >
+                      {emoji}
+                    </motion.div>
+                  ))}
+                </motion.div>
+                
+                <div className="mt-3">
+                  <div className="text-sm font-medium text-gray-800">Power User</div>
+                  <div className="text-xs text-gray-500">Static Segment</div>
+                </div>
+              </div>
+              
+              {/* Static vs Reality comparison */}
+              <div className="space-y-3">
+                <div>
+                  <div className="text-xs font-medium text-gray-400 mb-1">Expected:</div>
+                  <div className="text-xs text-gray-600">Always engaged</div>
+                </div>
+                
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1 }}
+                >
+                  <div className="text-xs font-medium text-purple-600 mb-1">Reality:</div>
+                  <motion.div
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    className="text-xs text-purple-700"
+                  >
+                    Changes every hour
+                  </motion.div>
+                </motion.div>
+              </div>
             </motion.div>
-          ))}
+          </div>
         </div>
       )
     },
@@ -252,93 +274,156 @@ const ProblemStatement = () => {
       ],
       realityCheck: "The most important user signals are the ones you're not tracking",
       visual: (
-        <div className="relative w-full h-full flex items-center justify-center">
-          {/* Dashboard with missing pieces */}
-          <div className="relative w-48 h-32">
-            {/* Analytics dashboard outline */}
-            <div className="absolute inset-0 border-2 border-gray-300 rounded-lg bg-gray-50">
-              {/* Visible metrics */}
-              <div className="p-3 space-y-2">
-                {/* Clicks metric */}
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-600">Clicks</span>
+        <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+          {/* Main dashboard */}
+          <motion.div 
+            className="relative"
+            animate={{ 
+              rotateX: [0, 5, -5, 0],
+              rotateY: [0, -5, 5, 0]
+            }}
+            transition={{ 
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+          >
+            {/* Dashboard frame */}
+            <div className="w-56 h-40 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl shadow-2xl overflow-hidden relative">
+              {/* Header */}
+              <div className="bg-gray-800 text-white text-xs px-3 py-1.5">Analytics Dashboard</div>
+              
+              {/* Visible metrics grid */}
+              <div className="p-3 grid grid-cols-2 gap-2">
+                {/* Metric cards */}
+                {[
+                  { label: 'Views', value: '12.5k', color: 'bg-blue-400' },
+                  { label: 'Clicks', value: '892', color: 'bg-green-400' },
+                  { label: 'Time', value: '2:34', color: 'bg-purple-400' },
+                  { label: 'Conv.', value: '3.2%', color: 'bg-indigo-400' }
+                ].map((metric, i) => (
                   <motion.div 
-                    className="w-12 h-1.5 bg-blue-400 rounded"
-                    animate={{ scaleX: [0.7, 1, 0.7] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                </div>
-                {/* Views metric */}
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-600">Views</span>
-                  <motion.div 
-                    className="w-10 h-1.5 bg-green-400 rounded"
-                    animate={{ scaleX: [0.8, 1, 0.8] }}
-                    transition={{ duration: 2.5, repeat: Infinity }}
-                  />
-                </div>
+                    key={i} 
+                    className="bg-white rounded p-2 shadow-sm"
+                    animate={{ 
+                      scale: [1, 1.02, 1],
+                      boxShadow: [
+                        '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                        '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                        '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+                      ]
+                    }}
+                    transition={{ 
+                      duration: 2,
+                      delay: i * 0.2,
+                      repeat: Infinity
+                    }}
+                  >
+                    <div className="text-xs text-gray-500">{metric.label}</div>
+                    <div className="text-sm font-bold text-gray-800">{metric.value}</div>
+                    <motion.div 
+                      className={`h-0.5 ${metric.color} rounded-full mt-1`}
+                      animate={{ scaleX: [0.6, 1, 0.6] }}
+                      transition={{ duration: 3, delay: i * 0.3, repeat: Infinity }}
+                    />
+                  </motion.div>
+                ))}
               </div>
+
+              {/* Missing data overlay - scan lines */}
+              <motion.div 
+                className="absolute inset-0 pointer-events-none"
+                animate={{ opacity: [0.1, 0.3, 0.1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-red-500/10 via-transparent to-red-500/10" />
+              </motion.div>
             </div>
-            
-            {/* Missing emotional data - represented as gaps */}
-            <motion.div 
-              className="absolute -right-8 top-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
+          </motion.div>
+
+          {/* Eye scanning animation */}
+          <motion.div 
+            className="absolute w-full h-full pointer-events-none"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+          >
+            <motion.div
+              className="absolute top-1/2 left-1/2"
+              style={{ transform: 'translate(-50%, -50%)' }}
             >
-              <div className="bg-white rounded-lg shadow-lg p-2 border-2 border-dashed border-red-300">
-                <div className="text-xs text-red-600 font-medium">Why did they leave?</div>
-                <div className="flex items-center gap-1 mt-1">
-                  {['😔', '😤', '🤔'].map((emoji, i) => (
-                    <motion.span 
-                      key={i} 
-                      className="text-sm"
-                      animate={{ 
-                        y: [0, -3, 0],
-                        opacity: [0.5, 1, 0.5]
-                      }}
-                      transition={{ 
-                        duration: 1.5, 
-                        delay: i * 0.2,
-                        repeat: Infinity 
-                      }}
-                    >
-                      {emoji}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  opacity: [0.8, 1, 0.8]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Eye className="w-12 h-12 text-gray-600" />
+              </motion.div>
+              
+              {/* Scan beam */}
+              <motion.div
+                className="absolute top-1/2 left-1/2 w-32 h-0.5 bg-gradient-to-r from-transparent via-red-400 to-transparent"
+                style={{ transformOrigin: '0 50%' }}
+                animate={{ 
+                  rotate: [0, 360],
+                  opacity: [0.5, 0.8, 0.5]
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity
+                }}
+              />
             </motion.div>
-            
-            {/* Another missing piece */}
-            <motion.div 
-              className="absolute -left-8 bottom-2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{ duration: 3, delay: 1.5, repeat: Infinity }}
+          </motion.div>
+
+          {/* Floating missing insights */}
+          {[
+            { emoji: '😤', label: 'Frustration spike', x: 20, y: 20 },
+            { emoji: '🤔', label: 'Decision moment', x: 75, y: 30 },
+            { emoji: '😔', label: 'Abandonment', x: 30, y: 70 },
+            { emoji: '❓', label: 'Confusion point', x: 80, y: 80 },
+            { emoji: '😰', label: 'Anxiety peak', x: 15, y: 85 }
+          ].map((insight, i) => (
+            <motion.div
+              key={i}
+              className="absolute"
+              style={{ left: `${insight.x}%`, top: `${insight.y}%` }}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ 
+                scale: [0, 1, 1, 0],
+                opacity: [0, 1, 1, 0],
+                y: [0, -10, -10, -20]
+              }}
+              transition={{ 
+                duration: 4,
+                delay: i * 0.8,
+                repeat: Infinity
+              }}
             >
-              <div className="bg-white rounded-lg shadow-lg p-2 border-2 border-dashed border-orange-300">
-                <div className="text-xs text-orange-600 font-medium">User feeling?</div>
+              <div className="bg-white rounded-lg shadow-xl p-2 border-2 border-red-200">
+                <div className="text-2xl mb-1">{insight.emoji}</div>
+                <div className="text-xs text-red-600 font-medium whitespace-nowrap">{insight.label}</div>
                 <motion.div 
-                  className="text-lg text-center mt-1"
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  ❓
-                </motion.div>
+                  className="absolute -bottom-1 left-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"
+                  style={{ transform: 'translateX(-50%)' }}
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                />
               </div>
             </motion.div>
-            
-            {/* Eye scanning but missing the important parts */}
-            <motion.div 
-              className="absolute inset-0 pointer-events-none"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            >
-              <Eye className="w-8 h-8 text-gray-600 absolute -top-4 left-1/2 -translate-x-1/2" />
-            </motion.div>
-          </div>
+          ))}
+
+          {/* Glitch effect */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            animate={{ opacity: [0, 0, 0, 0.1, 0] }}
+            transition={{ duration: 5, repeat: Infinity }}
+          >
+            <div className="absolute inset-0 bg-red-500 mix-blend-multiply" style={{ clipPath: 'inset(20% 0 70% 0)' }} />
+            <div className="absolute inset-0 bg-blue-500 mix-blend-multiply" style={{ clipPath: 'inset(60% 0 10% 0)' }} />
+          </motion.div>
         </div>
       )
     }
@@ -536,7 +621,7 @@ const ProblemStatement = () => {
           </div>
 
           {/* Cards container with perspective */}
-          <div className="relative max-w-7xl mx-auto perspective-1000">
+          <div className="relative max-w-7xl mx-auto" style={{ perspective: '1000px' }}>
             {problems.map((problem, index) => (
               <motion.div
                 key={index}
@@ -1328,26 +1413,6 @@ const ProblemStatement = () => {
         </motion.div>
       </div>
 
-      <style jsx>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
     </section>
   )
 }

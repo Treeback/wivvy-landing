@@ -50,6 +50,7 @@ module.exports = {
         'gradient-xy': 'gradient-xy 15s ease infinite',
         'fade-up': 'fade-up 0.5s ease-out',
         'fade-in': 'fade-in 0.5s ease-out',
+        'blob': 'blob 7s infinite',
       },
       keyframes: {
         'glow-pulse': {
@@ -85,9 +86,27 @@ module.exports = {
         'fade-in': {
           '0%': { opacity: 0 },
           '100%': { opacity: 1 }
+        },
+        'blob': {
+          '0%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' }
         }
+      },
+      animationDelay: {
+        '2000': '2s',
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.animation-delay-2000': {
+          'animation-delay': '2s',
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 }
