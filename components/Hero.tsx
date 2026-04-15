@@ -179,20 +179,28 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Mobile: Horizontal scroll */}
+          {/* Mobile: Auto-scrolling marquee */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="lg:hidden -mx-6 px-6"
+            className="lg:hidden -mx-6 overflow-hidden relative"
           >
-            <div className="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
-              {creators.slice(0, 4).map((creator, i) => (
-                <div key={i} className="flex-shrink-0 w-40 snap-start">
-                  <CreatorCard creator={creator} index={i} />
+            {/* Fade edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+
+            <motion.div
+              animate={{ x: [0, -840] }}
+              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+              className="flex gap-3 pb-4"
+            >
+              {[...creators, ...creators].map((creator, i) => (
+                <div key={i} className="flex-shrink-0 w-36">
+                  <CreatorCard creator={creator} index={i % creators.length} />
                 </div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
