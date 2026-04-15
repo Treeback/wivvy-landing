@@ -3,11 +3,12 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import Image from 'next/image'
 
 const useCases = [
   {
     id: 'creators',
-    emoji: '🎬',
+    icon: '/creators/creator.png',
     label: 'creators',
     tagline: 'who want to stop guessing.',
     stat: null,
@@ -20,7 +21,7 @@ const useCases = [
   },
   {
     id: 'agencies',
-    emoji: '🚀',
+    icon: '/creators/agency.png',
     label: 'agencies',
     tagline: 'who need to scale results.',
     stat: null,
@@ -33,7 +34,7 @@ const useCases = [
   },
   {
     id: 'brands',
-    emoji: '🎯',
+    icon: '/creators/brand.png',
     label: 'brands',
     tagline: 'that want real conversions.',
     stat: null,
@@ -86,10 +87,10 @@ export default function UseCases() {
                 <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
                   {/* Inline photo + text */}
                   <div className="flex items-center gap-4 md:gap-5 flex-1 min-w-0">
-                    {/* Emoji */}
-                    <span className="text-3xl md:text-4xl flex-shrink-0 group-hover:scale-110 transition-transform">
-                      {uc.emoji}
-                    </span>
+                    {/* Icon */}
+                    <div className="w-12 h-12 md:w-14 md:h-14 flex-shrink-0 relative group-hover:scale-110 transition-transform rounded-xl overflow-hidden">
+                      <Image src={uc.icon} alt={uc.label} fill className="object-contain invert brightness-200" sizes="56px" />
+                    </div>
 
                     {/* Typography */}
                     <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-snug">
