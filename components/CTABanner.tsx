@@ -130,13 +130,14 @@ export default function CTABanner() {
           >
             {/* Massive headline */}
             <h2 className="text-5xl md:text-6xl lg:text-8xl font-black text-white mb-6 tracking-tight leading-[0.95]">
-              Start creating
+              Your unfair
               <br />
-              <span className="text-gradient-yellow">with clarity.</span>
+              <span className="text-gradient-yellow">AI advantage.</span>
             </h2>
 
             <p className="text-lg md:text-xl text-gray-500 mb-12 max-w-lg mx-auto">
-              Join creators and teams who are no longer guessing what works.
+              The creators who win aren&apos;t just talented — they have better intelligence.
+              Get yours.
             </p>
 
             {/* Creator avatars as social proof */}
