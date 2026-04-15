@@ -1,7 +1,9 @@
 'use client'
 
+import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import Logo from './ui/Logo'
 
 /* ── Platform SVG Icons ── */
 function YoutubeIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
@@ -50,9 +52,10 @@ const steps = [
   {
     num: '03',
     title: 'You get a playbook',
-    body: 'Specific hooks. Formats working right now. Cultural moments to ride. All before your competitors see them.',
+    body: 'Specific hooks. Formats working right now. Cultural moments to ride. Before your competitors see them.',
   },
 ]
+
 
 export default function WhatWeDo() {
   return (
@@ -78,7 +81,7 @@ export default function WhatWeDo() {
           </p>
         </motion.div>
 
-        {/* ── Animated Globe with orbiting platforms ── */}
+        {/* ── Globe with orbiting platforms ── */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -87,41 +90,52 @@ export default function WhatWeDo() {
           className="relative mx-auto mb-20 w-[340px] h-[340px] md:w-[440px] md:h-[440px]"
         >
           {/* Ambient glow */}
-          <div className="absolute inset-0 bg-yellow-400/[0.04] rounded-full blur-3xl scale-150" />
+          <div className="absolute inset-0 bg-yellow-400/[0.04] rounded-full blur-3xl scale-125" />
 
-          {/* Outer orbit ring */}
-          <div className="absolute inset-0 rounded-full border border-white/[0.04]" />
-          <div className="absolute inset-8 md:inset-12 rounded-full border border-white/[0.03]" />
+          {/* Orbit rings */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+            className="absolute inset-0 rounded-full border border-white/[0.04]"
+            style={{ borderStyle: 'dashed' }}
+          />
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
+            className="absolute inset-10 md:inset-14 rounded-full border border-white/[0.03]"
+            style={{ borderStyle: 'dashed' }}
+          />
 
-          {/* Globe at center */}
+          {/* Pulsing glow rings */}
+          <motion.div
+            animate={{ scale: [1, 1.15, 1], opacity: [0.08, 0.15, 0.08] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute inset-[25%] rounded-full border border-yellow-400/20"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.1, 1], opacity: [0.05, 0.12, 0.05] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+            className="absolute inset-[20%] rounded-full border border-yellow-400/10"
+          />
+
+          {/* Center: Wivvy Logo */}
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
+              animate={{ scale: [1, 1.04, 1] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               className="relative"
             >
-              <svg viewBox="0 0 120 120" className="w-24 h-24 md:w-32 md:h-32" fill="none">
-                {/* Globe circle */}
-                <circle cx="60" cy="60" r="55" stroke="white" strokeOpacity={0.08} strokeWidth={1} />
-                {/* Latitude lines */}
-                <ellipse cx="60" cy="60" rx="55" ry="20" stroke="white" strokeOpacity={0.05} strokeWidth={0.5} />
-                <ellipse cx="60" cy="60" rx="55" ry="40" stroke="white" strokeOpacity={0.05} strokeWidth={0.5} />
-                {/* Longitude lines */}
-                <ellipse cx="60" cy="60" rx="20" ry="55" stroke="white" strokeOpacity={0.05} strokeWidth={0.5} />
-                <ellipse cx="60" cy="60" rx="40" ry="55" stroke="white" strokeOpacity={0.05} strokeWidth={0.5} />
-                {/* India highlight dot */}
-                <circle cx="72" cy="48" r="4" fill="#fbbf24" opacity={0.3} />
-                <motion.circle
-                  cx="72" cy="48" r="2"
-                  fill="#fbbf24"
-                  animate={{ r: [2, 3, 2], opacity: [0.8, 1, 0.8] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              </svg>
+              {/* Logo glow */}
+              <div className="absolute -inset-6 bg-yellow-400/[0.08] rounded-3xl blur-xl" />
+
+              <div className="relative w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-3xl flex items-center justify-center shadow-lg shadow-yellow-400/20">
+                <Logo size="lg" className="text-black" />
+              </div>
             </motion.div>
-            {/* Center label */}
-            <div className="absolute text-center pointer-events-none">
-              <p className="text-[10px] text-yellow-400/60 uppercase tracking-[0.2em] font-bold">Wivvy AI</p>
+
+            {/* Label below */}
+            <div className="absolute mt-[100px] md:mt-[120px] text-center">
+              <p className="text-xs text-yellow-400/50 uppercase tracking-[0.2em] font-bold">Wivvy AI</p>
             </div>
           </div>
 
@@ -147,13 +161,9 @@ export default function WhatWeDo() {
                   transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: 'easeInOut' }}
                   className="flex flex-col items-center gap-1.5"
                 >
-                  {/* Icon container */}
                   <div
                     className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center border backdrop-blur-sm"
-                    style={{
-                      backgroundColor: `${node.color}10`,
-                      borderColor: `${node.color}30`,
-                    }}
+                    style={{ backgroundColor: `${node.color}10`, borderColor: `${node.color}30` }}
                   >
                     {node.Icon ? (
                       <node.Icon className="w-5 h-5 md:w-6 md:h-6" style={{ color: node.color }} />
@@ -164,7 +174,7 @@ export default function WhatWeDo() {
                   <span className="text-[10px] text-gray-500 font-medium">{node.label}</span>
                 </motion.div>
 
-                {/* Particle flying to center */}
+                {/* Particle to center */}
                 <motion.div
                   className="absolute w-1.5 h-1.5 rounded-full top-1/2 left-1/2"
                   style={{ backgroundColor: node.color }}
