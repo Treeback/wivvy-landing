@@ -78,7 +78,7 @@ export default function CTABanner() {
                 type="submit"
                 className="group inline-flex items-center justify-center gap-2 bg-white text-black font-semibold px-8 py-4 rounded-xl hover:bg-gray-100 transition-all shadow-lg shadow-white/10 whitespace-nowrap"
               >
-                {submitted ? 'You\'re in!' : 'Get Access'}
+                {submitted ? 'You\'re in!' : 'Request Early Access'}
                 {!submitted && <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />}
               </button>
             </form>

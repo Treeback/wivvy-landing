@@ -62,7 +62,7 @@ const Header = () => {
             href="#cta"
             className="text-sm font-medium bg-white text-black px-5 py-2.5 rounded-lg hover:bg-gray-100 transition-all"
           >
-            Get Access
+            Request Early Access
           </Link>
         </div>
 
@@ -93,7 +93,7 @@ const Header = () => {
                 className="block w-full text-center text-sm font-medium bg-white text-black px-5 py-3 rounded-lg"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Get Access
+                Request Early Access
               </Link>
             </div>
           </div>
