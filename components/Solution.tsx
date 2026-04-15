@@ -34,7 +34,7 @@ const orbitNodes = [
   { id: 'ig', Icon: InstagramIcon, label: 'Instagram', color: '#f472b6', angle: 60, signals: ['রিলস ট্রেন্ডিং', '+127% hooks', 'நம்பிக்கை இழப்பு'] },
   { id: 'x', Icon: XIcon, label: 'X', color: '#38bdf8', angle: 120, signals: ['#बजट2025', 'ಟ್ರೆಂಡಿಂಗ್', 'Sentiment shift'] },
   { id: 'news', label: 'News', color: '#fbbf24', angle: 180, emoji: '📰', signals: ['बजट 2025', 'RBI दर कटौती', 'ఎన్నికల తరంగం'] },
-  { id: 'culture', label: 'Culture', color: '#fb923c', angle: 240, emoji: '🎭', signals: ['IPL ফাইনাল', 'बॉलीवुड ट्रेलर', 'ఉత్సవ సీజన్'] },
+  { id: 'culture', label: 'Culture', color: '#fb923c', angle: 240, emoji: '🪔', signals: ['IPL ফাইনাল', 'बॉलीवुड ट्रेलर', 'ఉత్సవ సీజన్'] },
   { id: 'trends', label: 'Trends', color: '#34d399', angle: 300, emoji: '📈', signals: ['+203% வளர்ச்சி', 'Fast cuts', 'POV ಫಾರ್ಮ್ಯಾಟ್'] },
 ]
 
