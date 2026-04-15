@@ -16,7 +16,7 @@ const useCases = [
     color: 'text-yellow-400',
     statColor: 'text-yellow-400/60',
     lineColor: 'bg-yellow-400/20',
-    detail: 'Rohit went from 40K to 500K views per video. He didn\u2019t change his niche. He changed his hooks \u2014 using patterns we surfaced from 42 similar creators who were already winning.',
+    detail: 'Stop spending hours researching what hooks work. Wivvy tells you what\u2019s trending in your niche, which formats are driving engagement right now, and exactly how to open your next video \u2014 so you spend less time guessing and more time creating.',
     cta: 'creators',
   },
   {
@@ -29,7 +29,7 @@ const useCases = [
     color: 'text-sky-400',
     statColor: 'text-sky-400/60',
     lineColor: 'bg-sky-400/20',
-    detail: 'CreatorScale manages 25 Indian creators. Before Wivvy, each strategy was gut feel. Now they have auto-generated niche playbooks \u2014 and 3 creators crossed 1M subs in 6 months.',
+    detail: 'Build content strategies backed by data, not gut feel. Wivvy gives your team niche-specific playbooks, trending formats, and hook patterns across creators \u2014 so you can scale performance without scaling headcount.',
     cta: 'agencies',
   },
   {
@@ -42,7 +42,7 @@ const useCases = [
     color: 'text-emerald-400',
     statColor: 'text-emerald-400/60',
     lineColor: 'bg-emerald-400/20',
-    detail: 'A D2C skincare brand discovered that "myth-busting" hooks convert 4x better than product demos for Gen Z. They matched with the right creators and saw 4.2x ROAS in their first quarter.',
+    detail: 'Go beyond follower counts. Wivvy shows you which content styles, hooks, and formats actually drive conversions for your audience \u2014 so you pick the right creators and brief them with data, not assumptions.',
     cta: 'brands',
   },
 ]
