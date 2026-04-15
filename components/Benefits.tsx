@@ -11,8 +11,8 @@ const useCases = [
     image: '/creators/creator-2.jpg',
     label: 'creators',
     tagline: 'who want to stop guessing.',
-    stat: '12x',
-    statLabel: 'more views',
+    stat: null,
+    statLabel: null,
     color: 'text-yellow-400',
     statColor: 'text-yellow-400/60',
     lineColor: 'bg-yellow-400/20',
@@ -24,8 +24,8 @@ const useCases = [
     image: '/creators/agency.jpg',
     label: 'agencies',
     tagline: 'who need to scale results.',
-    stat: '67%',
-    statLabel: 'faster strategy',
+    stat: null,
+    statLabel: null,
     color: 'text-sky-400',
     statColor: 'text-sky-400/60',
     lineColor: 'bg-sky-400/20',
@@ -37,8 +37,8 @@ const useCases = [
     image: '/creators/brand.jpg',
     label: 'brands',
     tagline: 'that want real conversions.',
-    stat: '4.2x',
-    statLabel: 'ROAS',
+    stat: null,
+    statLabel: null,
     color: 'text-emerald-400',
     statColor: 'text-emerald-400/60',
     lineColor: 'bg-emerald-400/20',
@@ -103,12 +103,8 @@ export default function UseCases() {
                     </h3>
                   </div>
 
-                  {/* Stat + arrow */}
-                  <div className="flex items-center gap-4 md:gap-6 pl-[4.5rem] md:pl-0">
-                    <div className="text-right">
-                      <span className={`text-3xl md:text-4xl font-black ${uc.color}`}>{uc.stat}</span>
-                      <p className="text-xs text-gray-600 uppercase tracking-wider">{uc.statLabel}</p>
-                    </div>
+                  {/* Arrow */}
+                  <div className="flex items-center pl-[4.5rem] md:pl-0">
                     <motion.div
                       animate={{ rotate: expanded === uc.id ? 90 : 0 }}
                       transition={{ duration: 0.2 }}
