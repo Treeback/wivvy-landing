@@ -8,7 +8,7 @@ import Image from 'next/image'
 const useCases = [
   {
     id: 'creators',
-    icon: '/creators/creator.png',
+    icon: '/creators/creator.svg',
     label: 'creators',
     tagline: 'who want to stop guessing.',
     stat: null,
