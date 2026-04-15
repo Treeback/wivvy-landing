@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="border-t border-white/[0.06]">
       <div className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="flex flex-col md:flex-row md:justify-between gap-12">
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <div className="w-9 h-9 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
@@ -30,6 +30,7 @@ const Footer = () => {
             </div>
           </div>
 
+          <div className="flex gap-16">
           <div className="space-y-4">
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider">Product</h4>
             <div className="space-y-2">
@@ -58,6 +59,7 @@ const Footer = () => {
                 Terms of Service
               </Link>
             </div>
+          </div>
           </div>
         </div>
 
