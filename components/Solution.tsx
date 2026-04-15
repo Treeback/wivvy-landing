@@ -161,14 +161,11 @@ export default function WhatWeDo() {
                   transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: 'easeInOut' }}
                   className="flex flex-col items-center gap-1.5"
                 >
-                  <div
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center border backdrop-blur-sm"
-                    style={{ backgroundColor: `${node.color}10`, borderColor: `${node.color}30` }}
-                  >
+                  <div className="flex items-center justify-center">
                     {node.Icon ? (
-                      <node.Icon className="w-5 h-5 md:w-6 md:h-6" style={{ color: node.color }} />
+                      <node.Icon className="w-7 h-7 md:w-8 md:h-8" style={{ color: node.color }} />
                     ) : (
-                      <span className="text-xl">{node.emoji}</span>
+                      <span className="text-2xl md:text-3xl">{node.emoji}</span>
                     )}
                   </div>
                   <span className="text-[10px] text-gray-500 font-medium">{node.label}</span>
