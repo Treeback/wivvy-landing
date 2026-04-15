@@ -2,12 +2,12 @@
 
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Video, Building2, Megaphone } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 const useCases = [
   {
     id: 'creators',
-    icon: Video,
+    emoji: '🎬',
     label: 'creators',
     tagline: 'who want to stop guessing.',
     stat: null,
@@ -20,7 +20,7 @@ const useCases = [
   },
   {
     id: 'agencies',
-    icon: Building2,
+    emoji: '🚀',
     label: 'agencies',
     tagline: 'who need to scale results.',
     stat: null,
@@ -33,7 +33,7 @@ const useCases = [
   },
   {
     id: 'brands',
-    icon: Megaphone,
+    emoji: '🎯',
     label: 'brands',
     tagline: 'that want real conversions.',
     stat: null,
@@ -86,17 +86,10 @@ export default function UseCases() {
                 <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
                   {/* Inline photo + text */}
                   <div className="flex items-center gap-4 md:gap-5 flex-1 min-w-0">
-                    {/* Icon */}
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 3 }}
-                      className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex-shrink-0 flex items-center justify-center group-hover:scale-105 transition-all ${
-                        uc.color.includes('yellow') ? 'bg-yellow-400/[0.08] ring-2 ring-yellow-400/10' :
-                        uc.color.includes('sky') ? 'bg-sky-400/[0.08] ring-2 ring-sky-400/10' :
-                        'bg-emerald-400/[0.08] ring-2 ring-emerald-400/10'
-                      }`}
-                    >
-                      <uc.icon className={`w-7 h-7 ${uc.color}`} />
-                    </motion.div>
+                    {/* Emoji */}
+                    <span className="text-3xl md:text-4xl flex-shrink-0 group-hover:scale-110 transition-transform">
+                      {uc.emoji}
+                    </span>
 
                     {/* Typography */}
                     <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-snug">
