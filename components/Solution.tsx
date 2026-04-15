@@ -81,7 +81,7 @@ export default function WhatWeDo() {
           </p>
         </motion.div>
 
-        {/* ── Globe with orbiting platforms ── */}
+        {/* ── Logo hub with orbiting platforms ── */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -89,6 +89,82 @@ export default function WhatWeDo() {
           transition={{ duration: 0.8 }}
           className="relative mx-auto mb-20 w-[340px] h-[340px] md:w-[440px] md:h-[440px]"
         >
+          {/* Scrolling photo background */}
+          <div className="absolute -inset-8 md:-inset-12 overflow-hidden rounded-full opacity-[0.07] flex flex-col justify-center">
+            {/* Row 1 → right */}
+            <motion.div
+              animate={{ x: [0, -600] }}
+              transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+              className="flex gap-2 mb-2"
+            >
+              {[...Array(3)].map((_, r) => (
+                <div key={r} className="flex gap-2 flex-shrink-0">
+                  {['/creators/creator-1.jpg', '/creators/creator-2.jpg', '/creators/creator-3.jpg', '/creators/creator-4.jpg', '/creators/creator-5.jpg', '/creators/creator-6.jpg'].map((src, i) => (
+                    <img key={`${r}-${i}`} src={src} alt="" className="w-20 h-14 object-cover rounded-lg flex-shrink-0" />
+                  ))}
+                </div>
+              ))}
+            </motion.div>
+            {/* Row 2 ← left */}
+            <motion.div
+              animate={{ x: [-600, 0] }}
+              transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+              className="flex gap-2 mb-2"
+            >
+              {[...Array(3)].map((_, r) => (
+                <div key={r} className="flex gap-2 flex-shrink-0">
+                  {['/creators/creator-4.jpg', '/creators/creator-6.jpg', '/creators/creator-1.jpg', '/creators/creator-5.jpg', '/creators/creator-3.jpg', '/creators/creator-2.jpg'].map((src, i) => (
+                    <img key={`${r}-${i}`} src={src} alt="" className="w-20 h-14 object-cover rounded-lg flex-shrink-0" />
+                  ))}
+                </div>
+              ))}
+            </motion.div>
+            {/* Row 3 → right */}
+            <motion.div
+              animate={{ x: [0, -600] }}
+              transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
+              className="flex gap-2 mb-2"
+            >
+              {[...Array(3)].map((_, r) => (
+                <div key={r} className="flex gap-2 flex-shrink-0">
+                  {['/creators/creator-3.jpg', '/creators/creator-1.jpg', '/creators/creator-6.jpg', '/creators/creator-2.jpg', '/creators/creator-4.jpg', '/creators/creator-5.jpg'].map((src, i) => (
+                    <img key={`${r}-${i}`} src={src} alt="" className="w-20 h-14 object-cover rounded-lg flex-shrink-0" />
+                  ))}
+                </div>
+              ))}
+            </motion.div>
+            {/* Row 4 ← left */}
+            <motion.div
+              animate={{ x: [-600, 0] }}
+              transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+              className="flex gap-2 mb-2"
+            >
+              {[...Array(3)].map((_, r) => (
+                <div key={r} className="flex gap-2 flex-shrink-0">
+                  {['/creators/creator-5.jpg', '/creators/creator-3.jpg', '/creators/creator-2.jpg', '/creators/creator-6.jpg', '/creators/creator-1.jpg', '/creators/creator-4.jpg'].map((src, i) => (
+                    <img key={`${r}-${i}`} src={src} alt="" className="w-20 h-14 object-cover rounded-lg flex-shrink-0" />
+                  ))}
+                </div>
+              ))}
+            </motion.div>
+            {/* Row 5 → right */}
+            <motion.div
+              animate={{ x: [0, -600] }}
+              transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
+              className="flex gap-2 mb-2"
+            >
+              {[...Array(3)].map((_, r) => (
+                <div key={r} className="flex gap-2 flex-shrink-0">
+                  {['/creators/creator-2.jpg', '/creators/creator-5.jpg', '/creators/creator-4.jpg', '/creators/creator-1.jpg', '/creators/creator-6.jpg', '/creators/creator-3.jpg'].map((src, i) => (
+                    <img key={`${r}-${i}`} src={src} alt="" className="w-20 h-14 object-cover rounded-lg flex-shrink-0" />
+                  ))}
+                </div>
+              ))}
+            </motion.div>
+            {/* Radial fade to mask edges */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle,transparent_30%,#0A0A0A_70%)]" />
+          </div>
+
           {/* Ambient glow */}
           <div className="absolute inset-0 bg-yellow-400/[0.04] rounded-full blur-3xl scale-125" />
 
