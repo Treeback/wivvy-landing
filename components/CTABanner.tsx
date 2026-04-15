@@ -2,7 +2,19 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Cpu } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+
+const marqueeRow1 = [
+  'Hook Analysis', 'Pattern Matching', 'Hindi NLP', 'Trend Detection',
+  '3-Second Retention Scoring', 'Cross-Platform Tracking', 'Cultural Signal Processing',
+  'Engagement Prediction', 'Format Clustering', 'Emotion Mapping',
+]
+
+const marqueeRow2 = [
+  'Creator Benchmarking', 'Niche Intelligence', 'Real-Time Monitoring', 'Geopolitical Triggers',
+  'Story Arc Detection', 'Audience Sentiment', 'Virality Scoring', 'Content DNA Extraction',
+  'Multi-Language Analysis', 'Delivery Style Classification',
+]
 
 export default function CTABanner() {
   const [email, setEmail] = useState('')
@@ -19,33 +31,89 @@ export default function CTABanner() {
   return (
     <>
       {/* AI Section */}
-      <section className="py-24 relative border-t border-white/[0.04]">
-        <div className="container mx-auto px-6">
+      <section className="py-24 relative border-t border-white/[0.04] overflow-hidden">
+        <div className="container mx-auto px-6 mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
+            className="max-w-3xl"
           >
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-sky-400/10 border border-sky-400/20 mb-8">
-              <Cpu className="w-7 h-7 text-sky-400" />
-            </div>
-
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Powered by AI. Driven by patterns.
+            <p className="text-sm text-gray-500 uppercase tracking-widest mb-4">The engine</p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
+              Powered by AI.
+              <br />
+              <span className="text-gray-500">Driven by patterns.</span>
             </h2>
-
-            <p className="text-lg text-gray-400 leading-relaxed">
-              We use AI to analyze thousands of videos, but what we deliver is clarity — real
-              insights into what works, what doesn&apos;t, and why.
+            <p className="text-gray-400 text-lg max-w-2xl">
+              We don&apos;t use generic AI. We train specialized models on Indian content —
+              Hindi hooks, regional storytelling, cultural context — so the insights
+              are specific, not surface-level.
             </p>
           </motion.div>
+        </div>
+
+        {/* Marquee rows */}
+        <div className="space-y-4 py-4">
+          {/* Row 1 → right */}
+          <div className="relative overflow-hidden">
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+            <motion.div
+              animate={{ x: [0, -1600] }}
+              transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+              className="flex gap-4 whitespace-nowrap"
+            >
+              {[...marqueeRow1, ...marqueeRow1, ...marqueeRow1].map((item, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center px-5 py-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] text-sm text-gray-400 font-medium"
+                >
+                  {item}
+                </span>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Row 2 ← left */}
+          <div className="relative overflow-hidden">
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+            <motion.div
+              animate={{ x: [-1600, 0] }}
+              transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}
+              className="flex gap-4 whitespace-nowrap"
+            >
+              {[...marqueeRow2, ...marqueeRow2, ...marqueeRow2].map((item, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center px-5 py-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] text-sm text-gray-400 font-medium"
+                >
+                  {item}
+                </span>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Closing statement */}
+        <div className="container mx-auto px-6 mt-16">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-center"
+          >
+            <span className="text-gray-600">&ldquo;</span>
+            <span className="text-white">This is not a tool. </span>
+            <span className="text-gradient-yellow">This is an advantage.</span>
+            <span className="text-gray-600">&rdquo;</span>
+          </motion.p>
         </div>
       </section>
 
       {/* Final CTA */}
       <section className="py-24 relative" id="cta">
-        {/* Background glow */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-yellow-500/[0.04] rounded-full blur-3xl" />
         </div>
