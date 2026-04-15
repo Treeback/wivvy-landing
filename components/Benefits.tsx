@@ -21,7 +21,7 @@ const useCases = [
   },
   {
     id: 'agencies',
-    image: '/creators/creator-1.jpg',
+    image: '/creators/agency.jpg',
     label: 'agencies',
     tagline: 'who need to scale results.',
     stat: '67%',
@@ -34,7 +34,7 @@ const useCases = [
   },
   {
     id: 'brands',
-    image: '/creators/creator-4.jpg',
+    image: '/creators/brand.jpg',
     label: 'brands',
     tagline: 'that want real conversions.',
     stat: '4.2x',
