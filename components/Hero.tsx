@@ -102,7 +102,7 @@ const Hero = () => {
               <span className="text-white">We decoded</span>
               <br />
               <span className="text-white">what makes </span>
-              <span className="text-gradient-yellow">Indian</span>
+              <span className="text-gradient-yellow">Indian </span><span className="inline-block align-middle" aria-label="India flag">🇮🇳</span>
               <br />
               <span className="text-gradient-yellow">content go viral.</span>
             </motion.h1>
