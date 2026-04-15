@@ -30,12 +30,12 @@ function XIcon({ className, style }: { className?: string; style?: React.CSSProp
 
 /* ── Orbiting nodes ── */
 const orbitNodes = [
-  { id: 'yt', Icon: YoutubeIcon, label: 'YouTube', color: '#f87171', angle: 0 },
-  { id: 'ig', Icon: InstagramIcon, label: 'Instagram', color: '#f472b6', angle: 60 },
-  { id: 'x', Icon: XIcon, label: 'X', color: '#38bdf8', angle: 120 },
-  { id: 'news', label: 'News', color: '#fbbf24', angle: 180, emoji: '📰' },
-  { id: 'culture', label: 'Culture', color: '#fb923c', angle: 240, emoji: '🎭' },
-  { id: 'trends', label: 'Trends', color: '#34d399', angle: 300, emoji: '📈' },
+  { id: 'yt', Icon: YoutubeIcon, label: 'YouTube', color: '#f87171', angle: 0, signals: ['8.2M views', 'ये गलती मत करो', 'Authority hook'] },
+  { id: 'ig', Icon: InstagramIcon, label: 'Instagram', color: '#f472b6', angle: 60, signals: ['রিলস ট্রেন্ডিং', '+127% hooks', 'நம்பிக்கை இழப்பு'] },
+  { id: 'x', Icon: XIcon, label: 'X', color: '#38bdf8', angle: 120, signals: ['#बजट2025', 'ಟ್ರೆಂಡಿಂಗ್', 'Sentiment shift'] },
+  { id: 'news', label: 'News', color: '#fbbf24', angle: 180, emoji: '📰', signals: ['बजट 2025', 'RBI दर कटौती', 'ఎన్నికల తరంగం'] },
+  { id: 'culture', label: 'Culture', color: '#fb923c', angle: 240, emoji: '🎭', signals: ['IPL ফাইনাল', 'बॉलीवुड ट्रेलर', 'ఉత్సవ సీజన్'] },
+  { id: 'trends', label: 'Trends', color: '#34d399', angle: 300, emoji: '📈', signals: ['+203% வளர்ச்சி', 'Fast cuts', 'POV ಫಾರ್ಮ್ಯಾಟ್'] },
 ]
 
 const steps = [
@@ -174,24 +174,33 @@ export default function WhatWeDo() {
                   <span className="text-[10px] text-gray-500 font-medium">{node.label}</span>
                 </motion.div>
 
-                {/* Particle to center */}
-                <motion.div
-                  className="absolute w-1.5 h-1.5 rounded-full top-1/2 left-1/2"
-                  style={{ backgroundColor: node.color }}
-                  animate={{
-                    x: [0, (50 - x) * 3.4],
-                    y: [0, (50 - y) * 3.4],
-                    opacity: [0.7, 0],
-                    scale: [1, 0.3],
-                  }}
-                  transition={{
-                    duration: 2,
-                    delay: 1 + i * 0.4,
-                    repeat: Infinity,
-                    repeatDelay: 2 + i * 0.3,
-                    ease: 'easeIn',
-                  }}
-                />
+                {/* Floating text signals to center */}
+                {node.signals.map((signal, si) => (
+                  <motion.div
+                    key={si}
+                    className="absolute top-1/2 left-1/2 pointer-events-none whitespace-nowrap"
+                    animate={{
+                      x: [0, (50 - x) * 3.4],
+                      y: [0, (50 - y) * 3.4],
+                      opacity: [0.9, 0],
+                      scale: [1, 0.4],
+                    }}
+                    transition={{
+                      duration: 3,
+                      delay: 1.5 + i * 0.6 + si * 2.5,
+                      repeat: Infinity,
+                      repeatDelay: node.signals.length * 2.5 - 3 + 1,
+                      ease: 'easeIn',
+                    }}
+                  >
+                    <span
+                      className="text-[11px] font-medium"
+                      style={{ color: node.color }}
+                    >
+                      {signal}
+                    </span>
+                  </motion.div>
+                ))}
               </motion.div>
             )
           })}
