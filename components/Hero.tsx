@@ -90,7 +90,7 @@ const Hero = () => {
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] text-gray-400 text-sm mb-8"
             >
               <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse" />
-              Analyzing 10,000+ viral Indian videos
+              Powered by specialized AI models trained on Indian content
             </motion.div>
 
             <motion.h1
@@ -113,8 +113,8 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.35 }}
               className="text-base lg:text-lg text-gray-400 mb-10 leading-relaxed max-w-lg"
             >
-              We analyze thousands of viral videos across Indian creators to
-              uncover repeatable patterns in hooks, storytelling, and engagement
+              We train specialized AI models on thousands of viral Indian videos
+              to uncover repeatable patterns in hooks, storytelling, and engagement
               — so you can create content that actually performs.
             </motion.p>
 
