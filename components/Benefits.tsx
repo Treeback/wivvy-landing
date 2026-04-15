@@ -1,140 +1,92 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Target, MessageSquare, Users, TrendingUp, Zap, Shield } from 'lucide-react'
+import { Video, Building2, BarChart3 } from 'lucide-react'
 
-const Benefits = () => {
-  const benefits = [
-    {
-      icon: Target,
-      title: "Precision targeting",
-      description: "Reach the right users at the perfect emotional moment for maximum impact",
-      stat: "47%",
-      statLabel: "higher engagement"
-    },
-    {
-      icon: MessageSquare,
-      title: "Resonant messaging",
-      description: "Craft copy that speaks directly to users' underlying psychological needs",
-      stat: "3.2x",
-      statLabel: "better conversion"
-    },
-    {
-      icon: Users,
-      title: "Deep understanding",
-      description: "Go beyond demographics to understand core motivations and emotional triggers",
-      stat: "85%",
-      statLabel: "accuracy rate"
-    },
-    {
-      icon: TrendingUp,
-      title: "Predictive insights",
-      description: "Anticipate user behavior and needs before they even articulate them",
-      stat: "62%",
-      statLabel: "reduced churn"
-    },
-    {
-      icon: Zap,
-      title: "Instant decisions",
-      description: "Make confident product and marketing choices backed by emotional data",
-      stat: "5x",
-      statLabel: "faster insights"
-    },
-    {
-      icon: Shield,
-      title: "Ethical approach",
-      description: "Privacy-first methodology that respects user data while delivering insights",
-      stat: "100%",
-      statLabel: "GDPR compliant"
-    }
-  ]
+const useCases = [
+  {
+    icon: Video,
+    title: 'Creators',
+    tagline: 'Make better videos faster',
+    description: 'Stop guessing what works. See the exact patterns behind viral content in your niche and apply them to your next video.',
+    color: 'yellow',
+    iconBg: 'bg-yellow-400/10',
+    iconColor: 'text-yellow-400',
+    borderColor: 'border-yellow-400/20',
+  },
+  {
+    icon: Building2,
+    title: 'Agencies',
+    tagline: 'Scale performance across creators',
+    description: 'Manage multiple creators with data-backed strategies. Know what formats, hooks, and structures drive results — before you publish.',
+    color: 'sky',
+    iconBg: 'bg-sky-400/10',
+    iconColor: 'text-sky-400',
+    borderColor: 'border-sky-400/20',
+  },
+  {
+    icon: BarChart3,
+    title: 'Brands',
+    tagline: 'Understand what actually converts',
+    description: 'Go beyond vanity metrics. Understand the content patterns that drive real engagement and conversion with Indian audiences.',
+    color: 'emerald',
+    iconBg: 'bg-emerald-400/10',
+    iconColor: 'text-emerald-400',
+    borderColor: 'border-emerald-400/20',
+  },
+]
 
+export default function UseCases() {
   return (
-    <section className="py-24 relative bg-gray-50" id="benefits">
+    <section className="py-24 relative" id="use-cases">
       <div className="container mx-auto px-6">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Transform data into growth
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+            Built for creators who want to win
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Leading teams use Wivvy to build deeper connections and drive meaningful results
-          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {benefits.map((benefit, index) => (
+        {/* Cards */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {useCases.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100"
+              transition={{ delay: index * 0.15, duration: 0.5 }}
+              className="group"
             >
-              <div className="flex justify-between items-start mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl flex items-center justify-center">
-                  <benefit.icon className="w-6 h-6 text-indigo-600" />
+              <div className="glass-card glass-card-hover p-8 h-full relative overflow-hidden">
+                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl ${item.iconBg} border ${item.borderColor} mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <item.icon className={`w-7 h-7 ${item.iconColor}`} />
                 </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
-                    {benefit.stat}
-                  </div>
-                  <div className="text-xs text-gray-500 uppercase tracking-wider">
-                    {benefit.statLabel}
-                  </div>
-                </div>
+
+                <h3 className="text-2xl font-bold text-white mb-1">
+                  {item.title}
+                </h3>
+                <p className={`text-sm font-medium mb-4 ${
+                  item.color === 'yellow' ? 'text-yellow-400' :
+                  item.color === 'sky' ? 'text-sky-400' :
+                  'text-emerald-400'
+                }`}>
+                  {item.tagline}
+                </p>
+
+                <p className="text-gray-400 leading-relaxed">
+                  {item.description}
+                </p>
               </div>
-              
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                {benefit.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {benefit.description}
-              </p>
             </motion.div>
           ))}
         </div>
-
-        {/* Enterprise callout */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
-          className="mt-20"
-        >
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-12 text-center text-white max-w-5xl mx-auto">
-            <h3 className="text-3xl font-bold mb-4">
-              Enterprise-ready from day one
-            </h3>
-            <p className="text-gray-300 text-lg mb-8 max-w-3xl mx-auto">
-              Bank-level security, SOC 2 compliance, and dedicated support for teams at scale
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3 border border-white/20">
-                <span className="font-medium">SOC 2 Type II</span>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3 border border-white/20">
-                <span className="font-medium">GDPR Compliant</span>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3 border border-white/20">
-                <span className="font-medium">99.9% Uptime SLA</span>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3 border border-white/20">
-                <span className="font-medium">24/7 Support</span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   )
 }
-
-export default Benefits

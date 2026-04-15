@@ -1,273 +1,303 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Play, CheckCircle2, Sparkles, Heart } from 'lucide-react'
-import Button from './ui/Button'
-import { useState } from 'react'
+import { ArrowRight, Play, Eye, TrendingUp } from 'lucide-react'
+import Image from 'next/image'
+
+const creators = [
+  {
+    image: '/creators/creator-2.jpg',
+    name: 'Rohit',
+    niche: 'Finance',
+    tag: '+2.3x retention',
+    tagColor: 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20',
+    glowColor: 'rgba(250,204,21,0.15)',
+    views: '8.4M',
+  },
+  {
+    image: '/creators/creator-4.jpg',
+    name: 'Priya',
+    niche: 'Storytelling',
+    tag: 'Hook: Mistake-based',
+    tagColor: 'text-sky-400 bg-sky-400/10 border-sky-400/20',
+    glowColor: 'rgba(56,189,248,0.15)',
+    views: '5.1M',
+  },
+  {
+    image: '/creators/creator-1.jpg',
+    name: 'Arjun',
+    niche: 'Tech',
+    tag: 'Trending format',
+    tagColor: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20',
+    glowColor: 'rgba(52,211,153,0.15)',
+    views: '3.8M',
+  },
+  {
+    image: '/creators/creator-3.jpg',
+    name: 'Karthik',
+    niche: 'Motivation',
+    tag: '+4.1x shares',
+    tagColor: 'text-pink-400 bg-pink-400/10 border-pink-400/20',
+    glowColor: 'rgba(244,114,182,0.15)',
+    views: '12.7M',
+  },
+  {
+    image: '/creators/creator-5.jpg',
+    name: 'Ananya',
+    niche: 'Lifestyle',
+    tag: 'Pattern detected',
+    tagColor: 'text-purple-400 bg-purple-400/10 border-purple-400/20',
+    glowColor: 'rgba(192,132,252,0.15)',
+    views: '6.9M',
+  },
+  {
+    image: '/creators/creator-6.jpg',
+    name: 'Meera',
+    niche: 'Growth',
+    tag: '1.9x engagement',
+    tagColor: 'text-orange-400 bg-orange-400/10 border-orange-400/20',
+    glowColor: 'rgba(251,146,60,0.15)',
+    views: '4.2M',
+  },
+]
+
+// Floating animation configs per column (different speed/amplitude)
+const columnFloat = [
+  { y: [0, -12, 0], duration: 5.5 },
+  { y: [0, 10, 0], duration: 6.5 },
+  { y: [0, -8, 0], duration: 7 },
+]
 
 const Hero = () => {
-  const [email, setEmail] = useState('')
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
-
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle email submission
-    console.log('Email submitted:', email)
-  }
-
-  const features = [
-    "Real-time emotional analytics",
-    "Privacy-first approach", 
-    "No code required"
-  ]
-
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Professional gradient mesh background */}
+    <section className="relative min-h-screen flex items-center pt-20 pb-12 overflow-hidden">
+      {/* Background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-50/40 via-white to-white" />
-        <div className="absolute top-0 -left-4 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
-        <div className="absolute top-0 -right-4 w-96 h-96 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
-        <div className="absolute -bottom-8 left-20 w-96 h-96 bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
+        <div className="absolute inset-0 bg-[#0A0A0A]" />
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-yellow-500/[0.03] rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-sky-500/[0.03] rounded-full blur-3xl translate-y-1/3 -translate-x-1/3" />
       </div>
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            
-            {/* Main headline with better typography */}
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6"
-            >
-              <span className="text-gray-900">Turn user behavior</span>
-              <br />
-              <span className="text-gray-900">into </span>
-              <span className="relative">
-                <span className="relative z-10 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent animate-gradient">
-                  emotional insights
-                </span>
-                <svg
-                  className="absolute -bottom-2 left-0 w-full"
-                  viewBox="0 0 300 12"
-                  fill="none"
-                >
-                  <motion.path
-                    initial={{ pathLength: 0 }}
-                    animate={{ 
-                      pathLength: 1,
-                      d: [
-                        "M2 9C2 9 75 3 150 7C225 11 298 5 298 5",
-                        "M2 5C2 5 75 11 150 7C225 3 298 9 298 9",
-                        "M2 9C2 9 75 3 150 7C225 11 298 5 298 5"
-                      ]
-                    }}
-                    transition={{ 
-                      pathLength: { duration: 1, delay: 0.8 },
-                      d: {
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 1.8
-                      }
-                    }}
-                    stroke="url(#gradient)"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                  />
-                  <defs>
-                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#6366f1" />
-                      <stop offset="50%" stopColor="#a855f7" />
-                      <stop offset="100%" stopColor="#6366f1" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-                {/* Multiple floating emotion emojis */}
-                <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-24 h-20">
-                  {['😊', '😔', '😍', '😤', '🤔', '😰', '😎', '😞', '🤩', '😫', '😌', '🙄', '🥰', '😠', '😄', '😕'].map((emoji, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute left-1/2 top-1/2 text-lg"
-                      initial={{ scale: 0, opacity: 0, x: -9, y: -9 }}
-                      animate={{ 
-                        scale: [0, 1.2, 1.2, 0],
-                        opacity: [0, 1, 1, 0],
-                        x: [-9, -9 + (i % 3 - 1) * 25, -9 + (i % 3 - 1) * 35, -9],
-                        y: [-9, -9 - 20, -9 - 40, -9]
-                      }}
-                      transition={{ 
-                        duration: 3,
-                        repeat: Infinity,
-                        delay: i * 0.3,
-                        ease: "easeOut",
-                        times: [0, 0.3, 0.7, 1]
-                      }}
-                    >
-                      {emoji}
-                    </motion.div>
-                  ))}
-                </div>
-              </span>
-            </motion.h1>
-            
-            {/* Subheading with better readability */}
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed"
-            >
-              Wivvy decodes the psychology behind every click, helping you build products 
-              and experiences that truly resonate with your users' emotions.
-            </motion.p>
 
-            {/* Feature pills */}
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
+
+          {/* Left: Copy */}
+          <div className="max-w-xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap items-center justify-center gap-4 mb-10"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] text-gray-400 text-sm mb-8"
             >
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-center gap-2 text-sm text-gray-600">
-                  <CheckCircle2 className="w-4 h-4 text-green-500" />
-                  <span>{feature}</span>
-                </div>
-              ))}
+              <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse" />
+              Analyzing 10,000+ viral Indian videos
             </motion.div>
 
-            {/* CTA Section - Email first approach */}
-            <motion.div 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col items-center gap-4"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.05] mb-6"
             >
-              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3 w-full max-w-md">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your work email"
-                  className="flex-1 px-5 py-3.5 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all text-base"
-                  required
-                />
-                <Button 
-                  type="submit"
-                  className="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 transition-all duration-200 whitespace-nowrap group"
-                >
-                  Start Free Trial
-                  <ArrowRight className="ml-2 w-4 h-4 inline-block transition-transform group-hover:translate-x-1" />
-                </Button>
-              </form>
-              
-              <button
-                onClick={() => setIsVideoModalOpen(true)}
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group"
+              <span className="text-white">We decoded</span>
+              <br />
+              <span className="text-white">what makes </span>
+              <span className="text-gradient-yellow">Indian</span>
+              <br />
+              <span className="text-gradient-yellow">content go viral.</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="text-base lg:text-lg text-gray-400 mb-10 leading-relaxed max-w-lg"
+            >
+              We analyze thousands of viral videos across Indian creators to
+              uncover repeatable patterns in hooks, storytelling, and engagement
+              — so you can create content that actually performs.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex flex-col sm:flex-row items-start gap-4"
+            >
+              <a
+                href="#insights"
+                className="group inline-flex items-center gap-2 bg-white text-black font-semibold px-7 py-3.5 rounded-xl hover:bg-gray-100 transition-all shadow-lg shadow-white/10"
               >
-                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                  <Play className="w-4 h-4 ml-0.5" />
-                </div>
-                <span className="font-medium">Watch 2-min demo</span>
-              </button>
+                Explore Insights
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
+              <a
+                href="#how-it-works"
+                className="group inline-flex items-center gap-2 border border-white/[0.15] text-gray-300 font-medium px-7 py-3.5 rounded-xl hover:bg-white/5 hover:border-white/[0.25] transition-all"
+              >
+                <Play className="w-4 h-4" />
+                See How It Works
+              </a>
             </motion.div>
+          </div>
 
-          </motion.div>
-
-          {/* Floating UI elements for depth */}
+          {/* Right: Creator Grid with floating columns */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="absolute -right-20 top-20 hidden xl:block"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="relative hidden lg:block"
           >
-            <div className="bg-white rounded-2xl shadow-2xl p-6 transform rotate-6 hover:rotate-3 transition-transform">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-sm font-medium text-gray-700">Live emotional data</span>
-              </div>
-              <div className="space-y-2">
-                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div className="h-full w-3/4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" />
-                </div>
-                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div className="h-full w-1/2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
-                </div>
-              </div>
+            <div className="grid grid-cols-3 gap-3">
+              {/* Column 1 */}
+              <motion.div
+                animate={{ y: columnFloat[0].y }}
+                transition={{ duration: columnFloat[0].duration, repeat: Infinity, ease: 'easeInOut' }}
+                className="space-y-3 pt-8"
+              >
+                <CreatorCard creator={creators[0]} index={0} />
+                <CreatorCard creator={creators[3]} index={3} />
+              </motion.div>
+              {/* Column 2 */}
+              <motion.div
+                animate={{ y: columnFloat[1].y }}
+                transition={{ duration: columnFloat[1].duration, repeat: Infinity, ease: 'easeInOut' }}
+                className="space-y-3"
+              >
+                <CreatorCard creator={creators[1]} index={1} />
+                <CreatorCard creator={creators[4]} index={4} />
+              </motion.div>
+              {/* Column 3 */}
+              <motion.div
+                animate={{ y: columnFloat[2].y }}
+                transition={{ duration: columnFloat[2].duration, repeat: Infinity, ease: 'easeInOut' }}
+                className="space-y-3 pt-16"
+              >
+                <CreatorCard creator={creators[2]} index={2} />
+                <CreatorCard creator={creators[5]} index={5} />
+              </motion.div>
             </div>
           </motion.div>
 
+          {/* Mobile: Horizontal scroll */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="absolute -left-20 bottom-20 hidden xl:block"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="lg:hidden -mx-6 px-6"
           >
-            <div className="bg-white rounded-2xl shadow-2xl p-6 transform -rotate-6 hover:-rotate-3 transition-transform">
-              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-1">
-                87%
-              </div>
-              <div className="text-sm text-gray-600">Accuracy in emotion detection</div>
+            <div className="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+              {creators.slice(0, 4).map((creator, i) => (
+                <div key={i} className="flex-shrink-0 w-40 snap-start">
+                  <CreatorCard creator={creator} index={i} />
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Video Modal */}
-      {isVideoModalOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6"
-          onClick={() => setIsVideoModalOpen(false)}
-        >
-          <motion.div
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            className="bg-white rounded-2xl p-2 shadow-2xl max-w-4xl w-full"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="aspect-video bg-gray-900 rounded-lg flex items-center justify-center">
-              <Play className="w-16 h-16 text-white" />
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-
-      <style jsx>{`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-      `}</style>
     </section>
+  )
+}
+
+function CreatorCard({ creator, index }: { creator: typeof creators[0]; index: number }) {
+  // Stagger entrance directions for variety
+  const entranceVariants = [
+    { x: -30, y: 20, rotate: -3 },
+    { x: 0, y: 40, rotate: 0 },
+    { x: 30, y: 20, rotate: 3 },
+    { x: -20, y: 30, rotate: -2 },
+    { x: 10, y: 35, rotate: 1 },
+    { x: 20, y: 25, rotate: 2 },
+  ]
+  const entrance = entranceVariants[index]
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, ...entrance, scale: 0.85 }}
+      animate={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
+      transition={{
+        duration: 0.7,
+        delay: 0.5 + index * 0.12,
+        type: 'spring',
+        stiffness: 80,
+        damping: 15,
+      }}
+      whileHover={{
+        y: -6,
+        scale: 1.03,
+        boxShadow: `0 20px 40px -12px ${creator.glowColor}`,
+        transition: { duration: 0.3, ease: 'easeOut' },
+      }}
+      className="group relative rounded-2xl overflow-hidden aspect-[3/4] cursor-pointer"
+    >
+      {/* Image */}
+      <Image
+        src={creator.image}
+        alt={creator.name}
+        fill
+        className="object-cover transition-transform duration-700 group-hover:scale-110"
+        sizes="(max-width: 1024px) 160px, 200px"
+      />
+
+      {/* Dark gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/10" />
+
+      {/* Hover glow overlay */}
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+
+      {/* Scan line effect via CSS */}
+      <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div
+          className="absolute left-0 right-0 h-[2px]"
+          style={{
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
+            animation: 'scanline 2.5s ease-in-out infinite',
+          }}
+        />
+      </div>
+
+      {/* Hover border glow ring */}
+      <div
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          boxShadow: `inset 0 0 0 1.5px ${creator.glowColor}, 0 0 20px ${creator.glowColor}`,
+        }}
+      />
+
+      {/* Top: Data tag with shimmer */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, y: -10 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ delay: 1 + index * 0.12, type: 'spring', stiffness: 120 }}
+        className="absolute top-2.5 left-2.5 right-2.5"
+      >
+        <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border backdrop-blur-md text-[11px] font-semibold tracking-wide ${creator.tagColor}`}>
+          <TrendingUp className="w-3 h-3" />
+          {creator.tag}
+        </div>
+      </motion.div>
+
+      {/* Bottom: Info with slide-up on hover */}
+      <div className="absolute bottom-0 left-0 right-0 p-3">
+        <div className="flex items-end justify-between">
+          <div>
+            <p className="text-white font-semibold text-sm leading-tight">{creator.name}</p>
+            <p className="text-gray-400 text-xs">{creator.niche}</p>
+          </div>
+          <motion.div
+            className="flex items-center gap-1 text-white/80"
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.2 + index * 0.1 }}
+          >
+            <Eye className="w-3 h-3" />
+            <span className="text-xs font-medium">{creator.views}</span>
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
   )
 }
 

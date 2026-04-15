@@ -1,31 +1,29 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import ProblemStatement from '@/components/ProblemStatement'
+import Solution from '@/components/Solution'
 import TransformationExamples from '@/components/TransformationExamples'
-import PersonaIntelligence from '@/components/PersonaIntelligence'
 import Benefits from '@/components/Benefits'
-import Pricing from '@/components/Pricing'
 import CTABanner from '@/components/CTABanner'
 import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white relative overflow-hidden">
-      {/* Subtle geometric patterns */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.02]">
+    <main className="min-h-screen bg-[#0A0A0A] relative overflow-hidden">
+      {/* Subtle dot grid */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.03]">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgb(0 0 0 / 0.05) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px'
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255 255 255 / 0.15) 1px, transparent 1px)`,
+          backgroundSize: '32px 32px'
         }} />
       </div>
-      
+
       <Header />
       <Hero />
       <ProblemStatement />
-      <PersonaIntelligence />
+      <Solution />
       <TransformationExamples />
       <Benefits />
-      <Pricing />
       <CTABanner />
       <Footer />
     </main>

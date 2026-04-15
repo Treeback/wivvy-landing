@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 
 export const metadata: Metadata = {
-  title: 'Wivvy - Turn User Behavior into Emotional Insights',
-  description: 'The first analytics platform that understands emotions, not just events. Decode the psychology behind every click to build products that truly resonate with your users.',
-  keywords: 'emotional analytics, user behavior analysis, AI analytics, user psychology, conversion optimization, user experience analytics',
+  title: 'Wivvy - The Intelligence Layer Behind Viral Indian Content',
+  description: 'We analyze thousands of viral videos across Indian creators to uncover repeatable patterns in hooks, storytelling, and engagement — so you can create content that actually performs.',
+  keywords: 'viral content, Indian creators, content intelligence, video analytics, hook patterns, content strategy, creator tools, YouTube India, Instagram Reels, engagement patterns',
   authors: [{ name: 'Wivvy' }],
   creator: 'Wivvy',
   publisher: 'Wivvy',
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Wivvy - Turn User Behavior into Emotional Insights',
-    description: 'The first analytics platform that understands emotions, not just events. Decode the psychology behind every click.',
+    title: 'Wivvy - The Intelligence Layer Behind Viral Indian Content',
+    description: 'We decoded what makes Indian content go viral. Analyze patterns across 10,000+ videos to create content that actually performs.',
     url: 'https://wivvy.ai',
     siteName: 'Wivvy',
     images: [
@@ -27,16 +27,16 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Wivvy - Emotional Analytics Platform',
+        alt: 'Wivvy - Content Intelligence Platform',
       }
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Wivvy - Turn User Behavior into Emotional Insights',
-    description: 'The first analytics platform that understands emotions, not just events. Decode the psychology behind every click.',
+    title: 'Wivvy - The Intelligence Layer Behind Viral Indian Content',
+    description: 'We decoded what makes Indian content go viral. Analyze patterns across 10,000+ videos to create content that actually performs.',
     images: ['/og-image.png'],
     creator: '@wivvy',
   },
@@ -66,7 +66,7 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: '#6366f1',
+  themeColor: '#0A0A0A',
 }
 
 export default function RootLayout({
