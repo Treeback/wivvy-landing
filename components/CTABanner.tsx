@@ -148,7 +148,7 @@ export default function CTABanner() {
               className="flex items-center justify-center gap-3 mb-10"
             >
               <div className="flex -space-x-3">
-                {['/creators/creator-2.jpg', '/creators/creator-4.jpg', '/creators/creator-1.jpg', '/creators/creator-3.jpg'].map((src, i) => (
+                {['/creators/hero-1.jpg', '/creators/hero-4.jpg', '/creators/hero-2.jpg', '/creators/hero-6.jpg'].map((src, i) => (
                   <img
                     key={i}
                     src={src}
