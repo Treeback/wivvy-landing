@@ -46,18 +46,6 @@ const Footer = () => {
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-white font-semibold text-sm uppercase tracking-wider">Resources</h4>
-            <div className="space-y-2">
-              <Link href="/blog" className="block text-gray-500 hover:text-gray-300 text-sm transition-colors">
-                Blog
-              </Link>
-              <Link href="/community" className="block text-gray-500 hover:text-gray-300 text-sm transition-colors">
-                Community
-              </Link>
-            </div>
-          </div>
-
-          <div className="space-y-4">
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider">Company</h4>
             <div className="space-y-2">
               <Link href="/about" className="block text-gray-500 hover:text-gray-300 text-sm transition-colors">
