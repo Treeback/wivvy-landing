@@ -1,88 +1,150 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Video, Building2, BarChart3 } from 'lucide-react'
+import React from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
+import { ArrowRight } from 'lucide-react'
 
 const useCases = [
   {
-    icon: Video,
-    title: 'Creators',
-    tagline: 'Make better videos faster',
-    description: 'Stop guessing what works. See the exact patterns behind viral content in your niche and apply them to your next video.',
-    color: 'yellow',
-    iconBg: 'bg-yellow-400/10',
-    iconColor: 'text-yellow-400',
-    borderColor: 'border-yellow-400/20',
+    id: 'creators',
+    image: '/creators/creator-2.jpg',
+    label: 'creators',
+    tagline: 'who want to stop guessing.',
+    stat: '12x',
+    statLabel: 'more views',
+    color: 'text-yellow-400',
+    statColor: 'text-yellow-400/60',
+    lineColor: 'bg-yellow-400/20',
+    detail: 'Rohit went from 40K to 500K views per video. He didn\u2019t change his niche. He changed his hooks \u2014 using patterns we surfaced from 42 similar creators who were already winning.',
+    cta: 'creators',
   },
   {
-    icon: Building2,
-    title: 'Agencies',
-    tagline: 'Scale performance across creators',
-    description: 'Manage multiple creators with data-backed strategies. Know what formats, hooks, and structures drive results — before you publish.',
-    color: 'sky',
-    iconBg: 'bg-sky-400/10',
-    iconColor: 'text-sky-400',
-    borderColor: 'border-sky-400/20',
+    id: 'agencies',
+    image: '/creators/creator-1.jpg',
+    label: 'agencies',
+    tagline: 'who need to scale results.',
+    stat: '67%',
+    statLabel: 'faster strategy',
+    color: 'text-sky-400',
+    statColor: 'text-sky-400/60',
+    lineColor: 'bg-sky-400/20',
+    detail: 'CreatorScale manages 25 Indian creators. Before Wivvy, each strategy was gut feel. Now they have auto-generated niche playbooks \u2014 and 3 creators crossed 1M subs in 6 months.',
+    cta: 'agencies',
   },
   {
-    icon: BarChart3,
-    title: 'Brands',
-    tagline: 'Understand what actually converts',
-    description: 'Go beyond vanity metrics. Understand the content patterns that drive real engagement and conversion with Indian audiences.',
-    color: 'emerald',
-    iconBg: 'bg-emerald-400/10',
-    iconColor: 'text-emerald-400',
-    borderColor: 'border-emerald-400/20',
+    id: 'brands',
+    image: '/creators/creator-4.jpg',
+    label: 'brands',
+    tagline: 'that want real conversions.',
+    stat: '4.2x',
+    statLabel: 'ROAS',
+    color: 'text-emerald-400',
+    statColor: 'text-emerald-400/60',
+    lineColor: 'bg-emerald-400/20',
+    detail: 'A D2C skincare brand discovered that "myth-busting" hooks convert 4x better than product demos for Gen Z. They matched with the right creators and saw 4.2x ROAS in their first quarter.',
+    cta: 'brands',
   },
 ]
 
 export default function UseCases() {
+  const [expanded, setExpanded] = React.useState<string | null>(null)
+
   return (
     <section className="py-24 relative" id="use-cases">
       <div className="container mx-auto px-6">
-        {/* Section Header */}
+
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="max-w-4xl mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Built for creators who want to win
+          <p className="text-sm text-gray-500 uppercase tracking-widest mb-4">Who it&apos;s for</p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+            Built for people who are
+            <br />
+            <span className="text-gray-500">tired of guessing.</span>
           </h2>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {useCases.map((item, index) => (
+        {/* Use case rows — typography-driven */}
+        <div className="max-w-6xl space-y-0">
+          {useCases.map((uc, i) => (
             <motion.div
-              key={index}
+              key={uc.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.15, duration: 0.5 }}
-              className="group"
+              transition={{ delay: i * 0.1 }}
             >
-              <div className="glass-card glass-card-hover p-8 h-full relative overflow-hidden">
-                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl ${item.iconBg} border ${item.borderColor} mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <item.icon className={`w-7 h-7 ${item.iconColor}`} />
+              {/* Main row */}
+              <button
+                onClick={() => setExpanded(expanded === uc.id ? null : uc.id)}
+                className="w-full text-left group py-8 md:py-10 border-b border-white/[0.06] cursor-pointer"
+              >
+                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+                  {/* Inline photo + text */}
+                  <div className="flex items-center gap-4 md:gap-5 flex-1 min-w-0">
+                    {/* Avatar */}
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 3 }}
+                      className="w-14 h-14 md:w-16 md:h-16 rounded-2xl overflow-hidden flex-shrink-0 relative ring-2 ring-white/[0.06] group-hover:ring-white/[0.15] transition-all"
+                    >
+                      <Image src={uc.image} alt={uc.label} fill className="object-cover" sizes="64px" />
+                    </motion.div>
+
+                    {/* Typography */}
+                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-snug">
+                      <span className="text-white">For </span>
+                      <span className={`${uc.color}`}>{uc.label}</span>
+                      <span className="text-gray-500"> {uc.tagline}</span>
+                    </h3>
+                  </div>
+
+                  {/* Stat + arrow */}
+                  <div className="flex items-center gap-4 md:gap-6 pl-[4.5rem] md:pl-0">
+                    <div className="text-right">
+                      <span className={`text-3xl md:text-4xl font-black ${uc.color}`}>{uc.stat}</span>
+                      <p className="text-xs text-gray-600 uppercase tracking-wider">{uc.statLabel}</p>
+                    </div>
+                    <motion.div
+                      animate={{ rotate: expanded === uc.id ? 90 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="w-10 h-10 rounded-full border border-white/[0.08] flex items-center justify-center text-gray-500 group-hover:border-white/[0.15] group-hover:text-white transition-all flex-shrink-0"
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.div>
+                  </div>
                 </div>
+              </button>
 
-                <h3 className="text-2xl font-bold text-white mb-1">
-                  {item.title}
-                </h3>
-                <p className={`text-sm font-medium mb-4 ${
-                  item.color === 'yellow' ? 'text-yellow-400' :
-                  item.color === 'sky' ? 'text-sky-400' :
-                  'text-emerald-400'
-                }`}>
-                  {item.tagline}
-                </p>
-
-                <p className="text-gray-400 leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
+              {/* Expanded detail */}
+              <AnimatePresence>
+                {expanded === uc.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-8 pt-2 pl-[4.5rem] md:pl-[5.25rem] pr-4 max-w-3xl">
+                      <p className="text-gray-400 leading-relaxed mb-4">
+                        {uc.detail}
+                      </p>
+                      <a
+                        href="#cta"
+                        className={`inline-flex items-center gap-2 text-sm font-semibold ${uc.color} hover:opacity-80 transition-opacity`}
+                      >
+                        Request early access for {uc.cta}
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>
