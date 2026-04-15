@@ -113,45 +113,75 @@ export default function CTABanner() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 relative" id="cta">
+      <section className="py-32 md:py-40 relative overflow-hidden" id="cta">
+        {/* Ambient glow */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-yellow-500/[0.04] rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-yellow-500/[0.05] rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[400px] h-[400px] bg-sky-500/[0.03] rounded-full blur-3xl" />
         </div>
 
         <div className="container mx-auto px-6 relative">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Start creating with clarity
+            {/* Massive headline */}
+            <h2 className="text-5xl md:text-6xl lg:text-8xl font-black text-white mb-6 tracking-tight leading-[0.95]">
+              Start creating
+              <br />
+              <span className="text-gradient-yellow">with clarity.</span>
             </h2>
 
-            <p className="text-lg text-gray-400 mb-10 max-w-xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-500 mb-12 max-w-lg mx-auto">
               Join creators and teams who are no longer guessing what works.
             </p>
 
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-6">
+            {/* Creator avatars as social proof */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center justify-center gap-3 mb-10"
+            >
+              <div className="flex -space-x-3">
+                {['/creators/creator-2.jpg', '/creators/creator-4.jpg', '/creators/creator-1.jpg', '/creators/creator-3.jpg'].map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt=""
+                    className="w-9 h-9 rounded-full border-2 border-[#0A0A0A] object-cover"
+                  />
+                ))}
+              </div>
+              <p className="text-sm text-gray-500">
+                <span className="text-white font-medium">200+</span> on the waitlist
+              </p>
+            </motion.div>
+
+            {/* Email form */}
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto mb-4">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
-                className="flex-1 px-5 py-4 bg-white/[0.05] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-yellow-400/40 focus:outline-none focus:ring-2 focus:ring-yellow-400/10 transition-all text-base"
+                className="flex-1 px-6 py-4 bg-white/[0.05] border border-white/[0.1] rounded-2xl text-white placeholder-gray-500 focus:border-yellow-400/40 focus:outline-none focus:ring-2 focus:ring-yellow-400/10 transition-all text-base"
                 required
               />
               <button
                 type="submit"
-                className="group inline-flex items-center justify-center gap-2 bg-white text-black font-semibold px-8 py-4 rounded-xl hover:bg-gray-100 transition-all shadow-lg shadow-white/10 whitespace-nowrap"
+                className="group inline-flex items-center justify-center gap-2 bg-white text-black font-bold px-8 py-4 rounded-2xl hover:bg-gray-100 transition-all shadow-lg shadow-white/10 whitespace-nowrap text-base"
               >
                 {submitted ? 'You\'re in!' : 'Request Early Access'}
                 {!submitted && <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />}
               </button>
             </form>
 
-            {submitted && (
+            {submitted ? (
               <motion.p
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -159,6 +189,8 @@ export default function CTABanner() {
               >
                 Welcome to Wivvy. Check your inbox for next steps.
               </motion.p>
+            ) : (
+              <p className="text-xs text-gray-600">No spam. Early access is free.</p>
             )}
           </motion.div>
         </div>
