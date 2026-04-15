@@ -21,7 +21,7 @@ const useCases = [
   },
   {
     id: 'agencies',
-    icon: '/creators/agency.png',
+    icon: '/creators/agency.svg',
     label: 'agencies',
     tagline: 'who need to scale results.',
     stat: null,
