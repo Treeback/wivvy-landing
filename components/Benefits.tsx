@@ -34,7 +34,7 @@ const useCases = [
   },
   {
     id: 'brands',
-    icon: '/creators/brand.png',
+    icon: '/creators/brand.svg',
     label: 'brands',
     tagline: 'that want real conversions.',
     stat: null,

@@ -1,0 +1,22 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Bag -->
+    <path d="M20 22H44C45.1 22 46 22.9 46 24V46C46 48.2 44.2 50 42 50H22C19.8 50 18 48.2 18 46V24C18 22.9 18.9 22 20 22Z"/>
+
+    <!-- Handles -->
+    <path d="M25 22C25 18.1 28.1 15 32 15C35.9 15 39 18.1 39 22"/>
+    <path d="M25 22V26"/>
+    <path d="M39 22V26"/>
+
+    <!-- Chart line -->
+    <path d="M24 40L29 35L34 37L41 30"/>
+
+    <!-- Data points -->
+    <circle cx="24" cy="40" r="1.5"/>
+    <circle cx="29" cy="35" r="1.5"/>
+    <circle cx="34" cy="37" r="1.5"/>
+
+    <!-- Arrow head -->
+    <path d="M38.5 30H41V32.5"/>
+  </g>
+</svg>
