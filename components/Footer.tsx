@@ -1,81 +1,92 @@
 import Link from 'next/link'
-import { Twitter, Instagram, Youtube } from 'lucide-react'
-import Logo from './ui/Logo'
+import { Instagram, Linkedin } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className="border-t border-white/[0.06]">
-      <div className="container mx-auto px-6 py-16">
-        <div className="flex flex-col md:flex-row md:justify-between gap-12">
-          <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-9 h-9 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center">
-                <Logo size="sm" className="text-black" />
-              </div>
-              <span className="text-lg font-bold text-white">Wivvy</span>
+    <footer className="relative overflow-hidden bg-ink text-cream">
+      <div className="container-page py-20">
+        <div className="flex flex-col items-start justify-between gap-12 md:flex-row md:items-end">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="relative inline-flex h-10 w-10 items-center justify-center">
+                <span className="absolute inset-0 rounded-full bg-violet" />
+                <span className="absolute inset-[4px] rounded-full bg-coral" />
+                <span className="absolute inset-[9px] rounded-full bg-lime" />
+              </span>
+              <span className="text-3xl font-extrabold lowercase tracking-tightest">wivvy</span>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed">
-              The intelligence layer behind viral Indian content.
+            <p className="heading-display mt-6 max-w-md text-balance text-3xl leading-snug text-cream/90 md:text-4xl">
+              Built for the next wave of{' '}
+              <span className="italic text-lime">young India.</span>
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-600 hover:text-yellow-400 transition-colors">
-                <Twitter size={18} />
-              </a>
-              <a href="#" className="text-gray-600 hover:text-yellow-400 transition-colors">
-                <Instagram size={18} />
-              </a>
-              <a href="#" className="text-gray-600 hover:text-yellow-400 transition-colors">
-                <Youtube size={18} />
-              </a>
-            </div>
+            <p className="mt-4 text-sm text-cream/55">wivvy.ai — Bengaluru / Mumbai</p>
           </div>
 
-          <div className="flex gap-16">
-          <div className="space-y-4">
-            <h4 className="text-white font-semibold text-sm uppercase tracking-wider">Product</h4>
-            <div className="space-y-2">
-              <Link href="#how-it-works" className="block text-gray-500 hover:text-gray-300 text-sm transition-colors">
-                How it Works
+          <div className="grid grid-cols-2 gap-10 text-sm md:text-base">
+            <div className="space-y-3">
+              <p className="text-xs font-semibold uppercase tracking-widest text-cream/40">
+                Explore
+              </p>
+              <Link href="#milke" className="block text-cream/85 hover:text-cream">
+                Milke
               </Link>
-              <Link href="#insights" className="block text-gray-500 hover:text-gray-300 text-sm transition-colors">
-                Insights
+              <Link href="#future" className="block text-cream/85 hover:text-cream">
+                What's next
               </Link>
-              <Link href="#use-cases" className="block text-gray-500 hover:text-gray-300 text-sm transition-colors">
-                Use Cases
-              </Link>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="text-white font-semibold text-sm uppercase tracking-wider">Company</h4>
-            <div className="space-y-2">
-              <Link href="/about" className="block text-gray-500 hover:text-gray-300 text-sm transition-colors">
-                About
-              </Link>
-              <Link href="/privacy" className="block text-gray-500 hover:text-gray-300 text-sm transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="block text-gray-500 hover:text-gray-300 text-sm transition-colors">
-                Terms of Service
+              <Link href="#careers" className="block text-cream/85 hover:text-cream">
+                Careers
               </Link>
             </div>
-          </div>
+            <div className="space-y-3">
+              <p className="text-xs font-semibold uppercase tracking-widest text-cream/40">
+                Connect
+              </p>
+              <a
+                href="mailto:hello@wivvy.ai"
+                className="block text-cream/85 hover:text-cream"
+              >
+                hello@wivvy.ai
+              </a>
+              <a
+                href="https://instagram.com/wivvy"
+                target="_blank"
+                rel="noreferrer"
+                className="block text-cream/85 hover:text-cream"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://linkedin.com/company/wivvy"
+                target="_blank"
+                rel="noreferrer"
+                className="block text-cream/85 hover:text-cream"
+              >
+                LinkedIn
+              </a>
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/[0.06]">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-600 text-sm">
-              &copy; 2025 Wivvy. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6 text-sm">
-              <Link href="/privacy" className="text-gray-600 hover:text-gray-400 transition-colors">
-                Privacy
-              </Link>
-              <Link href="/terms" className="text-gray-600 hover:text-gray-400 transition-colors">
-                Terms
-              </Link>
-            </div>
+        {/* Giant wordmark */}
+        <div className="relative mt-16 select-none overflow-hidden">
+          <div className="heading-display whitespace-nowrap text-[28vw] leading-none tracking-tightest text-cream/[0.06] md:text-[22vw]">
+            wivvy
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-cream/10 pt-8 text-xs text-cream/45 md:flex-row md:items-center">
+          <p>© {new Date().getFullYear()} Wivvy Labs. All rights reserved.</p>
+          <div className="flex items-center gap-5">
+            <a href="https://instagram.com/wivvy" aria-label="Instagram" className="hover:text-cream">
+              <Instagram className="h-4 w-4" />
+            </a>
+            <a
+              href="https://linkedin.com/company/wivvy"
+              aria-label="LinkedIn"
+              className="hover:text-cream"
+            >
+              <Linkedin className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </div>

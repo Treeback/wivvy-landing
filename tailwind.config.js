@@ -8,54 +8,77 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'surface': {
-          DEFAULT: '#0A0A0A',
-          '50': '#111111',
-          '100': '#1A1A1A',
-          '200': '#2A2A2A',
-          '300': '#3A3A3A',
+        cream: '#FAF7F2',
+        ink: '#14141F',
+        charcoal: '#1F1F2B',
+        violet: {
+          DEFAULT: '#7C3AED',
+          soft: '#A78BFA',
+          deep: '#5B21B6',
         },
-        'accent': {
-          'yellow': '#FBBF24',
-          'yellow-light': '#FDE68A',
-          'blue': '#38BDF8',
-          'blue-light': '#7DD3FC',
-        }
+        coral: {
+          DEFAULT: '#FF6B57',
+          soft: '#FFA89B',
+          deep: '#E54B36',
+        },
+        lime: {
+          DEFAULT: '#C8FF5C',
+          soft: '#E2FF99',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['"Instrument Serif"', 'Georgia', 'serif'],
+      },
+      letterSpacing: {
+        tightest: '-0.04em',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
-        'shimmer': 'shimmer 2s linear infinite',
-        'fade-up': 'fade-up 0.6s ease-out',
-        'fade-in': 'fade-in 0.5s ease-out',
-        'blob': 'blob 7s infinite',
-        'pulse-slow': 'pulse 4s ease-in-out infinite',
+        'float-slow': 'float 9s ease-in-out infinite',
+        'float-fast': 'float 4s ease-in-out infinite',
+        'bounce-soft': 'bounceSoft 3s ease-in-out infinite',
+        'wiggle': 'wiggle 6s ease-in-out infinite',
+        'spin-slow': 'spin 20s linear infinite',
+        'fade-up': 'fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both',
+        'fade-in': 'fadeIn 0.6s ease-out both',
+        'marquee': 'marquee 30s linear infinite',
+        'pulse-ring': 'pulseRing 2.4s ease-out infinite',
+        'gradient': 'gradient 8s ease infinite',
       },
       keyframes: {
-        'float': {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-8px)' }
+        float: {
+          '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+          '50%': { transform: 'translateY(-14px) rotate(-2deg)' },
         },
-        'shimmer': {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' }
+        bounceSoft: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-6px)' },
         },
-        'fade-up': {
-          '0%': { opacity: 0, transform: 'translateY(20px)' },
-          '100%': { opacity: 1, transform: 'translateY(0)' }
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-2deg)' },
+          '50%': { transform: 'rotate(2deg)' },
         },
-        'fade-in': {
+        fadeUp: {
+          '0%': { opacity: 0, transform: 'translateY(24px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        fadeIn: {
           '0%': { opacity: 0 },
-          '100%': { opacity: 1 }
+          '100%': { opacity: 1 },
         },
-        'blob': {
-          '0%': { transform: 'translate(0px, 0px) scale(1)' },
-          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-          '100%': { transform: 'translate(0px, 0px) scale(1)' }
-        }
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        pulseRing: {
+          '0%': { transform: 'scale(0.9)', opacity: 0.7 },
+          '100%': { transform: 'scale(1.6)', opacity: 0 },
+        },
+        gradient: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
       },
     },
   },

@@ -2,53 +2,37 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 
 export const metadata: Metadata = {
-  title: 'Wivvy - The Intelligence Layer Behind Viral Indian Content',
-  description: 'We analyze thousands of viral videos across Indian creators to uncover repeatable patterns in hooks, storytelling, and engagement — so you can create content that actually performs.',
-  keywords: 'viral content, Indian creators, content intelligence, video analytics, hook patterns, content strategy, creator tools, YouTube India, Instagram Reels, engagement patterns',
+  title: 'Wivvy — A consumer-tech studio for the next wave of young India',
+  description:
+    'Wivvy is a startup studio building playful, emotional, internet-native apps for young India. First product: Milke — less scrolling, more us.',
+  keywords:
+    'Wivvy, Milke, consumer tech, Indian startup studio, Gen Z apps, couple app, social apps, AI companions, lifestyle tools, India',
   authors: [{ name: 'Wivvy' }],
   creator: 'Wivvy',
   publisher: 'Wivvy',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   metadataBase: new URL('https://wivvy.ai'),
-  alternates: {
-    canonical: '/',
-  },
+  alternates: { canonical: '/' },
   openGraph: {
-    title: 'Wivvy - The Intelligence Layer Behind Viral Indian Content',
-    description: 'We decoded what makes Indian content go viral. Analyze patterns across 10,000+ videos to create content that actually performs.',
+    title: 'Wivvy — Building apps for the way young India feels, connects, and lives.',
+    description:
+      'A consumer-tech studio creating internet-native products for everyday moments — relationships, memories, and AI-led personal experiences.',
     url: 'https://wivvy.ai',
     siteName: 'Wivvy',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Wivvy - Content Intelligence Platform',
-      }
-    ],
     locale: 'en_IN',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Wivvy - The Intelligence Layer Behind Viral Indian Content',
-    description: 'We decoded what makes Indian content go viral. Analyze patterns across 10,000+ videos to create content that actually performs.',
-    images: ['/og-image.png'],
+    title: 'Wivvy — A consumer-tech studio for young India',
+    description: 'Building playful, emotional, internet-native apps. First product: Milke.',
     creator: '@wivvy',
   },
   robots: {
     index: true,
     follow: true,
-    nocache: true,
     googleBot: {
       index: true,
       follow: true,
-      noimageindex: false,
-      'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
@@ -64,21 +48,21 @@ export const metadata: Metadata = {
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  themeColor: '#0A0A0A',
+  themeColor: '#FAF7F2',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body>
-        {children}
-      </body>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>{children}</body>
     </html>
   )
 }
