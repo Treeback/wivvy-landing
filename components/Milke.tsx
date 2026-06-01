@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Heart, MapPin, Image as ImageIcon, Lock, Film } from 'lucide-react'
 
 const features = [
@@ -46,80 +47,35 @@ const Milke = () => {
       <div className="container-page">
         <div className="grid gap-16 lg:grid-cols-[1.05fr_1fr] lg:items-center">
           {/* Phone mockup */}
-          <div className="relative mx-auto w-full max-w-md lg:order-2">
+          <div className="relative mx-auto w-[300px] sm:w-[340px] lg:order-2 lg:w-[360px]">
             <div className="absolute -inset-10 -z-10 rounded-[60px] gradient-violet-coral opacity-25 blur-3xl" />
 
-            <div className="relative mx-auto h-[600px] w-[300px] rounded-[44px] border-[10px] border-ink bg-ink p-1.5 shadow-[0_60px_120px_-40px_rgba(20,20,31,0.5)]">
-              <div className="absolute left-1/2 top-2 z-10 h-5 w-24 -translate-x-1/2 rounded-full bg-ink" />
-              <div className="relative h-full w-full overflow-hidden rounded-[34px] bg-cream">
-                <div className="flex items-center justify-between px-5 pt-7 text-xs font-semibold text-ink">
-                  <span>9:41</span>
-                  <span className="lowercase">milke</span>
-                  <span>●●●</span>
-                </div>
+            {/* iPhone body */}
+            <div
+              className="relative rounded-[50px] bg-ink p-[8px] shadow-[0_60px_120px_-30px_rgba(20,20,31,0.45)]"
+              style={{ aspectRatio: '695 / 1503' }}
+            >
+              {/* Side buttons */}
+              <span className="absolute -left-[3px] top-[110px] h-10 w-[3px] rounded-l-md bg-ink/80" />
+              <span className="absolute -left-[3px] top-[170px] h-16 w-[3px] rounded-l-md bg-ink/80" />
+              <span className="absolute -left-[3px] top-[250px] h-16 w-[3px] rounded-l-md bg-ink/80" />
+              <span className="absolute -right-[3px] top-[150px] h-24 w-[3px] rounded-r-md bg-ink/80" />
 
-                <div className="mt-4 px-5">
-                  <p className="text-xs uppercase tracking-widest text-ink/50">today</p>
-                  <h3 className="heading-display mt-1 text-2xl text-ink">
-                    one tiny moment <span className="text-gradient italic">together</span>
-                  </h3>
-                </div>
-
-                <div className="mx-4 mt-4 rounded-3xl bg-white p-4 shadow-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-lime">
-                      💭
-                    </div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-ink/60">
-                      ritual
-                    </span>
-                  </div>
-                  <p className="mt-3 text-sm font-medium leading-snug text-ink">
-                    What was the smallest thing that made you smile today?
-                  </p>
-                  <div className="mt-4 flex gap-2">
-                    <div className="rounded-full bg-ink px-3 py-1.5 text-[11px] font-medium text-cream">
-                      share with arjun
-                    </div>
-                    <div className="rounded-full bg-ink/5 px-3 py-1.5 text-[11px] font-medium text-ink">
-                      skip
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mx-4 mt-3 grid grid-cols-2 gap-2">
-                  <div className="overflow-hidden rounded-2xl">
-                    <div className="h-20 gradient-coral-lime" />
-                    <div className="bg-white px-2 py-1.5">
-                      <p className="text-[10px] font-medium text-ink">marine drive</p>
-                    </div>
-                  </div>
-                  <div className="overflow-hidden rounded-2xl">
-                    <div className="h-20 gradient-violet-coral" />
-                    <div className="bg-white px-2 py-1.5">
-                      <p className="text-[10px] font-medium text-ink">our park</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mx-4 mt-3 rounded-2xl bg-violet/10 p-3">
-                  <p className="text-[11px] font-semibold uppercase tracking-wider text-violet">
-                    saved together
-                  </p>
-                  <p className="mt-1 text-xs font-medium text-ink">
-                    24 reels · 6 places · 3 plans
-                  </p>
-                </div>
+              {/* Screen */}
+              <div className="relative h-full w-full overflow-hidden rounded-[42px]">
+                <Image
+                  src="/milke/screen.png"
+                  alt="Milke app — less scrolling, more us"
+                  width={695}
+                  height={1503}
+                  priority
+                  className="block h-full w-full object-cover"
+                />
               </div>
             </div>
 
-            {/* Floating tags */}
-            <div className="absolute -left-4 top-16 -rotate-6 animate-float-slow">
-              <div className="card-soft px-3 py-1.5 text-xs font-semibold text-ink">
-                ❤️ 218 days
-              </div>
-            </div>
-            <div className="absolute -right-6 bottom-20 rotate-6 animate-float">
+            {/* Floating tag */}
+            <div className="absolute -right-2 bottom-24 rotate-6 animate-float sm:-right-6">
               <div className="rounded-full bg-lime px-4 py-2 text-xs font-bold text-ink shadow-lg">
                 coming soon
               </div>
