@@ -1,6 +1,7 @@
 'use client'
 
 import { ArrowUpRight } from 'lucide-react'
+import Reveal from './ui/Reveal'
 
 const tags = [
   'product',
@@ -23,39 +24,48 @@ const Careers = () => {
           </div>
 
           <div className="relative mx-auto max-w-4xl text-center">
-            <div className="pill mx-auto">careers · collaborators</div>
+            <Reveal>
+              <div className="pill mx-auto">careers · collaborators</div>
+            </Reveal>
 
-            <h2 className="heading-display mt-6 text-balance text-4xl leading-[1.02] text-ink sm:text-5xl md:text-6xl lg:text-7xl">
-              Come build the next{' '}
-              <span className="text-gradient italic">consumer internet</span> from India.
-            </h2>
+            <Reveal delay={0.1}>
+              <h2 className="heading-display mt-6 text-balance text-4xl leading-[1.02] text-ink sm:text-5xl md:text-6xl lg:text-7xl">
+                Come build the next{' '}
+                <span className="text-gradient italic">consumer internet</span> from India.
+              </h2>
+            </Reveal>
 
-            <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-ink/65 md:text-xl">
-              We're looking for people who understand product, culture, design, storytelling,
-              engineering, and the emotional lives of young users.
-            </p>
+            <Reveal delay={0.2}>
+              <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-ink/65 md:text-xl">
+                We're looking for people who understand product, culture, design, storytelling,
+                engineering, and the emotional lives of young users.
+              </p>
+            </Reveal>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
               {tags.map((t, i) => (
-                <span
-                  key={t}
-                  className="rounded-full border border-ink/10 bg-white px-4 py-1.5 text-sm font-medium text-ink/80 shadow-sm"
-                  style={{ transform: `rotate(${(i - 2) * 1.5}deg)` }}
-                >
-                  {t}
-                </span>
+                <Reveal key={t} delay={0.1 + i * 0.06} y={16}>
+                  <span
+                    className="inline-block rounded-full border border-ink/10 bg-white px-4 py-1.5 text-sm font-medium text-ink/80 shadow-sm"
+                    style={{ transform: `rotate(${(i - 2) * 1.5}deg)` }}
+                  >
+                    {t}
+                  </span>
+                </Reveal>
               ))}
             </div>
 
-            <div className="mt-10">
-              <a href="mailto:hello@wivvy.ai" className="btn-ink group text-base">
-                hello@wivvy.ai
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </a>
-              <p className="mt-4 text-sm text-ink/55">
-                Drop a line. Tell us what you're obsessed with.
-              </p>
-            </div>
+            <Reveal delay={0.3}>
+              <div className="mt-10">
+                <a href="mailto:hello@wivvy.ai" className="btn-ink group text-base">
+                  hello@wivvy.ai
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+                <p className="mt-4 text-sm text-ink/55">
+                  Drop a line. Tell us what you're obsessed with.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </div>

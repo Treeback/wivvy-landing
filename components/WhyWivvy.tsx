@@ -1,3 +1,5 @@
+import Reveal from './ui/Reveal'
+
 const WhyWivvy = () => {
   return (
     <section id="why" className="relative overflow-hidden py-24 md:py-32">
@@ -7,18 +9,24 @@ const WhyWivvy = () => {
 
       <div className="container-page">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="pill mx-auto">why wivvy exists</div>
+          <Reveal>
+            <div className="pill mx-auto">why wivvy exists</div>
+          </Reveal>
 
-          <h2 className="heading-display mt-6 text-balance text-4xl leading-[1.05] text-ink sm:text-5xl md:text-6xl lg:text-7xl">
-            The next wave of consumer apps won't just be useful.{' '}
-            <span className="text-gradient italic">They'll feel alive.</span>
-          </h2>
+          <Reveal delay={0.1}>
+            <h2 className="heading-display mt-6 text-balance text-4xl leading-[1.05] text-ink sm:text-5xl md:text-6xl lg:text-7xl">
+              The next wave of consumer apps won't just be useful.{' '}
+              <span className="text-gradient italic">They'll feel alive.</span>
+            </h2>
+          </Reveal>
 
-          <p className="mx-auto mt-8 max-w-2xl text-pretty text-lg text-ink/65 md:text-xl">
-            India's young internet users don't need more endless feeds. They need products that
-            understand emotion, identity, play, belonging, and real life.{' '}
-            <span className="font-semibold text-ink">Wivvy builds for that shift.</span>
-          </p>
+          <Reveal delay={0.2}>
+            <p className="mx-auto mt-8 max-w-2xl text-pretty text-lg text-ink/65 md:text-xl">
+              India's young internet users don't need more endless feeds. They need products that
+              understand emotion, identity, play, belonging, and real life.{' '}
+              <span className="font-semibold text-ink">Wivvy builds for that shift.</span>
+            </p>
+          </Reveal>
 
           {/* Visual divider with floating pills */}
           <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
@@ -29,13 +37,14 @@ const WhyWivvy = () => {
               { label: 'belonging', cls: 'bg-ink text-cream' },
               { label: 'real life', cls: 'bg-white text-ink border border-ink/10' },
             ].map((p, i) => (
-              <span
-                key={p.label}
-                className={`rounded-full px-5 py-2.5 text-sm font-semibold lowercase shadow-sm ${p.cls}`}
-                style={{ transform: `rotate(${(i - 2) * 2}deg)` }}
-              >
-                {p.label}
-              </span>
+              <Reveal key={p.label} delay={0.1 + i * 0.08} y={16}>
+                <span
+                  className={`inline-block rounded-full px-5 py-2.5 text-sm font-semibold lowercase shadow-sm ${p.cls}`}
+                  style={{ transform: `rotate(${(i - 2) * 2}deg)` }}
+                >
+                  {p.label}
+                </span>
+              </Reveal>
             ))}
           </div>
         </div>

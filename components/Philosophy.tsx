@@ -26,6 +26,8 @@ const principles = [
   },
 ]
 
+import Reveal from './ui/Reveal'
+
 const Philosophy = () => {
   return (
     <section id="philosophy" className="relative overflow-hidden bg-ink py-24 text-cream md:py-32">
@@ -36,7 +38,7 @@ const Philosophy = () => {
 
       <div className="container-page relative">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.4fr]">
-          <div>
+          <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-cream/15 bg-cream/5 px-4 py-1.5 text-xs font-medium text-cream/70 backdrop-blur">
               studio philosophy
             </div>
@@ -50,24 +52,23 @@ const Philosophy = () => {
               A handful of beliefs we keep coming back to as we sketch, ship, and shape what young
               India spends its hours with.
             </p>
-          </div>
+          </Reveal>
 
           <ol className="space-y-2">
-            {principles.map((p) => (
-              <li
-                key={p.n}
-                className="group flex gap-6 rounded-3xl border border-transparent px-2 py-6 transition-all hover:border-cream/10 hover:bg-cream/5 md:px-6"
-              >
-                <span className="heading-display shrink-0 text-2xl text-cream/40 md:text-3xl">
-                  {p.n}
-                </span>
-                <div>
-                  <h3 className="heading-display text-balance text-2xl leading-snug md:text-3xl">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-cream/55 md:text-base">{p.body}</p>
+            {principles.map((p, i) => (
+              <Reveal key={p.n} delay={i * 0.1} as="li">
+                <div className="group flex gap-6 rounded-3xl border border-transparent px-2 py-6 transition-all hover:border-cream/10 hover:bg-cream/5 md:px-6">
+                  <span className="heading-display shrink-0 text-2xl text-cream/40 md:text-3xl">
+                    {p.n}
+                  </span>
+                  <div>
+                    <h3 className="heading-display text-balance text-2xl leading-snug md:text-3xl">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-cream/55 md:text-base">{p.body}</p>
+                  </div>
                 </div>
-              </li>
+              </Reveal>
             ))}
           </ol>
         </div>
