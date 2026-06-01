@@ -1,9 +1,9 @@
 {
   "name": "Wivvy",
   "short_name": "Wivvy",
-  "description": "The Memory Layer for Smarter E-Commerce Marketing",
-  "theme_color": "#6366f1",
-  "background_color": "#ffffff",
+  "description": "A consumer-tech studio for the next wave of young India.",
+  "theme_color": "#7C3AED",
+  "background_color": "#FAF7F2",
   "display": "standalone",
   "start_url": "/",
   "icons": [
