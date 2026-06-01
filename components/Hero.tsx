@@ -76,8 +76,7 @@ const Hero = () => {
             variants={fadeUp}
             className="mx-auto mt-8 max-w-2xl text-pretty text-base text-ink/65 sm:text-lg md:text-xl"
           >
-            Wivvy is a consumer-tech studio creating internet-native products for everyday moments —
-            from relationships and memories to AI-led personal experiences.
+            Wivvy is a consumer-tech studio creating internet-native products for everyday moments.
           </motion.p>
 
           <motion.div

@@ -363,12 +363,12 @@ const MomentMarquee = () => {
       {/* Caption above */}
       <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center">
         <p className="heading-display text-balance text-3xl italic leading-tight md:text-4xl lg:text-5xl">
-          <span className="text-violet">feels.</span>{' '}
-          <span className="text-coral">connects.</span>{' '}
-          <span className="text-ink">lives.</span>
+          <span className="text-violet">the joys.</span>{' '}
+          <span className="text-coral">the longings.</span>{' '}
+          <span className="text-ink">the in-betweens.</span>
         </p>
         <p className="max-w-md text-pretty text-sm text-ink/55 md:text-base">
-          every app we build starts with one of these.
+          this is what we build apps for.
         </p>
       </div>
 
