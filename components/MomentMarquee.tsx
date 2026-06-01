@@ -355,29 +355,53 @@ const MomentMarquee = () => {
   const tiltsB = [1.5, -1.5, 2, -1, 1, -2, 0.8, -1.8]
 
   return (
-    <div
+    <section
       role="region"
       aria-label="Moments from young India — drag, swipe, or scroll to wander"
-      className="relative mt-16 marquee-mask md:mt-20"
-      style={{ marginLeft: 'calc(50% - 50vw)', marginRight: 'calc(50% - 50vw)' }}
+      className="mt-20 md:mt-28"
     >
-      <div className="space-y-3 py-6 md:space-y-4 md:py-10">
-        <Row tiles={tilesA} direction="left" pxPerFrame={0.32} tilts={tiltsA} />
-        <Row tiles={tilesB} direction="right" pxPerFrame={0.26} tilts={tiltsB} />
+      {/* Caption above */}
+      <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center">
+        <p className="heading-display text-balance text-3xl italic leading-tight md:text-4xl lg:text-5xl">
+          <span className="text-violet">feels.</span>{' '}
+          <span className="text-coral">connects.</span>{' '}
+          <span className="text-ink">lives.</span>
+        </p>
+        <p className="max-w-md text-pretty text-sm text-ink/55 md:text-base">
+          every app we build starts with one of these.
+        </p>
       </div>
 
-      {/* Fade into cream background top & bottom */}
+      {/* Full-bleed photo band */}
       <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-20 md:h-24"
-        style={{ background: 'linear-gradient(to bottom, #FAF7F2 0%, rgba(250,247,242,0) 100%)' }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-20 md:h-24"
-        style={{ background: 'linear-gradient(to top, #FAF7F2 0%, rgba(250,247,242,0) 100%)' }}
-      />
-    </div>
+        className="relative mt-6 marquee-mask md:mt-8"
+        style={{ marginLeft: 'calc(50% - 50vw)', marginRight: 'calc(50% - 50vw)' }}
+      >
+        <div className="space-y-3 py-6 md:space-y-4 md:py-10">
+          <Row tiles={tilesA} direction="left" pxPerFrame={0.32} tilts={tiltsA} />
+          <Row tiles={tilesB} direction="right" pxPerFrame={0.26} tilts={tiltsB} />
+        </div>
+
+        {/* Fade into cream background top & bottom */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-20 md:h-24"
+          style={{ background: 'linear-gradient(to bottom, #FAF7F2 0%, rgba(250,247,242,0) 100%)' }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-20 md:h-24"
+          style={{ background: 'linear-gradient(to top, #FAF7F2 0%, rgba(250,247,242,0) 100%)' }}
+        />
+      </div>
+
+      {/* Hint below */}
+      <p className="mt-2 flex items-center justify-center gap-2 text-[11px] font-medium uppercase tracking-[0.22em] text-ink/40 md:mt-4">
+        <span aria-hidden>←</span>
+        drag · scroll · or just watch
+        <span aria-hidden>→</span>
+      </p>
+    </section>
   )
 }
 
