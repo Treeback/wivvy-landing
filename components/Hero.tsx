@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Sparkles } from 'lucide-react'
+import MomentMarquee from './MomentMarquee'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -108,51 +109,7 @@ const Hero = () => {
           </motion.p>
         </div>
 
-        <div className="relative mt-20 hidden h-[280px] md:block">
-          <div className="absolute left-[6%] top-2 -rotate-6 animate-float-slow">
-            <div className="card-soft flex items-center gap-3 px-5 py-3">
-              <div className="h-8 w-8 rounded-full bg-gradient-to-br from-coral to-coral/60" />
-              <div>
-                <div className="text-xs text-ink/50">priya · just now</div>
-                <div className="text-sm font-medium text-ink">date night? 🌙</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute left-[28%] top-24 rotate-3 animate-float">
-            <div className="card-soft overflow-hidden">
-              <div className="h-24 w-44 gradient-coral-lime" />
-              <div className="px-4 py-3">
-                <div className="text-xs font-medium text-ink/50">memory · goa</div>
-                <div className="text-sm font-semibold text-ink">our first sunrise</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute right-[26%] top-2 -rotate-3 animate-float-fast">
-            <div className="card-soft flex items-center gap-3 px-5 py-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-lime text-lg">
-                💭
-              </div>
-              <div>
-                <div className="text-xs font-medium text-ink/50">today's ritual</div>
-                <div className="text-sm font-semibold text-ink">one thing you loved</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute right-[8%] top-28 rotate-6 animate-float-slow">
-            <div className="flex items-center gap-3 rounded-3xl border border-ink/5 bg-white px-4 py-3 shadow-[0_30px_60px_-30px_rgba(20,20,31,0.2)]">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl gradient-violet-coral text-xl text-white">
-                m
-              </div>
-              <div>
-                <div className="text-sm font-bold text-ink">Milke</div>
-                <div className="text-xs text-ink/50">a space for two</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <MomentMarquee />
       </div>
     </section>
   )
