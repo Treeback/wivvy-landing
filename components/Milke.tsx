@@ -1,6 +1,14 @@
 'use client'
 
 import Image from 'next/image'
+import { useRef } from 'react'
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from 'framer-motion'
 import { Heart, MapPin, Image as ImageIcon, Lock, Film } from 'lucide-react'
 import Reveal from './ui/Reveal'
 
@@ -37,6 +45,117 @@ const features = [
   },
 ]
 
+const InteractivePhone = () => {
+  const wrapRef = useRef<HTMLDivElement>(null)
+
+  // Cursor position normalized 0..1 inside the phone wrapper
+  const mx = useMotionValue(0.5)
+  const my = useMotionValue(0.5)
+
+  const springCfg = { stiffness: 180, damping: 22, mass: 0.6 }
+  const rotateY = useSpring(useTransform(mx, [0, 1], [-14, 14]), springCfg)
+  const rotateX = useSpring(useTransform(my, [0, 1], [10, -10]), springCfg)
+
+  // Glow drifts opposite to tilt for parallax depth
+  const glowX = useSpring(useTransform(mx, [0, 1], [24, -24]), { stiffness: 80, damping: 20 })
+  const glowY = useSpring(useTransform(my, [0, 1], [24, -24]), { stiffness: 80, damping: 20 })
+  const glowOpacity = useSpring(0.25, { stiffness: 80, damping: 20 })
+
+  // Rim halo — sits right behind the phone and tilts with it
+  const rimOpacity = useSpring(0.55, { stiffness: 90, damping: 20 })
+
+  // Specular highlight follows cursor across the screen
+  const sheenX = useTransform(mx, (v) => `${v * 100}%`)
+  const sheenY = useTransform(my, (v) => `${v * 100}%`)
+  const sheenOpacity = useSpring(0, { stiffness: 120, damping: 22 })
+  const sheen = useMotionTemplate`radial-gradient(circle at ${sheenX} ${sheenY}, rgba(255,255,255,0.55), transparent 50%)`
+
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = wrapRef.current?.getBoundingClientRect()
+    if (!rect) return
+    mx.set((e.clientX - rect.left) / rect.width)
+    my.set((e.clientY - rect.top) / rect.height)
+    glowOpacity.set(0.4)
+    rimOpacity.set(0.9)
+    sheenOpacity.set(0.6)
+  }
+
+  const handleLeave = () => {
+    mx.set(0.5)
+    my.set(0.5)
+    glowOpacity.set(0.25)
+    rimOpacity.set(0.55)
+    sheenOpacity.set(0)
+  }
+
+  return (
+    <div
+      ref={wrapRef}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      className="relative"
+      style={{ perspective: 1400 }}
+    >
+      {/* Magnetic glow */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -inset-12 -z-10 rounded-[64px] gradient-violet-coral blur-3xl"
+        style={{ x: glowX, y: glowY, opacity: glowOpacity }}
+      />
+
+      {/* Tilt wrapper — holds the rim halo + phone, both rotate together */}
+      <motion.div
+        className="relative will-change-transform"
+        style={{
+          aspectRatio: '695 / 1503',
+          rotateX,
+          rotateY,
+          transformStyle: 'preserve-3d',
+        }}
+      >
+        {/* Rim halo behind the phone */}
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute -inset-2 rounded-[58px] blur-2xl"
+          style={{
+            background:
+              'linear-gradient(125deg, #7C3AED 0%, #B05CFF 35%, #FF6B57 70%, #FFB29B 100%)',
+            opacity: rimOpacity,
+          }}
+        />
+
+        {/* iPhone body */}
+        <div className="relative h-full w-full rounded-[50px] bg-ink p-[8px] shadow-[0_60px_120px_-30px_rgba(20,20,31,0.45)]">
+          {/* Side buttons */}
+          <span className="absolute -left-[3px] top-[110px] h-10 w-[3px] rounded-l-md bg-ink/80" />
+          <span className="absolute -left-[3px] top-[170px] h-16 w-[3px] rounded-l-md bg-ink/80" />
+          <span className="absolute -left-[3px] top-[250px] h-16 w-[3px] rounded-l-md bg-ink/80" />
+          <span className="absolute -right-[3px] top-[150px] h-24 w-[3px] rounded-r-md bg-ink/80" />
+
+          {/* Screen */}
+          <div className="relative h-full w-full overflow-hidden rounded-[42px]">
+            <Image
+              src="/milke/screen.png"
+              alt="Milke app — less scrolling, more us"
+              width={695}
+              height={1503}
+              priority
+              className="block h-full w-full object-cover"
+            />
+
+            {/* Specular highlight follows the cursor */}
+            <motion.div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 mix-blend-overlay"
+              style={{ background: sheen, opacity: sheenOpacity }}
+            />
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
 const Milke = () => {
   return (
     <section id="milke" className="relative overflow-hidden py-24 md:py-32">
@@ -49,34 +168,10 @@ const Milke = () => {
         <div className="grid gap-16 lg:grid-cols-[1.05fr_1fr] lg:items-center">
           {/* Phone mockup */}
           <Reveal y={40} className="relative mx-auto w-[300px] sm:w-[340px] lg:order-2 lg:w-[360px]">
-            <div className="absolute -inset-10 -z-10 rounded-[60px] gradient-violet-coral opacity-25 blur-3xl" />
-
-            {/* iPhone body */}
-            <div
-              className="relative rounded-[50px] bg-ink p-[8px] shadow-[0_60px_120px_-30px_rgba(20,20,31,0.45)]"
-              style={{ aspectRatio: '695 / 1503' }}
-            >
-              {/* Side buttons */}
-              <span className="absolute -left-[3px] top-[110px] h-10 w-[3px] rounded-l-md bg-ink/80" />
-              <span className="absolute -left-[3px] top-[170px] h-16 w-[3px] rounded-l-md bg-ink/80" />
-              <span className="absolute -left-[3px] top-[250px] h-16 w-[3px] rounded-l-md bg-ink/80" />
-              <span className="absolute -right-[3px] top-[150px] h-24 w-[3px] rounded-r-md bg-ink/80" />
-
-              {/* Screen */}
-              <div className="relative h-full w-full overflow-hidden rounded-[42px]">
-                <Image
-                  src="/milke/screen.png"
-                  alt="Milke app — less scrolling, more us"
-                  width={695}
-                  height={1503}
-                  priority
-                  className="block h-full w-full object-cover"
-                />
-              </div>
-            </div>
+            <InteractivePhone />
 
             {/* Floating tag */}
-            <div className="absolute -right-2 bottom-24 rotate-6 animate-float sm:-right-6">
+            <div className="pointer-events-none absolute -right-2 bottom-24 rotate-6 animate-float sm:-right-6">
               <div className="rounded-full bg-lime px-4 py-2 text-xs font-bold text-ink shadow-lg">
                 coming soon
               </div>
